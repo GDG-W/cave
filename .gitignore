@@ -44,3 +44,6 @@ app.*.map.json
 
 .dev.env
 .prod.env
+
+# generated files
+*.g.dart
