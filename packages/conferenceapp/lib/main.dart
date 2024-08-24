@@ -1,7 +1,5 @@
+import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'core/themes/theme_data.dart';
 
 void main() {
   runApp(const MyApp());
