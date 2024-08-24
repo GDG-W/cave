@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "component library",
+            "cwd": "packages/catalog",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "chrome"
+        },
+        {
             "name": "conferenceapp",
             "cwd": "packages/conferenceapp",
             "request": "launch",
