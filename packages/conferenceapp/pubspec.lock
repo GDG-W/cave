@@ -65,7 +65,7 @@ packages:
     source: hosted
     version: "1.3.1"
   ficonsax:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: ficonsax
       sha256: f7c69817fb4a9a8545ed66656990d4634adad61b2b8d601fb91ba99d389fad47
