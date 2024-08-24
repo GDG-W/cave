@@ -5,15 +5,44 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Devfest24 App",
+            "name": "conferenceapp",
+            "cwd": "packages/conferenceapp",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "Devfest24 Widgetbook",
+            "name": "conferenceapp (profile mode)",
+            "cwd": "packages/conferenceapp",
             "request": "launch",
             "type": "dart",
-            "program": "lib/widgetbook.dart",
+            "flutterMode": "profile"
         },
+        {
+            "name": "conferenceapp (release mode)",
+            "cwd": "packages/conferenceapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "volunteerapp",
+            "cwd": "packages/volunteerapp",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "volunteerapp (profile mode)",
+            "cwd": "packages/volunteerapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "volunteerapp (release mode)",
+            "cwd": "packages/volunteerapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
     ]
 }

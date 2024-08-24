@@ -1,3 +1,16 @@
+# Generated files
+## These files will be included in the published
+## package but not checked in the source control
+## Removed when .gitignore is copied into .pubignore
+*.freezed.dart
+*.g.dart
+*.book.dart
+goldens/
+
+# Libraries should not include pubspec.lock,
+# per https://dart.dev/guides/libraries/private-files#pubspeclock.
+packages/cave/pubspec.lock
+
 # Miscellaneous
 *.class
 *.log
@@ -8,7 +21,6 @@
 .buildlog/
 .history
 .svn/
-migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -16,34 +28,27 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Visual Studio Code related
+.classpath
+.project
+.settings/
+
+# packages file containing multi-root paths
+.packages.generated
 
 # Flutter/Dart/Pub related
 **/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+**/generated_plugin_registrant.dart
+.packages
+.pub-preload-cache/
 .pub-cache/
 .pub/
-/build/
-
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
-.dev.env
-.prod.env
-
-# generated files
-*.g.dart
+pubspec_overrides.yaml
+build/
+flutter_*.png
+linked_*.ds
+unlinked.ds
+unlinked_spec.ds
