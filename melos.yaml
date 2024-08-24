@@ -14,3 +14,7 @@ scripts:
   format-check:
     run: melos exec dart format . --set-exit-if-changed
     description: Run `dart format` checks for all packages.
+
+  generate:
+    run: melos exec -c 1 --depends-on="build_runner" -- "dart run build_runner build -d"
+    description: Build all generated files.
