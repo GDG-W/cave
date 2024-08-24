@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "conferenceapp",
+            "cwd": "packages/conferenceapp",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "conferenceapp (profile mode)",
+            "cwd": "packages/conferenceapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "conferenceapp (release mode)",
+            "cwd": "packages/conferenceapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "volunteerapp",
+            "cwd": "packages/volunteerapp",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "volunteerapp (profile mode)",
+            "cwd": "packages/volunteerapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "volunteerapp (release mode)",
+            "cwd": "packages/volunteerapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
