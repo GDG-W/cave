@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class AppColors {
+abstract class DevfestColors {
   static const gradientGradient =
       LinearGradient(colors: [Color(0xffc471ed), Color(0xff12c2e9)]);
 

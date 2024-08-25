@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @immutable
-class AppTextTheme extends ThemeExtension<AppTextTheme> {
+class DevfestTextTheme extends ThemeExtension<DevfestTextTheme> {
   final TextStyle? headerH1;
   final TextStyle? headerH2;
   final TextStyle? headerH3;
@@ -40,7 +39,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   final TextStyle? buttonSmallSemibold;
   final TextStyle? buttonSmallBold;
 
-  const AppTextTheme({
+  const DevfestTextTheme({
     this.headerH1,
     this.headerH2,
     this.headerH3,
@@ -79,250 +78,250 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
     this.buttonSmallBold,
   });
 
-  AppTextTheme.responsive()
+  const DevfestTextTheme.responsive()
       : this(
-          headerH1: TextStyle(
-            fontSize: 80.sp,
+          headerH1: const TextStyle(
+            fontSize: 80,
             fontWeight: FontWeight.w700,
             height: 1.15,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH2: TextStyle(
-            fontSize: 62.sp,
+          headerH2: const TextStyle(
+            fontSize: 62,
             fontWeight: FontWeight.w700,
             height: 1.23,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH3: TextStyle(
-            fontSize: 56.sp,
+          headerH3: const TextStyle(
+            fontSize: 56,
             fontWeight: FontWeight.w700,
             height: 1.25,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH4: TextStyle(
-            fontSize: 40.sp,
+          headerH4: const TextStyle(
+            fontSize: 40,
             fontWeight: FontWeight.w700,
             height: 1.2,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH5: TextStyle(
-            fontSize: 32.sp,
+          headerH5: const TextStyle(
+            fontSize: 32,
             fontWeight: FontWeight.w700,
             height: 1.25,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH6: TextStyle(
-            fontSize: 28.sp,
+          headerH6: const TextStyle(
+            fontSize: 28,
             fontWeight: FontWeight.w400,
             height: 1.29,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle1Regular: TextStyle(
-            fontSize: 24.sp,
+          titleTitle1Regular: const TextStyle(
+            fontSize: 24,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle1Medium: TextStyle(
-            fontSize: 24.sp,
+          titleTitle1Medium: const TextStyle(
+            fontSize: 24,
             fontWeight: FontWeight.w500,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle1Semibold: TextStyle(
-            fontSize: 24.sp,
+          titleTitle1Semibold: const TextStyle(
+            fontSize: 24,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle2Regular: TextStyle(
-            fontSize: 22.sp,
+          titleTitle2Regular: const TextStyle(
+            fontSize: 22,
             fontWeight: FontWeight.w400,
             height: 1.45,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle2Medium: TextStyle(
-            fontSize: 22.sp,
+          titleTitle2Medium: const TextStyle(
+            fontSize: 22,
             fontWeight: FontWeight.w500,
             height: 1.45,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle2Semibold: TextStyle(
-            fontSize: 22.sp,
+          titleTitle2Semibold: const TextStyle(
+            fontSize: 22,
             fontWeight: FontWeight.w400,
             height: 1.45,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody1Regular: TextStyle(
-            fontSize: 18.sp,
+          bodyBody1Regular: const TextStyle(
+            fontSize: 18,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody1Medium: TextStyle(
-            fontSize: 18.sp,
+          bodyBody1Medium: const TextStyle(
+            fontSize: 18,
             fontWeight: FontWeight.w500,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody1Semibold: TextStyle(
-            fontSize: 18.sp,
+          bodyBody1Semibold: const TextStyle(
+            fontSize: 18,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody2Regular: TextStyle(
-            fontSize: 16.sp,
+          bodyBody2Regular: const TextStyle(
+            fontSize: 16,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody2Medium: TextStyle(
-            fontSize: 16.sp,
+          bodyBody2Medium: const TextStyle(
+            fontSize: 16,
             fontWeight: FontWeight.w500,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody2Semibold: TextStyle(
-            fontSize: 16.sp,
+          bodyBody2Semibold: const TextStyle(
+            fontSize: 16,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody3Regular: TextStyle(
-            fontSize: 14.sp,
+          bodyBody3Regular: const TextStyle(
+            fontSize: 14,
             fontWeight: FontWeight.w400,
             height: 1.43,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody3Medium: TextStyle(
-            fontSize: 14.sp,
+          bodyBody3Medium: const TextStyle(
+            fontSize: 14,
             fontWeight: FontWeight.w500,
             height: 1.43,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody3Semibold: TextStyle(
-            fontSize: 14.sp,
+          bodyBody3Semibold: const TextStyle(
+            fontSize: 14,
             fontWeight: FontWeight.w400,
             height: 1.43,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody4Regular: TextStyle(
-            fontSize: 12.sp,
+          bodyBody4Regular: const TextStyle(
+            fontSize: 12,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody4Medium: TextStyle(
-            fontSize: 12.sp,
+          bodyBody4Medium: const TextStyle(
+            fontSize: 12,
             fontWeight: FontWeight.w500,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody4Semibold: TextStyle(
-            fontSize: 12.sp,
+          bodyBody4Semibold: const TextStyle(
+            fontSize: 12,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody5Regular: TextStyle(
-            fontSize: 10.sp,
+          bodyBody5Regular: const TextStyle(
+            fontSize: 10,
             fontWeight: FontWeight.w400,
             height: 1.4,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody5Medium: TextStyle(
-            fontSize: 10.sp,
+          bodyBody5Medium: const TextStyle(
+            fontSize: 10,
             fontWeight: FontWeight.w500,
             height: 1.4,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody5Semibold: TextStyle(
-            fontSize: 10.sp,
+          bodyBody5Semibold: const TextStyle(
+            fontSize: 10,
             fontWeight: FontWeight.w400,
             height: 1.4,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonLargeMedium: TextStyle(
-            fontSize: 18.sp,
+          buttonLargeMedium: const TextStyle(
+            fontSize: 18,
             fontWeight: FontWeight.w500,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonLargeSemibold: TextStyle(
-            fontSize: 18.sp,
+          buttonLargeSemibold: const TextStyle(
+            fontSize: 18,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonLargeBold: TextStyle(
-            fontSize: 18.sp,
+          buttonLargeBold: const TextStyle(
+            fontSize: 18,
             fontWeight: FontWeight.w700,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonMediumMedium: TextStyle(
-            fontSize: 16.sp,
+          buttonMediumMedium: const TextStyle(
+            fontSize: 16,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonMediumSemibold: TextStyle(
-            fontSize: 16.sp,
+          buttonMediumSemibold: const TextStyle(
+            fontSize: 16,
             fontWeight: FontWeight.w400,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonMediumBold: TextStyle(
-            fontSize: 16.sp,
+          buttonMediumBold: const TextStyle(
+            fontSize: 16,
             fontWeight: FontWeight.w700,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonSmallMedium: TextStyle(
-            fontSize: 12.sp,
+          buttonSmallMedium: const TextStyle(
+            fontSize: 12,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonSmallSemibold: TextStyle(
-            fontSize: 12.sp,
+          buttonSmallSemibold: const TextStyle(
+            fontSize: 12,
             fontWeight: FontWeight.w400,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonSmallBold: TextStyle(
-            fontSize: 12.sp,
+          buttonSmallBold: const TextStyle(
+            fontSize: 12,
             fontWeight: FontWeight.w700,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
@@ -330,7 +329,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
         );
 
   @override
-  AppTextTheme copyWith({
+  DevfestTextTheme copyWith({
     TextStyle? headerH1,
     TextStyle? headerH2,
     TextStyle? headerH3,
@@ -368,7 +367,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
     TextStyle? buttonSmallSemibold,
     TextStyle? buttonSmallBold,
   }) {
-    return AppTextTheme(
+    return DevfestTextTheme(
       headerH1: headerH1 ?? this.headerH1,
       headerH2: headerH2 ?? this.headerH2,
       headerH3: headerH3 ?? this.headerH3,
@@ -409,9 +408,9 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   }
 
   @override
-  AppTextTheme lerp(AppTextTheme? other, double t) {
-    if (other is! AppTextTheme) return this;
-    return AppTextTheme(
+  DevfestTextTheme lerp(DevfestTextTheme? other, double t) {
+    if (other is! DevfestTextTheme) return this;
+    return DevfestTextTheme(
       headerH1: TextStyle.lerp(headerH1, other.headerH1, t),
       headerH2: TextStyle.lerp(headerH2, other.headerH2, t),
       headerH3: TextStyle.lerp(headerH3, other.headerH3, t),

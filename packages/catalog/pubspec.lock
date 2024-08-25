@@ -624,7 +624,7 @@ packages:
     source: hosted
     version: "3.8.1"
   widgetbook_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: widgetbook_annotation
       sha256: c2d881d0241525b36aa3777d0ac406d198528ed28b84ca73b7dd9f59189d6bb0

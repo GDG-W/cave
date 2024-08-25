@@ -1,18 +1,22 @@
 import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+import 'main.directories.g.dart';
 
 void main() {
   runApp(const WidgetbookApp());
 }
 
+@widgetbook.App()
 class WidgetbookApp extends StatelessWidget {
   const WidgetbookApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
-      directories: const [],
+      directories: directories,
+      initialRoute: '/?path=widgets/devfestbottomnav/devfest-bottom-nav',
       addons: [
         DeviceFrameAddon(
           devices: [
@@ -41,10 +45,10 @@ class WidgetbookApp extends StatelessWidget {
                 ),
                 useMaterial3: true,
                 textTheme: const TextTheme(bodyMedium: TextStyle()),
-                extensions: const <ThemeExtension<dynamic>>[
+                extensions: <ThemeExtension<dynamic>>[
                   /// Use the below format for raw theme data
                   /// DevFestTheme(textTheme: DevfestTextTheme()),
-                  // DevFestTheme.light(),
+                  DevFestTheme.light(),
                 ],
               ),
             ),
@@ -58,10 +62,10 @@ class WidgetbookApp extends StatelessWidget {
                 ),
                 useMaterial3: true,
                 textTheme: const TextTheme(bodyMedium: TextStyle()),
-                extensions: const <ThemeExtension<dynamic>>[
+                extensions: <ThemeExtension<dynamic>>[
                   /// Use the below format for raw theme data
                   /// DevFestTheme(textTheme: DevfestTextTheme()),
-                  // DevFestTheme.dark(),
+                  DevFestTheme.dark(),
                 ],
               ),
             ),
@@ -69,7 +73,7 @@ class WidgetbookApp extends StatelessWidget {
           themeBuilder: (context, theme, child) {
             final isDark = theme.brightness == Brightness.dark ? true : false;
             return ScreenUtilInit(
-              designSize: const Size(375, 812),
+              designSize: const Size(430, 956),
               minTextAdapt: true,
               useInheritedMediaQuery: true,
               builder: (context, child) {
