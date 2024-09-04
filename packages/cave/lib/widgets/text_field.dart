@@ -53,7 +53,7 @@ class DevfestTextFormField extends StatelessWidget {
           validator: validator,
           textInputAction: textInputAction,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
-          // cursorColor: DevFestTheme.of(context).onBackgroundColor,
+          keyboardAppearance: Brightness.dark,
           style: textFieldTheme.style,
           decoration: InputDecoration(
             hintText: hint,
