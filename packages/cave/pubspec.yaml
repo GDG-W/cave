@@ -8,15 +8,16 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  control_style: ^0.1.0
+  ficonsax: ^0.0.3
   flutter:
     sdk: flutter
-  ficonsax: ^0.0.3
   flutter_screenutil: ^5.9.3
 
 dev_dependencies:
+  flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

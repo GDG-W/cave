@@ -34,14 +34,14 @@ class DevFestTheme extends ThemeExtension<DevFestTheme> {
           buttonTheme: const DevfestButtonTheme.light(),
           outlinedButtonTheme: const DevfestOutlinedButtonTheme.light(),
           bottomNavTheme: const DevfestBottomNavTheme.light(),
-          textFieldTheme: const DevfestTextFieldTheme.light(),
+          textFieldTheme: DevfestTextFieldTheme.light(),
         );
 
   DevFestTheme.dark()
       : this(
           textTheme: const DevfestTextTheme.responsive(),
           backgroundColor: DevfestColors.backgroundDark,
-          textFieldTheme: const DevfestTextFieldTheme.dark(),
+          textFieldTheme: DevfestTextFieldTheme.dark(),
           buttonTheme: const DevfestButtonTheme.dark(),
           outlinedButtonTheme: const DevfestOutlinedButtonTheme.dark(),
           bottomNavTheme: const DevfestBottomNavTheme.dark(),

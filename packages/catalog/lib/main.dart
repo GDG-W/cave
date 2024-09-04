@@ -16,7 +16,6 @@ class WidgetbookApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Widgetbook.material(
       directories: directories,
-      initialRoute: '/?path=widgets/devfestbottomnav/devfest-bottom-nav',
       addons: [
         DeviceFrameAddon(
           devices: [
@@ -79,9 +78,11 @@ class WidgetbookApp extends StatelessWidget {
               builder: (context, child) {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
-                  theme: theme.copyWith(extensions: [
-                    isDark ? DevFestTheme.dark() : DevFestTheme.light()
-                  ]),
+                  theme: theme.copyWith(
+                    extensions: [
+                      isDark ? DevFestTheme.dark() : DevFestTheme.light()
+                    ],
+                  ),
                   home: Material(child: child),
                 );
               },
