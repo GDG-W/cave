@@ -10,7 +10,7 @@ Widget devfestBottomNav(BuildContext context) {
   int index = 0;
   return StatefulBuilder(builder: (context, setState) {
     return Scaffold(
-      backgroundColor: DevFestTheme.of(context).backgroundColor,
+      backgroundColor: DevfestTheme.of(context).backgroundColor,
       bottomNavigationBar: DevfestBottomNav(
         index: index,
         items: const [

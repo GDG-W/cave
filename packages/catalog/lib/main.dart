@@ -47,7 +47,7 @@ class WidgetbookApp extends StatelessWidget {
                 extensions: <ThemeExtension<dynamic>>[
                   /// Use the below format for raw theme data
                   /// DevFestTheme(textTheme: DevfestTextTheme()),
-                  DevFestTheme.light(),
+                  DevFestThemeData.light(),
                 ],
               ),
             ),
@@ -64,7 +64,7 @@ class WidgetbookApp extends StatelessWidget {
                 extensions: <ThemeExtension<dynamic>>[
                   /// Use the below format for raw theme data
                   /// DevFestTheme(textTheme: DevfestTextTheme()),
-                  DevFestTheme.dark(),
+                  DevFestThemeData.dark(),
                 ],
               ),
             ),
@@ -80,7 +80,7 @@ class WidgetbookApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   theme: theme.copyWith(
                     extensions: [
-                      isDark ? DevFestTheme.dark() : DevFestTheme.light()
+                      isDark ? DevFestThemeData.dark() : DevFestThemeData.light()
                     ],
                   ),
                   home: Material(child: child),

@@ -22,7 +22,7 @@ class DevfestFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonTheme = DevFestTheme.of(context).buttonTheme ??
+    final buttonTheme = DevfestTheme.of(context).buttonTheme ??
         const DevfestButtonTheme.light();
     return Material(
       type: MaterialType.transparency,
@@ -103,7 +103,7 @@ class DevfestOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final outlinedButtonTheme = DevFestTheme.of(context).outlinedButtonTheme ??
+    final outlinedButtonTheme = DevfestTheme.of(context).outlinedButtonTheme ??
         const DevfestOutlinedButtonTheme.light();
     return Material(
       type: MaterialType.transparency,

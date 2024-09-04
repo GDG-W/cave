@@ -40,8 +40,8 @@ class _DevfestBottomNavState extends State<DevfestBottomNav> {
   Widget build(BuildContext context) {
     final additionalBottomPadding = MediaQuery.viewPaddingOf(context).bottom;
     return DevfestTheme(
-      data: DevFestTheme.of(context).copyWith(
-        bottomNavTheme: DevFestTheme.of(context).bottomNavTheme?.copyWith(
+      data: DevfestTheme.of(context).copyWith(
+        bottomNavTheme: DevfestTheme.of(context).bottomNavTheme?.copyWith(
               labelStyle: widget.labelStyle,
               selectedColor: widget.selectedColor,
               unselectedColor: widget.unselectedColor,
@@ -56,10 +56,10 @@ class _DevfestBottomNavState extends State<DevfestBottomNav> {
         height: 88 + additionalBottomPadding,
         padding: EdgeInsets.only(bottom: additionalBottomPadding),
         decoration: BoxDecoration(
-          color: DevFestTheme.of(context).bottomNavTheme?.backgroundColor,
+          color: DevfestTheme.of(context).bottomNavTheme?.backgroundColor,
           border: Border(
             top: BorderSide(
-                color: DevFestTheme.of(context).bottomNavTheme?.borderColor ??
+                color: DevfestTheme.of(context).bottomNavTheme?.borderColor ??
                     const Color(0xFF000000),
                 width: 1),
           ),
@@ -114,7 +114,7 @@ class _DevfestBottomNavTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bottomNavItemTheme = DevFestTheme.of(context).bottomNavTheme ??
+    final bottomNavItemTheme = DevfestTheme.of(context).bottomNavTheme ??
         const DevfestBottomNavTheme.light();
 
     final itemColor = selected

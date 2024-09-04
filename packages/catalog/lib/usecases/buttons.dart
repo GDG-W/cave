@@ -5,7 +5,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 @widgetbook.UseCase(name: 'Filled Button', type: DevfestFilledButton)
 Widget devfestFilledButton(BuildContext context) {
   return Material(
-    color: DevFestTheme.of(context).backgroundColor,
+    color: DevfestTheme.of(context).backgroundColor,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,7 +46,7 @@ Widget devfestFilledButton(BuildContext context) {
 @widgetbook.UseCase(name: 'Outlined Button', type: DevfestOutlinedButton)
 Widget devfestOutlinedButton(BuildContext context) {
   return Material(
-    color: DevFestTheme.of(context).backgroundColor,
+    color: DevfestTheme.of(context).backgroundColor,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
