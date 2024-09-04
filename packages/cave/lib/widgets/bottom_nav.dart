@@ -60,7 +60,7 @@ class _DevfestBottomNavState extends State<DevfestBottomNav> {
           border: Border(
             top: BorderSide(
                 color: DevFestTheme.of(context).bottomNavTheme?.borderColor ??
-                    const Color(0xFF000000), // TODO:
+                    const Color(0xFF000000),
                 width: 1),
           ),
         ),

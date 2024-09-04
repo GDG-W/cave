@@ -10,6 +10,7 @@ class DevFestTheme extends ThemeExtension<DevFestTheme> {
   /// Create and register new themes here
   final DevfestTextTheme? textTheme;
   final DevfestButtonTheme? buttonTheme;
+  final DevfestOutlinedButtonTheme? outlinedButtonTheme;
   final DevfestBottomNavTheme? bottomNavTheme;
   final DevfestTextFieldTheme? textFieldTheme;
   final Color? backgroundColor;
@@ -22,6 +23,7 @@ class DevFestTheme extends ThemeExtension<DevFestTheme> {
     this.backgroundColor,
     this.bottomNavTheme,
     this.buttonTheme,
+    this.outlinedButtonTheme,
     this.textFieldTheme,
   });
 
@@ -30,6 +32,7 @@ class DevFestTheme extends ThemeExtension<DevFestTheme> {
           textTheme: const DevfestTextTheme.responsive(),
           backgroundColor: DevfestColors.backgroundLight,
           buttonTheme: const DevfestButtonTheme.light(),
+          outlinedButtonTheme: const DevfestOutlinedButtonTheme.light(),
           bottomNavTheme: const DevfestBottomNavTheme.light(),
           textFieldTheme: const DevfestTextFieldTheme.light(),
         );
@@ -40,6 +43,7 @@ class DevFestTheme extends ThemeExtension<DevFestTheme> {
           backgroundColor: DevfestColors.backgroundDark,
           textFieldTheme: const DevfestTextFieldTheme.dark(),
           buttonTheme: const DevfestButtonTheme.dark(),
+          outlinedButtonTheme: const DevfestOutlinedButtonTheme.dark(),
           bottomNavTheme: const DevfestBottomNavTheme.dark(),
         );
 
@@ -47,11 +51,13 @@ class DevFestTheme extends ThemeExtension<DevFestTheme> {
   DevFestTheme copyWith({
     DevfestTextTheme? textTheme,
     DevfestButtonTheme? buttonTheme,
+    DevfestOutlinedButtonTheme? outlinedButtonTheme,
     DevfestBottomNavTheme? bottomNavTheme,
   }) {
     return DevFestTheme(
       textTheme: textTheme ?? this.textTheme,
       buttonTheme: buttonTheme ?? this.buttonTheme,
+      outlinedButtonTheme: outlinedButtonTheme ?? this.outlinedButtonTheme,
       bottomNavTheme: bottomNavTheme ?? this.bottomNavTheme,
     );
   }
@@ -63,6 +69,8 @@ class DevFestTheme extends ThemeExtension<DevFestTheme> {
       textTheme: textTheme?.lerp(other.textTheme, t),
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       buttonTheme: buttonTheme?.lerp(other.buttonTheme, t),
+      outlinedButtonTheme:
+          outlinedButtonTheme?.lerp(other.outlinedButtonTheme, t),
       bottomNavTheme: bottomNavTheme?.lerp(other.bottomNavTheme, t),
     );
   }
