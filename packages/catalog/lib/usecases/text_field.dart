@@ -9,7 +9,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Widget devfestTextField(BuildContext context) {
   return StatefulBuilder(builder: (context, setState) {
     return Scaffold(
-      backgroundColor: DevFestTheme.of(context).backgroundColor,
+      backgroundColor: DevfestTheme.of(context).backgroundColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),

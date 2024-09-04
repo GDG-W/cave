@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants.dart';
-import '../themes/colors.dart';
 import '../themes/text_field_theme.dart';
-import '../themes/theme_data.dart';
+import '../themes/themes.dart';
 
 class DevfestTextFormField extends StatelessWidget {
   const DevfestTextFormField({
@@ -34,7 +33,7 @@ class DevfestTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textFieldTheme = DevFestTheme.of(context).textFieldTheme ??
+    final textFieldTheme = DevfestTheme.of(context).textFieldTheme ??
         DevfestTextFieldTheme.light();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +41,7 @@ class DevfestTextFormField extends StatelessWidget {
         if (title != null) ...[
           Text(
             title!,
-            style: DevFestTheme.of(context).textTheme?.bodyBody3Medium,
+            style: DevfestTheme.of(context).textTheme?.bodyBody3Medium,
           ),
           Constants.smallVerticalGutter.verticalSpace,
         ],
