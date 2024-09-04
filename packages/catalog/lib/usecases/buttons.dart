@@ -2,7 +2,10 @@ import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-@widgetbook.UseCase(name: 'Filled Button', type: DevfestFilledButton)
+@widgetbook.UseCase(
+  name: 'Filled Button',
+  type: DevfestFilledButton,
+)
 Widget devfestFilledButton(BuildContext context) {
   return Material(
     color: DevfestTheme.of(context).backgroundColor,
@@ -43,7 +46,10 @@ Widget devfestFilledButton(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Outlined Button', type: DevfestOutlinedButton)
+@widgetbook.UseCase(
+  name: 'Outlined Button',
+  type: DevfestOutlinedButton,
+)
 Widget devfestOutlinedButton(BuildContext context) {
   return Material(
     color: DevfestTheme.of(context).backgroundColor,

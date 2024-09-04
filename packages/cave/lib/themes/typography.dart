@@ -1,8 +1,6 @@
 import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
-
 @immutable
 class DevfestTextTheme extends ThemeExtension<DevfestTextTheme> {
   final TextStyle? headerH1;
