@@ -80,7 +80,9 @@ class WidgetbookApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   theme: theme.copyWith(
                     extensions: [
-                      isDark ? DevFestThemeData.dark() : DevFestThemeData.light()
+                      isDark
+                          ? DevFestThemeData.dark()
+                          : DevFestThemeData.light()
                     ],
                   ),
                   home: Material(child: child),

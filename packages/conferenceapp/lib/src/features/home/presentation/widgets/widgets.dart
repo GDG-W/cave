@@ -1,2 +1,2 @@
-//GENERATED BARREL FILE 
-export 'agenda_header.dart'; 
+//GENERATED BARREL FILE
+export 'agenda_header.dart';

@@ -1,7 +1,6 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import '../widgets/devfest_version.dart';
-import 'package:devfest24/src/routing/router.dart';
 import 'package:devfest24/src/routing/routing.dart';
 import 'package:devfest24/src/shared/shared.dart';
 import 'package:flutter/material.dart';

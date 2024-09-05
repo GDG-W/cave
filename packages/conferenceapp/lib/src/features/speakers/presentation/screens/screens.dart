@@ -1,3 +1,3 @@
-//GENERATED BARREL FILE 
-export 'home.dart'; 
-export 'speaker_details.dart'; 
+//GENERATED BARREL FILE
+export 'home.dart';
+export 'speaker_details.dart';
