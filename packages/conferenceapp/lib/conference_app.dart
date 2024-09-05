@@ -20,54 +20,73 @@ class _ConferenceAppState extends ConsumerState<ConferenceApp> {
     Devfest2024Router.instance.initialiseRouter(ref);
   }
 
+  void _unfocus() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: designSize,
-      minTextAdapt: true,
-      builder: (_, child) {
-        return MaterialApp.router(
-          title: 'Devfest24 Conference App',
-          routerConfig: Devfest2024Router.instance.router,
-          builder: (context, child) => AccessibilityTools(child: child),
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.deepPurple,
-              surface: DevFestThemeData.light().backgroundColor,
+    return GestureDetector(
+      onTap: _unfocus,
+      child: ScreenUtilInit(
+        designSize: designSize,
+        minTextAdapt: true,
+        builder: (_, child) {
+          return MaterialApp.router(
+            title: 'Devfest24 Conference App',
+            routerConfig: Devfest2024Router.instance.router,
+            builder: (context, child) => AccessibilityTools(child: child),
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: Brightness.light,
+                surface: DevFestThemeData.light().backgroundColor,
+              ),
+              scaffoldBackgroundColor: DevFestThemeData.light().backgroundColor,
+              useMaterial3: true,
+              textTheme: const TextTheme(
+                displayMedium: TextStyle(color: DevfestColors.grey10),
+              ),
+              appBarTheme: AppBarTheme(
+                elevation: 0,
+                color: DevFestThemeData.light().backgroundColor,
+                surfaceTintColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                scrolledUnderElevation: 0,
+              ),
+              extensions: <ThemeExtension<dynamic>>[
+                /// Use the below format for raw theme data
+                /// DevFestTheme(textTheme: DevfestTextTheme()),
+                DevFestThemeData.light(),
+              ],
             ),
-            scaffoldBackgroundColor: DevFestThemeData.light().backgroundColor,
-            useMaterial3: true,
-            textTheme: const TextTheme(
-              displayMedium: TextStyle(color: DevfestColors.grey10),
+            darkTheme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: Brightness.dark,
+                surface: DevFestThemeData.dark().backgroundColor,
+              ),
+              appBarTheme: AppBarTheme(
+                elevation: 0,
+                color: DevFestThemeData.dark().backgroundColor,
+                surfaceTintColor: Colors.transparent,
+                scrolledUnderElevation: 0,
+              ),
+              scaffoldBackgroundColor: DevFestThemeData.dark().backgroundColor,
+              useMaterial3: true,
+              textTheme: const TextTheme(
+                displayMedium: TextStyle(color: DevfestColors.grey100),
+              ),
+              extensions: <ThemeExtension<dynamic>>[
+                /// Use the below format for raw theme data
+                /// DevFestTheme(textTheme: DevfestTextTheme()),
+                DevFestThemeData.dark(),
+              ],
             ),
-            // appBarTheme: AppBarTheme(
-            //   color: DevFestThemeData.light().backgroundColor,
-            // ),
-            extensions: <ThemeExtension<dynamic>>[
-              /// Use the below format for raw theme data
-              /// DevFestTheme(textTheme: DevfestTextTheme()),
-              DevFestThemeData.light(),
-            ],
-          ),
-          darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.deepPurple,
-              surface: DevFestThemeData.dark().backgroundColor,
-            ),
-            scaffoldBackgroundColor: DevFestThemeData.dark().backgroundColor,
-            useMaterial3: true,
-            textTheme: const TextTheme(
-              displayMedium: TextStyle(color: DevfestColors.grey100),
-            ),
-            extensions: <ThemeExtension<dynamic>>[
-              /// Use the below format for raw theme data
-              /// DevFestTheme(textTheme: DevfestTextTheme()),
-              DevFestThemeData.dark(),
-            ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
