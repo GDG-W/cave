@@ -8,22 +8,57 @@ class DevfestFilledButton extends StatelessWidget {
   const DevfestFilledButton({
     super.key,
     this.title,
+    this.titleStyle,
+    this.backgroundColor,
     this.prefixIcon,
     this.suffixIcon,
     this.onPressed,
-  });
+    double height = 72.0,
+  }) : _height = height;
+
+  const DevfestFilledButton.small({
+    super.key,
+    this.title,
+    this.titleStyle,
+    this.backgroundColor,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onPressed,
+  }) : _height = 36;
+
+  const DevfestFilledButton.medium({
+    super.key,
+    this.title,
+    this.titleStyle,
+    this.backgroundColor,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onPressed,
+  }) : _height = 40;
 
   final Widget? title;
+  final TextStyle? titleStyle;
+  final Color? backgroundColor;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final VoidCallback? onPressed;
+  final double _height;
 
   static final _space = 8.horizontalSpace;
 
   @override
   Widget build(BuildContext context) {
-    final buttonTheme = DevfestTheme.of(context).buttonTheme ??
+    DevfestButtonTheme buttonTheme = DevfestTheme.of(context).buttonTheme ??
         const DevfestButtonTheme.light();
+
+    buttonTheme = buttonTheme.copyWith(
+      textStyle: switch (_height) {
+        < 40 => DevfestTheme.of(context).textTheme?.bodyBody3Semibold, // small
+        < 72 => DevfestTheme.of(context).textTheme?.bodyBody1Medium, // medium
+        _ => null,
+      }
+          ?.copyWith(color: buttonTheme.textStyle.color),
+    );
     return Material(
       type: MaterialType.transparency,
       child: InkWell(
@@ -31,16 +66,22 @@ class DevfestFilledButton extends StatelessWidget {
         customBorder: buttonTheme.shape,
         child: AnimatedDefaultTextStyle(
           duration: Constants.kAnimationDur,
-          style: buttonTheme.textStyle,
+          style: buttonTheme.textStyle.merge(titleStyle),
           child: IconTheme(
-            data: IconThemeData(color: buttonTheme.iconColor),
+            data: IconThemeData(
+              color: buttonTheme.iconColor,
+              size: switch (_height) {
+                < 40 => 20,
+                _ => 24,
+              },
+            ),
             child: AnimatedContainer(
               duration: Constants.kAnimationDur,
-              height: 72.h,
+              height: _height.h,
               width: double.infinity,
               decoration: ShapeDecoration(
                 shape: buttonTheme.shape,
-                color: buttonTheme.backgroundColor,
+                color: backgroundColor ?? buttonTheme.backgroundColor,
               ),
               alignment: Alignment.center,
               child: Row(
