@@ -1,5 +1,6 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
+import 'package:devfest24/src/features/more/presentation/widgets/widgets.dart';
 import '../widgets/devfest_version.dart';
 import 'package:devfest24/src/routing/routing.dart';
 import 'package:devfest24/src/shared/shared.dart';
@@ -21,39 +22,44 @@ class MoreHomeScreen extends StatelessWidget {
                   horizontal: Constants.horizontalMargin.w),
               child: Column(
                 children: [
-                  Container(
-                    height: 188.h,
-                    margin: const EdgeInsets.only(
-                        top: Constants.smallVerticalGutter,
-                        bottom: Constants.largeVerticalGutter),
-                    decoration: const BoxDecoration(
-                      gradient: DevfestColors.gradientGradient,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(Constants.largeVerticalGutter),
-                      ),
-                    ),
-                  ),
+                  const SignedInUserHeaderTile(),
                   MoreSection(
                     title: const Text('GENERAL'),
                     options: [
                       MoreButton(
                         title: const Text('Profile'),
+                        icon: Icon(
+                          IconsaxOutline.user,
+                          size: 22.r,
+                        ),
                         onTap: () {
                           context.goNamed(Devfest2024Routes.profile.name);
                         },
                       ),
                       MoreButton(
                         title: const Text('My QR Code'),
+                        icon: Icon(
+                          IconsaxOutline.shield,
+                          size: 22.r,
+                        ),
                         onTap: () {
                           context.goNamed(Devfest2024Routes.myQrCode.name);
                         },
                       ),
                       MoreButton(
                         title: const Text('Theme Settings'),
+                        icon: Icon(
+                          IconsaxOutline.component,
+                          size: 22.r,
+                        ),
                         onTap: () {},
                       ),
                       MoreButton(
                         title: const Text('Venue Map'),
+                        icon: Icon(
+                          IconsaxOutline.location,
+                          size: 22.r,
+                        ),
                         onTap: () {
                           context.goNamed(Devfest2024Routes.venueMap.name);
                         },
@@ -65,10 +71,18 @@ class MoreHomeScreen extends StatelessWidget {
                     options: [
                       MoreButton(
                         title: const Text('About GDG Lagos'),
+                        icon: Icon(
+                          IconsaxOutline.heart,
+                          size: 22.r,
+                        ),
                         onTap: () {},
                       ),
                       MoreButton(
                         title: const Text('Contact Us'),
+                        icon: Icon(
+                          IconsaxOutline.info_circle,
+                          size: 22.r,
+                        ),
                         onTap: () {},
                       ),
                     ],
