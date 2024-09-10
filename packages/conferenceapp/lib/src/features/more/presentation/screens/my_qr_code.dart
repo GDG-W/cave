@@ -1,3 +1,6 @@
+import 'package:cave/cave.dart';
+import 'package:cave/constants.dart';
+import 'package:devfest24/src/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class MyQrCodeScreen extends StatelessWidget {
@@ -5,6 +8,37 @@ class MyQrCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        leading: const GoBackButton(),
+        leadingWidth: 120.w,
+      ),
+      body: Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: Constants.horizontalMargin)
+                .w,
+        child: Column(
+          children: [
+            HeaderText(
+              title: const Text('🤳 Your QR Code'),
+              titleStyle: TextStyle(
+                fontSize: DevfestTheme.of(context)
+                    .textTheme
+                    ?.titleTitle1Semibold
+                    ?.fontSize,
+              ),
+              subtitle: const Text(
+                'Here is your QR Code you need to use to check in. Reach out to any volunteer to check you in',
+              ),
+              subtitleStyle: DevfestTheme.of(context)
+                  .textTheme
+                  ?.bodyBody2Medium
+                  ?.medium
+                  .applyColor(DevfestColors.grey50.possibleDarkVariant),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

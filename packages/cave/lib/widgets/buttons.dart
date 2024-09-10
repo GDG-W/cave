@@ -10,6 +10,7 @@ class DevfestFilledButton extends StatelessWidget {
     this.title,
     this.titleStyle,
     this.backgroundColor,
+    this.backgroundGradient,
     this.prefixIcon,
     this.suffixIcon,
     this.onPressed,
@@ -21,6 +22,7 @@ class DevfestFilledButton extends StatelessWidget {
     this.title,
     this.titleStyle,
     this.backgroundColor,
+    this.backgroundGradient,
     this.prefixIcon,
     this.suffixIcon,
     this.onPressed,
@@ -31,6 +33,7 @@ class DevfestFilledButton extends StatelessWidget {
     this.title,
     this.titleStyle,
     this.backgroundColor,
+    this.backgroundGradient,
     this.prefixIcon,
     this.suffixIcon,
     this.onPressed,
@@ -39,6 +42,7 @@ class DevfestFilledButton extends StatelessWidget {
   final Widget? title;
   final TextStyle? titleStyle;
   final Color? backgroundColor;
+  final Gradient? backgroundGradient;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final VoidCallback? onPressed;
@@ -81,7 +85,10 @@ class DevfestFilledButton extends StatelessWidget {
               width: double.infinity,
               decoration: ShapeDecoration(
                 shape: buttonTheme.shape,
-                color: backgroundColor ?? buttonTheme.backgroundColor,
+                color: backgroundGradient != null
+                    ? null
+                    : backgroundColor ?? buttonTheme.backgroundColor,
+                gradient: backgroundGradient,
               ),
               alignment: Alignment.center,
               child: Row(

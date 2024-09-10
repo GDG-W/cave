@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SliverList.separated(
                   itemCount: 2,
-                  itemBuilder: (context, index) => AgentTalkTile(
+                  itemBuilder: (context, index) => AgendaTalkTile(
                     onTap: () {},
                   ),
                   separatorBuilder: (context, _) =>
@@ -128,8 +128,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SliverList.separated(
                   itemCount: 4,
-                  itemBuilder: (context, index) =>
-                      const ConferenceSponsorTile(),
+                  itemBuilder: (context, index) => ConferenceSponsorTile(
+                    linkOnTap: () {},
+                  ),
                   separatorBuilder: (context, _) =>
                       Constants.smallVerticalGutter.verticalSpace,
                 ),
