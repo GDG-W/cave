@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ConferenceSponsorTile extends StatelessWidget {
-  const ConferenceSponsorTile({super.key});
+  const ConferenceSponsorTile({super.key, this.linkOnTap});
+
+  final VoidCallback? linkOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +42,7 @@ class ConferenceSponsorTile extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: _SponsorLinkTag(
-                      () {},
-                    ),
+                    child: _SponsorLinkTag(linkOnTap),
                   )
                 ],
               ),

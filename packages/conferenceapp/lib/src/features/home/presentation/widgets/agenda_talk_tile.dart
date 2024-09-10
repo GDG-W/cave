@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 
 import '../../../../shared/shared.dart';
 
-class AgentTalkTile extends StatelessWidget {
-  const AgentTalkTile({super.key, this.onTap});
+class AgendaTalkTile extends StatelessWidget {
+  const AgendaTalkTile({super.key, this.onTap});
 
   final VoidCallback? onTap;
 
