@@ -21,24 +21,22 @@ class ReserveHomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
         child: CustomScrollView(
           slivers: [
-            PinnedHeaderSliver(
-              child: Material(
-                child: AgendaHeader(
-                  title: const Text('💺 Reserve'),
-                  subtitle: const Text(
-                    'We have a seat saved just for you in these  sessions!',
-                  ),
-                  onEventDayChanged: (_) {},
-                ),
+            SliverAgendaHeader(
+              title: const Text('💺 Reserve'),
+              subtitle: const Text(
+                'We have a seat saved just for you in these  sessions!',
               ),
+              onEventDayChanged: (_) {},
             ),
             SliverList.separated(
+              itemCount: 20,
               itemBuilder: (context, index) => ConferenceSessionTile(
                 onTap: () {},
               ),
               separatorBuilder: (context, index) =>
                   Constants.verticalGutter.verticalSpace,
             ),
+            SliverToBoxAdapter(child: Constants.verticalGutter.verticalSpace),
           ],
         ),
       ),

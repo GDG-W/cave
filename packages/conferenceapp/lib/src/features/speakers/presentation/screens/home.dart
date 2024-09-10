@@ -21,17 +21,13 @@ class SpeakersHomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
         child: CustomScrollView(
           slivers: [
-            PinnedHeaderSliver(
-              child: Material(
-                child: AgendaHeader(
-                  title: const Text('🎤 Speakers'),
-                  subtitle: const Text(
-                    'Industry veterans ready to share knowledge with you on their experiences',
-                  ),
-                  onFilterSelected: () {},
-                  onEventDayChanged: (_) {},
-                ),
+            SliverAgendaHeader(
+              title: const Text('🎤 Speakers'),
+              subtitle: const Text(
+                'Industry veterans ready to share knowledge with you on their experiences',
               ),
+              onFilterSelected: () {},
+              onEventDayChanged: (_) {},
             ),
             SliverList.separated(
               itemBuilder: (context, index) => SpeakerTile(

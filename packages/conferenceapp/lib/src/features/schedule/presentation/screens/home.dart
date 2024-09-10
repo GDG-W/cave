@@ -22,17 +22,13 @@ class ScheduleHomeScreen extends StatelessWidget {
                 .w,
         child: CustomScrollView(
           slivers: [
-            PinnedHeaderSliver(
-              child: Material(
-                child: AgendaHeader(
-                  title: const Text('📆 Schedule'),
-                  subtitle: const Text(
-                    'Our schedule is packed with incredible content all for you!!',
-                  ),
-                  onFilterSelected: () {},
-                  onEventDayChanged: (_) {},
-                ),
+            SliverAgendaHeader(
+              title: const Text('📆 Schedule'),
+              subtitle: const Text(
+                'Our schedule is packed with incredible content all for you!!',
               ),
+              onFilterSelected: () {},
+              onEventDayChanged: (_) {},
             ),
             SliverList.separated(
               itemBuilder: (context, index) => ConferenceScheduleTile(
