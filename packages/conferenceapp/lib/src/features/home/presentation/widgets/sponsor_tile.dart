@@ -16,7 +16,7 @@ class ConferenceSponsorTile extends StatelessWidget {
         ConstrainedBox(
           constraints: BoxConstraints(minHeight: 160.r),
           child: DecoratedBox(
-            decoration:  const BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: DevfestColors.inverseGradientGradient,
               color: Colors.green,
               borderRadius: BorderRadius.all(
