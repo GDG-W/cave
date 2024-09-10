@@ -69,7 +69,7 @@ class OnboardingLoginScreen extends StatelessWidget {
               DevfestFilledButton(
                 title: const Text('Next'),
                 onPressed: () {
-                  context.goNamed(Devfest2024Routes.dashboard.name);
+                  context.goNamed(Devfest2024Routes.onboardingSignature.name);
                 },
               ),
               DevfestFilledButton(
@@ -77,7 +77,9 @@ class OnboardingLoginScreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 titleStyle:
                     TextStyle(color: DevfestColors.grey10.possibleDarkVariant),
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed(Devfest2024Routes.dashboard.name);
+                },
               ),
             ],
           ),
