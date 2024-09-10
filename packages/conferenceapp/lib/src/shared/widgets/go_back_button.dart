@@ -2,9 +2,10 @@ import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
 
 class GoBackButton extends StatelessWidget {
-  const GoBackButton({super.key, this.onTap});
+  const GoBackButton({super.key, this.onTap, this.color});
 
   final VoidCallback? onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +14,14 @@ class GoBackButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const BackButton(onPressed: null),
+          BackButton(onPressed: null, color: color),
           Text(
             'Go Back',
-            style: DevfestTheme.of(context).textTheme?.bodyBody2Medium?.medium,
+            style: DevfestTheme.of(context)
+                .textTheme
+                ?.bodyBody2Medium
+                ?.medium
+                .applyColor(color),
           )
         ],
       ),
