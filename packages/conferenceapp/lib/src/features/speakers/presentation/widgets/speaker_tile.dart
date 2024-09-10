@@ -2,7 +2,6 @@ import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../shared/shared.dart';
 
@@ -13,7 +12,6 @@ class SpeakerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat('hh:mm a');
     return Material(
       borderRadius:
           const BorderRadius.all(Radius.circular(Constants.verticalGutter)),
