@@ -43,10 +43,11 @@ class AgendaHeader extends StatelessWidget {
               : SizedBox(
                   width: 87.w,
                   child: DevfestFilledButton.small(
+                    onPressed: onFilterSelected,
                     backgroundColor:
                         DevfestColors.primariesYellow90.possibleDarkVariant,
                     prefixIcon: Icon(
-                      Icons.filter_alt_outlined,
+                      IconsaxOutline.filter,
                       color: DevfestTheme.of(context)
                           .textTheme
                           ?.titleTitle2Semibold
@@ -69,30 +70,32 @@ class AgendaHeader extends StatelessWidget {
               ?.medium
               .applyColor(DevfestColors.grey50.possibleDarkVariant),
         ),
-        gutter ?? Constants.largeVerticalGutter.verticalSpace,
-        Row(
-          children: [
-            Flexible(
-              child: DevfestTabButton(
-                title: const Text('Friday'),
-                selected: eventDay == EventDay.one,
-                onTap: () {
-                  onEventDayChanged?.call(EventDay.one);
-                },
+        if (onEventDayChanged != null) ...[
+          gutter ?? Constants.largeVerticalGutter.verticalSpace,
+          Row(
+            children: [
+              Flexible(
+                child: DevfestTabButton(
+                  title: const Text('Friday'),
+                  selected: eventDay == EventDay.one,
+                  onTap: () {
+                    onEventDayChanged?.call(EventDay.one);
+                  },
+                ),
               ),
-            ),
-            Flexible(
-              child: DevfestTabButton(
-                title: const Text('Saturday'),
-                selected: eventDay == EventDay.two,
-                onTap: () {
-                  onEventDayChanged?.call(EventDay.two);
-                },
+              Flexible(
+                child: DevfestTabButton(
+                  title: const Text('Saturday'),
+                  selected: eventDay == EventDay.two,
+                  onTap: () {
+                    onEventDayChanged?.call(EventDay.two);
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
-        Constants.verticalGutter.verticalSpace,
+            ],
+          ),
+          Constants.verticalGutter.verticalSpace,
+        ],
       ],
     );
   }

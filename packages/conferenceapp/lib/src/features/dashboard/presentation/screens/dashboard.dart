@@ -62,23 +62,23 @@ class _ViewState extends State<_View> {
         items: const [
           DevfestBottomNavItem(
             label: 'Home',
-            icon: Icon(Icons.home),
+            icon: Icon(IconsaxOutline.home_2),
           ),
           DevfestBottomNavItem(
             label: 'Schedule',
-            icon: Icon(Icons.home),
+            icon: Icon(IconsaxOutline.calendar_1),
           ),
           DevfestBottomNavItem(
             label: 'Speakers',
-            icon: Icon(Icons.home),
+            icon: Icon(IconsaxOutline.microphone),
           ),
           DevfestBottomNavItem(
             label: 'Reserve',
-            icon: Icon(Icons.home),
+            icon: Icon(IconsaxOutline.ticket),
           ),
           DevfestBottomNavItem(
             label: 'More',
-            icon: Icon(Icons.home),
+            icon: Icon(IconsaxOutline.more_square),
           ),
         ],
       ),

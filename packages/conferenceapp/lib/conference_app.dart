@@ -36,7 +36,11 @@ class _ConferenceAppState extends ConsumerState<ConferenceApp> {
           return MaterialApp.router(
             title: 'Devfest24 Conference App',
             routerConfig: Devfest2024Router.instance.router,
-            builder: (context, child) => AccessibilityTools(child: child),
+            builder: (context, child) => AccessibilityTools(
+              minimumTapAreas: const MinimumTapAreas(mobile: 30, desktop: 44),
+              checkFontOverflows: true,
+              child: child,
+            ),
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
                 seedColor: Colors.deepPurple,

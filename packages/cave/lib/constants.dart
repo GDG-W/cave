@@ -4,6 +4,7 @@ abstract class Constants {
 
   static const horizontalMargin = 24.0;
   static const horizontalGutter = 8.0;
+  static const largeHorizontalGutter = 16.0;
   static const largeVerticalGutter = 24.0;
   static const verticalGutter = 16.0;
   static const smallVerticalGutter = 8.0;

@@ -12,7 +12,7 @@ class CheckInButton extends StatelessWidget {
       width: 113.w,
       child: DevfestFilledButton.small(
         onPressed: onTap,
-        prefixIcon: const Icon(Icons.shield_outlined, size: 20),
+        prefixIcon: const Icon(IconsaxOutline.shield, size: 20),
         title: const Text(
           'Check-In',
         ),

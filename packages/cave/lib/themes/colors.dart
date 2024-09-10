@@ -4,6 +4,9 @@ abstract class DevfestColors {
   static const gradientGradient =
       LinearGradient(colors: [Color(0xffc471ed), Color(0xff12c2e9)]);
 
+  static const inverseGradientGradient =
+      LinearGradient(colors: [Color(0xff12c2e9), Color(0xffc471ed)]);
+
   static const Color grey10 = Color(0xff0a0a0a);
 
   static const Color grey20 = Color(0xff1d1d1d);
