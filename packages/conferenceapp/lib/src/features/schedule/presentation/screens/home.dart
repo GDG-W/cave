@@ -12,7 +12,7 @@ class ScheduleHomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          const CheckInButton(),
+          const CheckInButton(isLoggedIn: true),
           Constants.horizontalMargin.horizontalSpace,
         ],
       ),
