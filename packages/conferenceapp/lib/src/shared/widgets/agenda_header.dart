@@ -117,7 +117,6 @@ class SliverAgendaHeader extends StatefulWidget {
     this.eventDay = EventDay.one,
     this.onEventDayChanged,
     this.onFilterSelected,
-    this.gutter,
   });
 
   final Widget title;
@@ -126,7 +125,6 @@ class SliverAgendaHeader extends StatefulWidget {
   final EventDay eventDay;
   final ValueChanged<EventDay>? onEventDayChanged;
   final VoidCallback? onFilterSelected;
-  final Widget? gutter;
 
   @override
   State<SliverAgendaHeader> createState() => _SliverAgendaHeaderState();
@@ -194,31 +192,54 @@ class _SliverAgendaHeaderState extends State<SliverAgendaHeader> {
             false => widget.onFilterSelected,
             null => prevHideHeaders == true ? null : widget.onFilterSelected,
           },
-          onEventDayChanged: switch (hideHeaders) {
-            true => null,
-            false => widget.onEventDayChanged,
-            null => prevHideHeaders == true ? null : widget.onEventDayChanged,
+          onEventDayChanged: widget.onEventDayChanged,
+          gutter: switch (hideHeaders) {
+            true => Constants.smallVerticalGutter.verticalSpace,
+            false => Constants.verticalGutter.verticalSpace,
+            null => prevHideHeaders == true
+                ? Constants.smallVerticalGutter.verticalSpace
+                : Constants.verticalGutter.verticalSpace,
           },
         ),
       ),
       maxExtentPrototype: Material(
         child: AgendaHeader(
           title: widget.title,
-          subtitle: widget.subtitle,
+          subtitle: switch (hideHeaders) {
+            true => null,
+            false => widget.subtitle,
+            null => prevHideHeaders == true ? null : widget.subtitle,
+          },
           titleStyle: widget.titleStyle,
           onFilterSelected: widget.onFilterSelected,
           onEventDayChanged: widget.onEventDayChanged,
-          gutter: widget.gutter,
+          gutter: switch (hideHeaders) {
+            true => Constants.smallVerticalGutter.verticalSpace,
+            false => Constants.verticalGutter.verticalSpace,
+            null => prevHideHeaders == true
+                ? Constants.smallVerticalGutter.verticalSpace
+                : Constants.verticalGutter.verticalSpace,
+          },
         ),
       ),
       child: Material(
         child: AgendaHeader(
           title: widget.title,
-          subtitle: widget.subtitle,
+          subtitle: switch (hideHeaders) {
+            true => null,
+            false => widget.subtitle,
+            null => prevHideHeaders == true ? null : widget.subtitle,
+          },
           titleStyle: widget.titleStyle,
           onFilterSelected: widget.onFilterSelected,
           onEventDayChanged: widget.onEventDayChanged,
-          gutter: widget.gutter,
+          gutter: switch (hideHeaders) {
+            true => Constants.smallVerticalGutter.verticalSpace,
+            false => Constants.verticalGutter.verticalSpace,
+            null => prevHideHeaders == true
+                ? Constants.smallVerticalGutter.verticalSpace
+                : Constants.verticalGutter.verticalSpace,
+          },
         ),
       ),
     );
