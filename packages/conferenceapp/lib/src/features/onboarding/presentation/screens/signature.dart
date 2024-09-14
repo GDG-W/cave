@@ -1,7 +1,16 @@
+import 'dart:io';
+
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
+import 'package:devfest24/src/features/onboarding/presentation/widgets/widgets.dart';
 import 'package:devfest24/src/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../routing/routing.dart';
+import '../widgets/path_to_svg_parser.dart';
 
 class OnboardingSignatureScreen extends StatefulWidget {
   const OnboardingSignatureScreen({super.key});
@@ -12,61 +21,168 @@ class OnboardingSignatureScreen extends StatefulWidget {
 }
 
 class _OnboardingSignatureScreenState extends State<OnboardingSignatureScreen> {
-  Color? stencilColor = DevfestColors.grey10;
+  Color stencilColor = DevfestColors.grey10;
+  double strokeWidth = 5;
+
+  List<DrawSession>? drawSessions;
+
+  BoxConstraints? canvasConstraints;
+
+  File? svgFile;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Row(
-          children: [
-            Constants.horizontalMargin.horizontalSpace,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Row(
+            children: [
+              Constants.horizontalMargin.horizontalSpace,
+              SizedBox(
+                width: 96.w,
+                child: DevfestFilledButton.medium(
+                  backgroundColor: DevfestColors.grey80.possibleDarkVariant,
+                  title: const Text('Exit'),
+                  titleStyle: TextStyle(
+                    color: DevfestColors.grey50.possibleDarkVariant,
+                  ).semi,
+                  onPressed: () {
+                    context.goNamed(Devfest2024Routes.dashboard.name);
+                  },
+                ),
+              ),
+            ],
+          ),
+          leadingWidth: 120.w,
+          actions: [
             SizedBox(
               width: 96.w,
-              child: DevfestFilledButton.small(
-                backgroundColor: DevfestColors.grey80.possibleDarkVariant,
-                title: const Text('Exit'),
-                titleStyle: TextStyle(
-                  color: DevfestColors.grey50.possibleDarkVariant,
-                ).semi,
-                onPressed: () {},
+              child: DevfestFilledButton.medium(
+                title: const Text('Upload'),
+                onPressed: () {
+                  if (canvasConstraints != null) {
+                    final pathSvgParser = PathSvgParser(
+                      drawSessions: drawSessions ?? [],
+                      canvasConstraints: canvasConstraints!,
+                    );
+
+                    pathSvgParser.parseAsFile().then((file) {
+                      setState(() {
+                        svgFile = file;
+                      });
+                    });
+                  }
+                },
               ),
             ),
+            Constants.horizontalMargin.horizontalSpace,
           ],
         ),
-        leadingWidth: 120.w,
-        actions: [
-          SizedBox(
-            width: 96.w,
-            child: DevfestFilledButton.small(
-              title: const Text('Upload'),
-              onPressed: () {},
-            ),
-          ),
-          Constants.horizontalMargin.horizontalSpace,
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-                horizontal: Constants.horizontalGutter,
-                vertical: Constants.verticalGutter)
-            .r
-            .add(
-              EdgeInsets.only(bottom: MediaQuery.viewPaddingOf(context).bottom),
-            ),
-        child: Column(
+        body: Stack(
           children: [
-            Expanded(child: Container()),
-            _SignatureCanvasPalette(
-              onUndoPressed: () {},
-              onDeletePressed: () {},
-              selectedColor: stencilColor,
-              onColorChanged: (color) {
-                setState(() {
-                  stencilColor = color;
-                });
-              },
-            )
+            Positioned.fill(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                        vertical: Constants.verticalGutter)
+                    .r
+                    .add(
+                      EdgeInsets.only(
+                          bottom: MediaQuery.viewPaddingOf(context).bottom),
+                    ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          if (drawSessions?.isEmpty == true)
+                            const Center(
+                              child: _CanvasHintText(
+                                text: 'Leave your mark here\n😘',
+                              ),
+                            ),
+                          Positioned.fill(
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                canvasConstraints ??= constraints;
+                                return SignatureCanvas(
+                                  stencilColor: stencilColor,
+                                  strokeWidth: strokeWidth,
+                                  onDrawSessionsChanged: (boardResult) {
+                                    setState(() {
+                                      drawSessions = boardResult;
+                                    });
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                              horizontal: Constants.horizontalGutter,
+                              vertical: Constants.smallVerticalGutter)
+                          .r,
+                      child: _SignatureCanvasPalette(
+                        onUndoPressed: () {
+                          setState(() {
+                            if (drawSessions?.isNotEmpty == true) {
+                              drawSessions?.removeLast();
+                            }
+                            svgFile = null;
+                          });
+                        },
+                        onDeletePressed: () {
+                          setState(() {
+                            drawSessions?.clear();
+                            svgFile = null;
+                          });
+                        },
+                        selectedColor: stencilColor,
+                        onColorChanged: (color) {
+                          setState(() {
+                            stencilColor = color;
+                            svgFile = null;
+                          });
+                        },
+                      ),
+                    ),
+                    Slider.adaptive(
+                      value: strokeWidth,
+                      min: 1,
+                      max: 22,
+                      divisions: 7,
+                      onChanged: (value) {
+                        setState(() {
+                          strokeWidth = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            if (svgFile != null)
+              Positioned(
+                right: Constants.horizontalGutter.r,
+                top: 0,
+                height: 150,
+                width: 100,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: DevfestTheme.of(context).backgroundColor,
+                    border: Border.all(color: DevfestColors.grey50),
+                  ),
+                  child: SvgPicture.file(
+                    svgFile!,
+                    semanticsLabel: 'Signature preview',
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -101,7 +217,10 @@ class _SignatureCanvasPalette extends StatelessWidget {
       children: [
         IconButton(
           onPressed: onUndoPressed,
-          icon: const Icon(IconsaxOutline.undo),
+          icon: const Icon(
+            IconsaxOutline.undo,
+            semanticLabel: 'Undo button',
+          ),
         ),
         Expanded(
           child: Material(
@@ -171,24 +290,43 @@ class _PaletteColorItem extends StatelessWidget {
     return Material(
       color: color,
       shape: const CircleBorder(),
-      child: InkWell(
-        onTap: onTap,
-        customBorder: const CircleBorder(),
-        child: AnimatedSize(
-          duration: Constants.kAnimationDur,
-          curve: Curves.ease,
-          child: SizedBox.square(
-            dimension: dimension,
-            child: isSelected
-                ? const Icon(
-                    Icons.check_rounded,
-                    color: DevfestColors.grey100,
-                    semanticLabel: 'Selected color',
-                  )
-                : const SizedBox.shrink(),
+      child: Semantics.fromProperties(
+        properties: const SemanticsProperties(label: 'Color picker'),
+        child: InkWell(
+          onTap: onTap,
+          customBorder: const CircleBorder(),
+          child: AnimatedSize(
+            duration: Constants.kAnimationDur,
+            curve: Curves.ease,
+            child: SizedBox.square(
+              dimension: dimension,
+              child: isSelected
+                  ? const Icon(
+                      Icons.check_rounded,
+                      color: DevfestColors.grey100,
+                      semanticLabel: 'Selected color',
+                    )
+                  : const SizedBox.shrink(),
+            ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _CanvasHintText extends StatelessWidget {
+  const _CanvasHintText({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: DevfestTheme.of(context).textTheme?.headerH5?.regular.applyColor(
+          DevfestColors.grey70.possibleDarkVariant.withOpacity(0.5)),
     );
   }
 }
