@@ -22,7 +22,12 @@ class VenueMapScreen extends StatelessWidget {
               padding: const EdgeInsets.all(Constants.horizontalGutter).r,
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  return LandmarkMap(mapConstraints: constraints);
+                  return RepaintBoundary(
+                    child: SizedBox(
+                      height: constraints.maxHeight,
+                      child: LandmarkMap(mapConstraints: constraints),
+                    ),
+                  );
                 },
               ),
             ),
