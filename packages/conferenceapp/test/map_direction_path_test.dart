@@ -24,9 +24,9 @@ void main() {
       final robot = MapRobot(grid);
 
       GridCell exhibitionCell =
-      GridCell((row: 62 + ((78 - 62) ~/ 2), column: grid.columns - 1));
+          GridCell((row: 62 + ((78 - 62) ~/ 2), column: grid.columns - 1));
       GridCell room1Cell =
-      GridCell((row: 47 + ((62 - 47) ~/ 2), column: grid.columns - 1));
+          GridCell((row: 47 + ((62 - 47) ~/ 2), column: grid.columns - 1));
 
       // state > 0 - cell is available for movement
       // find closest cell that allows movement

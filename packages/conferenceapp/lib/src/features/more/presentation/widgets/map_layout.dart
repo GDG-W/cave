@@ -42,51 +42,50 @@ class MapLayoutDelegate extends MultiChildLayoutDelegate {
 
       blockLayouts.add(
         (
-        room: RoomType.values[i],
-        start: childOffset,
-        end: Offset(childOffset.dx + currentSize.width,
-            childOffset.dy + currentSize.height),
-        hideFenceBorder: block.hideFenceBorder,
-        openings: block.openingPositions
-            .asMap()
-            .map((index, openingPosition) {
-          final startX = childOffset.dx + openingPosition.dx;
-          final startY = childOffset.dy + openingPosition.dy;
+          room: RoomType.values[i],
+          start: childOffset,
+          end: Offset(childOffset.dx + currentSize.width,
+              childOffset.dy + currentSize.height),
+          hideFenceBorder: block.hideFenceBorder,
+          openings: block.openingPositions
+              .asMap()
+              .map((index, openingPosition) {
+                final startX = childOffset.dx + openingPosition.dx;
+                final startY = childOffset.dy + openingPosition.dy;
 
-          final openingSize =
-              block.openingSizes.elementAtOrNull(index) ?? openingRadius;
-          late Offset start;
-          late Offset end;
+                final openingSize =
+                    block.openingSizes.elementAtOrNull(index) ?? openingRadius;
+                late Offset start;
+                late Offset end;
 
-          final blockStartFromEnd =
-          (block.entranceLabel?.isNotEmpty ?? false) ? 25.0 : 0.0;
-          // if is at left edge
-          if (openingPosition.dx == 0) {
-            start = Offset(startX, startY);
-            end = Offset(startX, startY + openingSize);
-          } // if is at right edge
-          else if (openingPosition.dx - blockStartFromEnd ==
-              block.width) {
-            start = Offset(startX, startY);
-            end = Offset(startX, startY + openingSize);
-          } // if is at top edge
-          else if (openingPosition.dy == 0) {
-            start = Offset(startX - blockStartFromEnd, startY);
-            end =
-                Offset(startX + openingSize - blockStartFromEnd,
-                    startY);
-          } // if is at bottom edge
-          else {
-            start =
-                Offset(startX - blockStartFromEnd, startY - cellSize.w);
-            end = Offset(
-                startX + openingSize - blockStartFromEnd, startY - cellSize.w);
-          }
+                final blockStartFromEnd =
+                    (block.entranceLabel?.isNotEmpty ?? false) ? 25.0 : 0.0;
+                // if is at left edge
+                if (openingPosition.dx == 0) {
+                  start = Offset(startX, startY);
+                  end = Offset(startX, startY + openingSize);
+                } // if is at right edge
+                else if (openingPosition.dx - blockStartFromEnd ==
+                    block.width) {
+                  start = Offset(startX, startY);
+                  end = Offset(startX, startY + openingSize);
+                } // if is at top edge
+                else if (openingPosition.dy == 0) {
+                  start = Offset(startX - blockStartFromEnd, startY);
+                  end =
+                      Offset(startX + openingSize - blockStartFromEnd, startY);
+                } // if is at bottom edge
+                else {
+                  start =
+                      Offset(startX - blockStartFromEnd, startY - cellSize.w);
+                  end = Offset(startX + openingSize - blockStartFromEnd,
+                      startY - cellSize.w);
+                }
 
-          return MapEntry(index, (start: start, end: end));
-        })
-            .values
-            .toList(),
+                return MapEntry(index, (start: start, end: end));
+              })
+              .values
+              .toList(),
         ),
       );
 
