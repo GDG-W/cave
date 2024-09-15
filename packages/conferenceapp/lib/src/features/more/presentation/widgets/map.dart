@@ -1,24 +1,37 @@
 import 'package:cave/cave.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
-import '../map_utils.dart';
+import '../map/map.dart';
 import 'map_block.dart';
+import 'map_layout.dart';
+
+typedef BlockLayoutCallback = void Function(List<BlockLayoutArea> areas);
+
+typedef GridCellRange = ({GridCell start, GridCell end});
 
 class LandmarkMap extends StatefulWidget {
-  const LandmarkMap({super.key, required this.mapConstraints});
+  const LandmarkMap({
+    super.key,
+    required this.mapConstraints,
+    required this.onBlocksLayout,
+    this.getDirections,
+  });
 
   final BoxConstraints mapConstraints;
+  final BlockLayoutCallback onBlocksLayout;
+  final GridCellRange? getDirections;
 
   @override
   State<LandmarkMap> createState() => _LandmarkMapState();
 }
 
-class _LandmarkMapState extends State<LandmarkMap> {
+class _LandmarkMapState extends State<LandmarkMap>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController controller;
   late double largeRoomHeight = widget.mapConstraints.maxWidth * 0.206;
   late double mediumRoomHeight = widget.mapConstraints.maxHeight * 0.09;
 
-  late final mapSchematics = [
+  late List<Block> mapSchematics = [
     Block.fromContext(
       context,
       width: widget.mapConstraints.maxWidth,
@@ -56,14 +69,8 @@ class _LandmarkMapState extends State<LandmarkMap> {
       blockColor: const Color(0xff88cd83),
       openingSizes: [null, widget.mapConstraints.maxWidth * 0.082],
       openingPositions: [
-        Offset(
-          335.w,
-          largeRoomHeight,
-        ),
-        Offset(
-          307.w,
-          0,
-        ),
+        Offset(335.w, largeRoomHeight),
+        Offset(307.w, 0),
       ],
     ),
     Block.fromContext(
@@ -75,10 +82,7 @@ class _LandmarkMapState extends State<LandmarkMap> {
       blockLabelStyle:
           DevfestTheme.of(context).textTheme?.bodyBody4Regular?.medium,
       blockColor: const Color(0xffd9d0c3),
-      position: Offset(
-        280.w,
-        largeRoomHeight * 3,
-      ),
+      position: Offset(280.w, largeRoomHeight * 3),
     ),
     Block.fromContext(
       context,
@@ -134,58 +138,136 @@ class _LandmarkMapState extends State<LandmarkMap> {
     ),
   ];
 
-  static double cellSize = 5;
-  int hueValue = 200;
+  late List<BlockLayoutArea> roomsLayouts;
 
-  late final ValueNotifier<Grid<int>> grid = ValueNotifier(
-    Grid.make(widget.mapConstraints.maxHeight ~/ cellSize,
-        widget.mapConstraints.maxWidth ~/ cellSize, 0),
+  int hueValue = 200;
+  int movementPathState = 30;
+  int allowedState = 150;
+
+  late Grid<int> grid = Grid.make(
+    widget.mapConstraints.maxHeight ~/ cellSize,
+    widget.mapConstraints.maxWidth ~/ cellSize,
+    0,
   );
 
-  late List<BlockLayoutArea> roomsLayouts;
+  @override
+  void initState() {
+    super.initState();
+
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 5));
+
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
+      if (widget.getDirections != null) {
+        _navigateToDestination();
+      }
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant LandmarkMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.getDirections != widget.getDirections &&
+        widget.getDirections != null) {
+      _navigateToDestination();
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void _navigateToDestination() async {
+    if (widget.getDirections == null) return;
+    GridCell start = widget.getDirections!.start;
+    GridCell goal = widget.getDirections!.end;
+
+    grid.resetCells(grid.filledCells((state) => state == movementPathState));
+    controller.reset();
+
+    final robot = MapRobot(grid);
+    robot.getAction(start, goal);
+
+    Grid<int> newGrid = Grid.make(widget.mapConstraints.maxHeight ~/ cellSize,
+        widget.mapConstraints.maxWidth ~/ cellSize, 0);
+
+    newGrid = newGrid.copyWith(grid: grid.grid.toList());
+
+    for (final action in robot.foundActions.reversed) {
+      switch (action) {
+        case Action.moveUp:
+          newGrid.grid[start.row][start.column] = movementPathState;
+          start = start.above;
+          break;
+        case Action.moveRight:
+          newGrid.grid[start.row][start.column] = movementPathState;
+          start = start.right;
+          break;
+        case Action.moveLeft:
+          newGrid.grid[start.row][start.column] = movementPathState;
+          start = start.left;
+          break;
+        case Action.moveDown:
+          newGrid.grid[start.row][start.column] = movementPathState;
+          start = start.below;
+          break;
+        case Action.doNothing:
+          newGrid.grid[start.row][start.column] = movementPathState;
+          start = start;
+          break;
+      }
+    }
+
+    if (!mounted) return;
+    setState(() {
+      if (!mounted) return;
+      grid = newGrid;
+    });
+
+    controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Positioned.fill(
-          child: CustomMultiChildLayout(
-            delegate: MapLayoutDelegate(
-              blocks: mapSchematics,
-              onBlocksLayout: (areas) {
-                roomsLayouts = areas.toList(); // soft-copy
-                WidgetsFlutterBinding.ensureInitialized()
-                    .addPostFrameCallback((_) {
-                  areas.forEach(_fillPositionOnGrid);
-                });
-              },
-            ),
-            children: [
-              for (int i = 0; i < mapSchematics.length; i++)
-                LayoutId(
-                  id: i,
-                  child: CustomPaint(
-                    painter: MapBlockPainter(block: mapSchematics[i]),
-                  ),
-                ),
-            ],
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return CustomPaint(
+          foregroundPainter: GridPainter(
+            grid: grid,
+            cellSize: cellSize,
+            progress: controller.value,
+            reverse: widget.getDirections != null
+                ? (widget.getDirections!.start.row >
+                    widget.getDirections!.end.row)
+                : false,
           ),
+          child: child,
+        );
+      },
+      child: CustomMultiChildLayout(
+        delegate: MapLayoutDelegate(
+          blocks: mapSchematics,
+          onBlocksLayout: (areas) {
+            widget.onBlocksLayout(areas.toList());
+            roomsLayouts = areas;
+            WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
+              areas.forEach(_fillPositionOnGrid);
+            });
+          },
         ),
-        // Positioned.fill(
-        //   child: ValueListenableBuilder(
-        //     valueListenable: grid,
-        //     builder: (context, schematicsGrid, child) {
-        //       return CustomPaint(
-        //         foregroundPainter: GridPainter(
-        //           grid: schematicsGrid,
-        //           cellSize: cellSize,
-        //         ),
-        //       );
-        //     },
-        //   ),
-        // ),
-      ],
+        children: [
+          for (int i = 0; i < mapSchematics.length; i++)
+            LayoutId(
+              id: i,
+              child: CustomPaint(
+                painter: MapBlockPainter(block: mapSchematics[i]),
+              ),
+            ),
+        ],
+      ),
     );
   }
 
@@ -193,7 +275,7 @@ class _LandmarkMapState extends State<LandmarkMap> {
     Grid<int> newGrid = Grid.make(widget.mapConstraints.maxHeight ~/ cellSize,
         widget.mapConstraints.maxWidth ~/ cellSize, 0);
 
-    newGrid = newGrid.copyWith(grid: grid.value.grid.toList());
+    newGrid = newGrid.copyWith(grid: grid.grid.toList());
 
     final startTouchColumn = (area.start.dx / cellSize).floor();
     final endTouchColumn = (area.end.dx / cellSize).floor();
@@ -202,158 +284,69 @@ class _LandmarkMapState extends State<LandmarkMap> {
 
     for (int i = startTouchRow; i < endTouchRow; i++) {
       for (int j = startTouchColumn; j < endTouchColumn; j++) {
+        final leftEdge = j == startTouchColumn;
+        final rightEdge = j == endTouchColumn;
+        final topEdge = i == startTouchRow;
+        final bottomEdge = i == endTouchRow - 1;
+
+        // deal with edges
+        if (leftEdge || rightEdge || topEdge || bottomEdge) {
+          if (area.hideFenceBorder != HideFenceBorder.all) {
+            if (area.hideFenceBorder == HideFenceBorder.right && !rightEdge) {
+              final openingsGridPoints = area.openings.map((opening) {
+                final startTouchColumn = (opening.start.dx / cellSize).floor();
+                final endTouchColumn = (opening.end.dx / cellSize).floor();
+                final startTouchRow = (opening.start.dy / cellSize).floor();
+                final endTouchRow = (opening.end.dy / cellSize).floor();
+
+                return (
+                  startGridColumn: startTouchColumn,
+                  endGridColumn: endTouchColumn,
+                  startGridRow: startTouchRow,
+                  endGridRow: endTouchRow,
+                );
+              });
+
+              for (final gridPoint in openingsGridPoints) {
+                final isWithinColumnRange = j >= gridPoint.startGridColumn &&
+                    j <= gridPoint.endGridColumn;
+                final isWithinRowRange =
+                    i >= gridPoint.startGridRow && i <= gridPoint.endGridRow;
+
+                if (isWithinColumnRange && isWithinRowRange) {
+                  newGrid.grid[i][j] = hueValue;
+                  continue;
+                }
+              }
+
+              continue;
+            }
+
+            if (area.hideFenceBorder == HideFenceBorder.left && !leftEdge) {
+              continue;
+            }
+
+            if (area.hideFenceBorder == HideFenceBorder.top && !topEdge) {
+              continue;
+            }
+
+            if (area.hideFenceBorder == HideFenceBorder.bottom && !bottomEdge) {
+              continue;
+            }
+          }
+        }
+
         newGrid.grid[i][j] = hueValue;
       }
     }
 
-    grid.value = newGrid;
-    hueValue += 30;
+    setState(() {
+      grid = newGrid;
+    });
+
+    hueValue += 20;
     if (hueValue > 360) {
       hueValue = 1;
     }
   }
-}
-
-class GridPainter extends CustomPainter {
-  GridPainter({
-    required this.grid,
-    required this.cellSize,
-  });
-
-  final Grid<int> grid;
-  final double cellSize;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.save();
-
-    _paintGrid(canvas, size, grid);
-
-    canvas.restore();
-  }
-
-  void _paintGrid(Canvas canvas, Size size, Grid<int> grid) {
-    for (int i = 0; i <= grid.rows - 1; i++) {
-      for (int j = 0; j <= grid.columns - 1; j++) {
-        final state = grid.grid[i][j];
-
-        final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
-        final xOrigin = 0 + (size.width ~/ grid.columns * j).toDouble();
-        final center = cellSize / 2;
-        Path path = Path()
-          ..moveTo(xOrigin, yOrigin)
-          ..addRect(
-            Rect.fromCenter(
-              center: Offset(xOrigin + center, yOrigin + center),
-              width: cellSize,
-              height: cellSize,
-            ),
-          );
-        canvas.drawPath(
-          path,
-          Paint()
-            ..color = Colors.black
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 0.5,
-        );
-
-        if (state > 0) {
-          final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
-          final xOrigin = 0 + (size.width ~/ grid.columns * j).toDouble();
-          final center = cellSize / 2;
-          Path path = Path()
-            ..moveTo(xOrigin, yOrigin)
-            ..addRect(
-              Rect.fromCenter(
-                center: Offset(xOrigin + center, yOrigin + center),
-                width: cellSize,
-                height: cellSize,
-              ),
-            );
-
-          final hue = HSLColor.fromAHSL(1, state.toDouble(), 1, 0.5);
-          canvas.drawPath(
-            path,
-            Paint()
-              ..color = hue.toColor()
-              ..style = PaintingStyle.fill,
-          );
-        }
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    if (oldDelegate is! GridPainter) return false;
-
-    // ensure unnecessary paint calls doesn't trigger repaints
-    if (oldDelegate.grid != grid) return true;
-    return false;
-  }
-}
-
-final class Grid<T> extends Equatable {
-  final List<List<T>> grid;
-
-  final T initialValue;
-
-  const Grid._(this.grid, this.initialValue);
-
-  factory Grid.make(int rows, int columns, T initialValue) {
-    return Grid._(
-      List.generate(
-        rows,
-        (index) => List.generate(columns, (index) => initialValue),
-      ),
-      initialValue,
-    );
-  }
-
-  int get rows {
-    return grid.length;
-  }
-
-  int get columns {
-    return grid.first.length;
-  }
-
-  int filledCellsCount(bool Function(T state) filter) {
-    return filledCells(filter).length;
-  }
-
-  List<({int row, int column})> filledCells(bool Function(T state) filter) {
-    List<({int row, int column})> cells = [];
-    for (int i = 0; i <= rows - 1; i++) {
-      for (int j = 0; j <= columns - 1; j++) {
-        final state = grid[i][j];
-
-        if (filter(state)) cells.add((row: i, column: j));
-      }
-    }
-    return cells;
-  }
-
-  /// Due to the vector nature of the grid(2x2 matrix), to ensure the equality
-  /// works properly and to help dart infer that a new grid object is created
-  /// we use the grid factory to create a new instance and copy the grid values
-  /// to this new grid before returning the instance
-  Grid<T> copyWith({List<List<T>>? grid}) {
-    if (grid != null) {
-      Grid<T> nextGrid = Grid.make(rows, columns, initialValue);
-
-      for (int i = 0; i <= rows - 1; i++) {
-        for (int j = 0; j <= columns - 1; j++) {
-          nextGrid.grid[i][j] = grid[i][j];
-        }
-      }
-
-      return nextGrid;
-    }
-
-    return Grid._(grid ?? this.grid, initialValue);
-  }
-
-  @override
-  List<Object?> get props => [grid];
 }

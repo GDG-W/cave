@@ -1,4 +1,5 @@
 import 'package:cave/cave.dart';
+import 'package:devfest24/src/features/more/presentation/widgets/map_layout.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -91,7 +92,13 @@ final class Block extends Equatable {
       ];
 }
 
-typedef BlockLayoutArea = ({RoomType room, Offset start, Offset end});
+typedef BlockLayoutArea = ({
+  RoomType room,
+  Offset start,
+  Offset end,
+  HideFenceBorder hideFenceBorder,
+  List<({Offset start, Offset end})> openings,
+});
 
 enum RoomType {
   exhibitionRoom,
@@ -118,11 +125,10 @@ enum RoomType {
 }
 
 // DFS algorithm to get the directions from one room to another
-List<RoomType> getDirections(RoomType start, RoomType end) {
-  final visited = <RoomType>{};
+List<RoomType> getOverviewDirections(RoomType start, RoomType end) {
   final adj = <RoomType>{};
 
-  adj.add(_getNextDirection(start, end, visited, adj));
+  adj.add(_getNextDirection(start, end, <RoomType>{}, adj));
 
   return adj.toList();
 }
@@ -161,4 +167,26 @@ RoomType _getNextDirection(
   }
 
   return _getNextDirection(nextDirection, end, visited, adj);
+}
+
+extension BlockLayouts on List<BlockLayoutArea> {
+  BlockLayoutArea getRoomLayout(RoomType room) {
+    return firstWhere((layout) => layout.room == room);
+  }
+
+  String printLayout() {
+    final buffer = StringBuffer();
+    for (final layout in this) {
+      buffer.write('Room: ${layout.room}\t');
+      buffer.write('Start: ${layout.start}\t');
+      buffer.writeln('End: ${layout.end}');
+      buffer.write(
+        'Start GridCell(row: ${(layout.start.dy / cellSize).floor()}, column: ${(layout.start.dx / cellSize).floor()})\t',
+      );
+      buffer.writeln(
+        'End GridCell(row: ${(layout.end.dy / cellSize).floor()}, column: ${(layout.end.dx / cellSize).floor()})',
+      );
+    }
+    return buffer.toString();
+  }
 }

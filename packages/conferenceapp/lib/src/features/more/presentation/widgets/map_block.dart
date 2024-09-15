@@ -3,61 +3,9 @@ import 'dart:math';
 import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
 
-import '../map_utils.dart';
+import '../map/map_utils.dart';
 
-class MapLayoutDelegate extends MultiChildLayoutDelegate {
-  final List<Block> blocks;
-  final ValueChanged<List<BlockLayoutArea>>? onBlocksLayout;
-
-  MapLayoutDelegate({
-    this.blocks = const [],
-    this.onBlocksLayout,
-  });
-
-  double _sumBlocHeightsToIndex(int index) {
-    double sum = 0;
-    for (int i = 0; i < index; i++) {
-      sum += blocks[i].height;
-    }
-    return sum;
-  }
-
-  @override
-  void performLayout(Size size) {
-    final blockLayouts = <BlockLayoutArea>[];
-    for (int i = 0; i < blocks.length; i++) {
-      final block = blocks[i];
-      final childId = i;
-      final childSize = Size(block.width, block.height);
-      final currentSize = layoutChild(childId, BoxConstraints.tight(childSize));
-
-      final childOffset = Offset(
-        block.position?.dx ?? 0,
-        size.height -
-            currentSize.height -
-            (block.position?.dy ?? _sumBlocHeightsToIndex(i)),
-      );
-
-      blockLayouts.add(
-        (
-          room: RoomType.values[i],
-          start: childOffset,
-          end: Offset(childOffset.dx + currentSize.width,
-              childOffset.dy + currentSize.height)
-        ),
-      );
-
-      positionChild(childId, childOffset);
-    }
-
-    onBlocksLayout?.call(blockLayouts);
-  }
-
-  @override
-  bool shouldRelayout(MapLayoutDelegate oldDelegate) {
-    return oldDelegate.blocks != blocks;
-  }
-}
+double openingRadius = 32.w;
 
 class MapBlockPainter extends CustomPainter {
   final Block block;
@@ -65,7 +13,6 @@ class MapBlockPainter extends CustomPainter {
   const MapBlockPainter({required this.block});
 
   static const double _fenceStrokeWidth = 1.5;
-  static final double _openingRadius = 32.w;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -263,7 +210,7 @@ class MapBlockPainter extends CustomPainter {
           path.moveTo(
             0,
             edgeOpenings[i].dy +
-                (block.openingSizes.elementAtOrNull(i) ?? _openingRadius),
+                (block.openingSizes.elementAtOrNull(i) ?? openingRadius),
           );
         }
         path.lineTo(0, size.height);
@@ -290,7 +237,7 @@ class MapBlockPainter extends CustomPainter {
           path.moveTo(
               bottomEdgeOpenings[i].dx -
                   horizontalPaddingFactor +
-                  (block.openingSizes.elementAtOrNull(i) ?? _openingRadius),
+                  (block.openingSizes.elementAtOrNull(i) ?? openingRadius),
               size.height);
         }
         path.lineTo(size.width, size.height);
@@ -316,7 +263,7 @@ class MapBlockPainter extends CustomPainter {
           path.lineTo(
               size.width,
               edgeOpenings[i].dy +
-                  (block.openingSizes.elementAtOrNull(i) ?? _openingRadius));
+                  (block.openingSizes.elementAtOrNull(i) ?? openingRadius));
           path.moveTo(size.width, edgeOpenings[i].dy);
         }
         path.lineTo(size.width, 0);
@@ -340,7 +287,7 @@ class MapBlockPainter extends CustomPainter {
           path.lineTo(
               topEdgeOpenings[i].dx -
                   horizontalPaddingFactor +
-                  (block.openingSizes.elementAtOrNull(i) ?? _openingRadius),
+                  (block.openingSizes.elementAtOrNull(i) ?? openingRadius),
               0);
           path.moveTo(topEdgeOpenings[i].dx - horizontalPaddingFactor, 0);
         }

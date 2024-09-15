@@ -1,4 +1,4 @@
-import 'package:devfest24/src/features/more/presentation/map_utils.dart';
+import 'package:devfest24/src/features/more/presentation/map/map_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -7,7 +7,7 @@ void main() {
       RoomType start = RoomType.exhibitionRoom;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -23,7 +23,7 @@ void main() {
 
       // room 1
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -39,7 +39,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -54,7 +54,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -68,7 +68,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -83,7 +83,7 @@ void main() {
 
       // room 2
       end = RoomType.room2;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -92,7 +92,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -104,7 +104,7 @@ void main() {
       RoomType start = RoomType.room1;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -119,7 +119,7 @@ void main() {
 
       // room 3
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -134,7 +134,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -148,7 +148,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -161,7 +161,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -175,7 +175,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -188,7 +188,7 @@ void main() {
 
       // room 2
       end = RoomType.room2;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -197,7 +197,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -206,7 +206,7 @@ void main() {
 
       // exhibition room
       end = RoomType.exhibitionRoom;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -218,7 +218,7 @@ void main() {
       RoomType start = RoomType.room2;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -227,7 +227,7 @@ void main() {
 
       // room 3
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -236,7 +236,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -245,7 +245,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -254,7 +254,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -263,7 +263,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -272,7 +272,7 @@ void main() {
 
       // exhibition room
       end = RoomType.exhibitionRoom;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -284,7 +284,7 @@ void main() {
       RoomType start = RoomType.hallway;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -293,7 +293,7 @@ void main() {
 
       // room 3
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -302,7 +302,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -311,7 +311,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -320,7 +320,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -329,7 +329,7 @@ void main() {
 
       // room 2
       end = RoomType.room2;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -338,7 +338,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -347,7 +347,7 @@ void main() {
 
       // exhibition room
       end = RoomType.exhibitionRoom;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -364,7 +364,7 @@ void main() {
       RoomType start = RoomType.stairs;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -373,7 +373,7 @@ void main() {
 
       // room 3
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -382,7 +382,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -391,7 +391,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -400,7 +400,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -409,7 +409,7 @@ void main() {
 
       // room 2
       end = RoomType.room2;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -418,7 +418,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -427,7 +427,7 @@ void main() {
 
       // exhibition room
       end = RoomType.exhibitionRoom;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -445,7 +445,7 @@ void main() {
       RoomType start = RoomType.toilet;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -454,7 +454,7 @@ void main() {
 
       // room 3
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -463,7 +463,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -472,7 +472,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -481,7 +481,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -490,7 +490,7 @@ void main() {
 
       // room 2
       end = RoomType.room2;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -499,7 +499,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -508,7 +508,7 @@ void main() {
 
       // exhibition room
       end = RoomType.exhibitionRoom;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -526,7 +526,7 @@ void main() {
       RoomType start = RoomType.room3;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -535,7 +535,7 @@ void main() {
 
       // room 3
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -544,7 +544,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -553,7 +553,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -562,7 +562,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -571,7 +571,7 @@ void main() {
 
       // room 2
       end = RoomType.room2;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -580,7 +580,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -595,7 +595,7 @@ void main() {
 
       // exhibition room
       end = RoomType.exhibitionRoom;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -614,7 +614,7 @@ void main() {
       RoomType start = RoomType.room4;
       RoomType end = RoomType.room4;
 
-      List<RoomType> directions = getDirections(start, end);
+      List<RoomType> directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -623,7 +623,7 @@ void main() {
 
       // room 3
       end = RoomType.room3;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -632,7 +632,7 @@ void main() {
 
       // stairway
       end = RoomType.stairs;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -641,7 +641,7 @@ void main() {
 
       // hallway
       end = RoomType.hallway;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -650,7 +650,7 @@ void main() {
 
       // toilet
       end = RoomType.toilet;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -659,7 +659,7 @@ void main() {
 
       // room 2
       end = RoomType.room2;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -668,7 +668,7 @@ void main() {
 
       // room 1
       end = RoomType.room1;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,
@@ -683,7 +683,7 @@ void main() {
 
       // exhibition room
       end = RoomType.exhibitionRoom;
-      directions = getDirections(start, end);
+      directions = getOverviewDirections(start, end);
 
       expect(
         directions,

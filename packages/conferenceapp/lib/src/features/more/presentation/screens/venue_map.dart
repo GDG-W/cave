@@ -1,12 +1,78 @@
+import 'dart:math';
+
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:devfest24/src/features/more/presentation/widgets/map.dart';
+import 'package:devfest24/src/features/more/presentation/map/grid.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/shared.dart';
+import '../map/map_utils.dart';
+import '../widgets/map_layout.dart';
 
-class VenueMapScreen extends StatelessWidget {
+class VenueMapScreen extends StatefulWidget {
   const VenueMapScreen({super.key});
+
+  @override
+  State<VenueMapScreen> createState() => _VenueMapScreenState();
+}
+
+class _VenueMapScreenState extends State<VenueMapScreen> {
+  late List<BlockLayoutArea> roomsLayouts;
+  GridCellRange? navigationBlock;
+
+  void _getDirections() {
+    // final getExhibitionToRoom4Directions =
+    //     getOverviewDirections(RoomType.exhibitionRoom, RoomType.room3);
+
+    // final directionsBlockLayout = getExhibitionToRoom4Directions
+    //     .map((direction) =>
+    //         roomsLayouts.firstWhere((layout) => layout.room == direction))
+    //     .toList();
+
+    // debugPrint('block layouts result\n${directionsBlockLayout.printLayout()}');
+    setState(() {
+      navigationBlock = (
+        start: getRandomAvailableCellInRoom(RoomType.exhibitionRoom),
+        end: getCenterAvailableCellInRoom(RoomType.toilet),
+      );
+    });
+  }
+
+  GridCell getCenterAvailableCellInRoom(RoomType room) {
+    final roomBlock = roomsLayouts.firstWhere(
+      (block) => block.room == room,
+    );
+
+    final startTouchColumn = (roomBlock.start.dx / cellSize).floor();
+    final endTouchColumn = (roomBlock.end.dx / cellSize).floor();
+    final startTouchRow = (roomBlock.start.dy / cellSize).floor();
+    final endTouchRow = (roomBlock.end.dy / cellSize).floor();
+
+    final randomRow = startTouchRow + (endTouchRow - startTouchRow) ~/ 2;
+    final randomColumn =
+        startTouchColumn + (endTouchColumn - startTouchColumn) ~/ 2;
+
+    return GridCell((row: randomRow, column: randomColumn));
+  }
+
+  GridCell getRandomAvailableCellInRoom(RoomType room) {
+    final roomBlock = roomsLayouts.firstWhere(
+      (block) => block.room == room,
+    );
+
+    final startTouchColumn = (roomBlock.start.dx / cellSize).floor();
+    final endTouchColumn = (roomBlock.end.dx / cellSize).floor();
+    final startTouchRow = (roomBlock.start.dy / cellSize).floor();
+    final endTouchRow = (roomBlock.end.dy / cellSize).floor();
+
+    final randomRow =
+        startTouchRow + Random().nextInt(endTouchRow - startTouchRow) ~/ 2;
+    final randomColumn = startTouchColumn +
+        Random().nextInt(endTouchColumn - startTouchColumn) ~/ 2;
+
+    return GridCell((row: randomRow, column: randomColumn));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +128,13 @@ class VenueMapScreen extends StatelessWidget {
                     return RepaintBoundary(
                       child: SizedBox(
                         height: constraints.maxHeight,
-                        child: LandmarkMap(mapConstraints: constraints),
+                        child: LandmarkMap(
+                          mapConstraints: constraints,
+                          getDirections: navigationBlock,
+                          onBlocksLayout: (layout) {
+                            roomsLayouts = layout;
+                          },
+                        ),
                       ),
                     );
                   },
@@ -87,7 +159,7 @@ class VenueMapScreen extends StatelessWidget {
                       bottom: MediaQuery.viewPaddingOf(context).bottom)),
               child: DevfestFilledButton(
                 title: const Text('Get Directions'),
-                onPressed: () {},
+                onPressed: _getDirections,
               ),
             ),
           ),
