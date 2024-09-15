@@ -15,95 +15,122 @@ class LandmarkMap extends StatefulWidget {
 }
 
 class _LandmarkMapState extends State<LandmarkMap> {
+  late double largeRoomHeight = widget.mapConstraints.maxWidth * 0.206;
+  late double mediumRoomHeight = widget.mapConstraints.maxHeight * 0.09;
+
   late final mapSchematics = [
     Block.fromContext(
       context,
       width: widget.mapConstraints.maxWidth,
-      height: 103.h,
+      height: largeRoomHeight,
       hideFenceBorder: HideFenceBorder.right,
       entranceLabel: 'ENTRANCE',
       blockLabel: 'Exhibition Room',
       blockColor: const Color(0xffb6b0dd),
       openingPositions: [
-        Offset(widget.mapConstraints.maxWidth - 333, 0),
-        Offset(widget.mapConstraints.maxWidth - 79, 0),
+        Offset(56.w, 0),
+        Offset(335.w, 0),
       ],
     ),
     Block.fromContext(
       context,
       width: widget.mapConstraints.maxWidth,
-      height: 103.h,
+      height: largeRoomHeight,
       hideFenceBorder: HideFenceBorder.right,
       entranceLabel: 'ENTRANCE',
       blockLabel: 'Room 1',
       blockColor: const Color(0xffffd3bf),
       openingPositions: [
-        Offset(widget.mapConstraints.maxWidth - 79, 103.h),
-        Offset(widget.mapConstraints.maxWidth - 333, 103.h),
-        Offset(widget.mapConstraints.maxWidth - 79, 0),
+        Offset(335.w, largeRoomHeight),
+        Offset(56.w, largeRoomHeight),
+        Offset(335.w, 0),
       ],
     ),
     Block.fromContext(
       context,
       width: widget.mapConstraints.maxWidth,
-      height: 103.h,
+      height: largeRoomHeight,
       hideFenceBorder: HideFenceBorder.right,
       entranceLabel: 'Exit',
       blockLabel: 'Room 2',
       blockColor: const Color(0xff88cd83),
+      openingSizes: [null, widget.mapConstraints.maxWidth * 0.082],
       openingPositions: [
-        Offset(widget.mapConstraints.maxWidth - 79, 103.h),
-        Offset(widget.mapConstraints.maxWidth - 96, 0),
+        Offset(
+          335.w,
+          largeRoomHeight,
+        ),
+        Offset(
+          307.w,
+          0,
+        ),
       ],
     ),
     Block.fromContext(
       context,
-      width: 33.w,
-      height: 147.h,
+      width: widget.mapConstraints.maxWidth * 0.082,
+      height: widget.mapConstraints.maxHeight * 0.293,
       hideFenceBorder: HideFenceBorder.all,
       blockLabel: 'HALLWAY',
       blockLabelStyle:
           DevfestTheme.of(context).textTheme?.bodyBody4Regular?.medium,
       blockColor: const Color(0xffd9d0c3),
-      position: Offset(280.w, 103.h * 3),
+      position: Offset(
+        280.w,
+        largeRoomHeight * 3,
+      ),
     ),
     Block.fromContext(
       context,
-      width: 77.w,
-      height: 70.h,
+      width: widget.mapConstraints.maxWidth * 0.190,
+      height: widget.mapConstraints.maxHeight * 0.14,
       hideFenceBorder: HideFenceBorder.all,
       blockLabel: 'Toilet',
       blockColor: const Color(0xffbee673),
-      position: Offset(313.w, 103.h * 3 + 32.h),
+      position: Offset(
+        313.w,
+        largeRoomHeight * 3 + widget.mapConstraints.maxHeight * 0.064,
+      ),
     ),
     Block.fromContext(
       context,
-      width: 258.w,
-      height: 45.h,
+      width: widget.mapConstraints.maxWidth * 0.638,
+      height: mediumRoomHeight,
       hideFenceBorder: HideFenceBorder.all,
       blockLabel: 'STAIRWAY',
       blockLabelStyle:
           DevfestTheme.of(context).textTheme?.bodyBody4Regular?.medium,
       blockColor: const Color(0xffd9d9d9),
-      position: Offset(22.w, 103.h * 3 + 102.h),
+      position: Offset(
+        22.w,
+        largeRoomHeight * 3 +
+            widget.mapConstraints.maxHeight * 0.293 -
+            widget.mapConstraints.maxHeight * 0.09,
+      ),
     ),
     Block.fromContext(
       context,
-      width: 139.w,
-      height: 45.h,
+      width: widget.mapConstraints.maxWidth * 0.344,
+      height: mediumRoomHeight,
       hideFenceBorder: HideFenceBorder.all,
       blockLabel: 'Room 3',
       blockColor: const Color(0xffbee673),
-      position: Offset(22.w, 103.h * 3 + 57.h),
+      position: Offset(
+        22.w,
+        largeRoomHeight * 3 + widget.mapConstraints.maxHeight * 0.114,
+      ),
     ),
     Block.fromContext(
       context,
-      width: 139.w,
-      height: 45.h,
+      width: widget.mapConstraints.maxWidth * 0.344,
+      height: mediumRoomHeight,
       hideFenceBorder: HideFenceBorder.all,
       blockLabel: 'Room 4',
       blockColor: const Color(0xffbbddc9),
-      position: Offset(22.w, 103.h * 3 + 147.h),
+      position: Offset(
+        22.w,
+        largeRoomHeight * 3 + widget.mapConstraints.maxHeight * 0.293,
+      ),
     ),
   ];
 
@@ -119,49 +146,46 @@ class _LandmarkMapState extends State<LandmarkMap> {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(color: Color(0xfffffaeb)),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Positioned.fill(
-            child: CustomMultiChildLayout(
-              delegate: MapLayoutDelegate(
-                blocks: mapSchematics,
-                onBlocksLayout: (areas) {
-                  roomsLayouts = areas.toList(); // soft-copy
-                  WidgetsFlutterBinding.ensureInitialized()
-                      .addPostFrameCallback((_) {
-                    areas.forEach(_fillPositionOnGrid);
-                  });
-                },
-              ),
-              children: [
-                for (int i = 0; i < mapSchematics.length; i++)
-                  LayoutId(
-                    id: i,
-                    child: CustomPaint(
-                      painter: MapBlockPainter(block: mapSchematics[i]),
-                    ),
-                  ),
-              ],
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Positioned.fill(
+          child: CustomMultiChildLayout(
+            delegate: MapLayoutDelegate(
+              blocks: mapSchematics,
+              onBlocksLayout: (areas) {
+                roomsLayouts = areas.toList(); // soft-copy
+                WidgetsFlutterBinding.ensureInitialized()
+                    .addPostFrameCallback((_) {
+                  areas.forEach(_fillPositionOnGrid);
+                });
+              },
             ),
+            children: [
+              for (int i = 0; i < mapSchematics.length; i++)
+                LayoutId(
+                  id: i,
+                  child: CustomPaint(
+                    painter: MapBlockPainter(block: mapSchematics[i]),
+                  ),
+                ),
+            ],
           ),
-          // Positioned.fill(
-          //   child: ValueListenableBuilder(
-          //     valueListenable: grid,
-          //     builder: (context, schematicsGrid, child) {
-          //       return CustomPaint(
-          //         foregroundPainter: GridPainter(
-          //           grid: schematicsGrid,
-          //           cellSize: cellSize,
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // ),
-        ],
-      ),
+        ),
+        // Positioned.fill(
+        //   child: ValueListenableBuilder(
+        //     valueListenable: grid,
+        //     builder: (context, schematicsGrid, child) {
+        //       return CustomPaint(
+        //         foregroundPainter: GridPainter(
+        //           grid: schematicsGrid,
+        //           cellSize: cellSize,
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // ),
+      ],
     );
   }
 
@@ -171,10 +195,10 @@ class _LandmarkMapState extends State<LandmarkMap> {
 
     newGrid = newGrid.copyWith(grid: grid.value.grid.toList());
 
-    final startTouchColumn = area.start.dx ~/ cellSize;
-    final endTouchColumn = area.end.dx ~/ cellSize;
-    final startTouchRow = area.start.dy ~/ cellSize;
-    final endTouchRow = area.end.dy ~/ cellSize;
+    final startTouchColumn = (area.start.dx / cellSize).floor();
+    final endTouchColumn = (area.end.dx / cellSize).floor();
+    final startTouchRow = (area.start.dy / cellSize).floor();
+    final endTouchRow = (area.end.dy / cellSize).floor();
 
     for (int i = startTouchRow; i < endTouchRow; i++) {
       for (int j = startTouchColumn; j < endTouchColumn; j++) {

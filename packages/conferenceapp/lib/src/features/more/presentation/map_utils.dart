@@ -22,6 +22,7 @@ final class Block extends Equatable {
   final Color? blockColor;
   final Offset? position;
   final List<Offset> openingPositions;
+  final List<double?> openingSizes;
 
   const Block({
     this.width = 100,
@@ -34,6 +35,7 @@ final class Block extends Equatable {
     this.blockColor,
     this.position,
     this.openingPositions = const [],
+    this.openingSizes = const [],
   });
 
   factory Block.fromContext(
@@ -48,6 +50,7 @@ final class Block extends Equatable {
     Color? blockColor,
     Offset? position,
     List<Offset> openingPositions = const [],
+    List<double?> openingSizes = const [],
   }) {
     return Block(
       entranceLabel: entranceLabel,
@@ -68,6 +71,7 @@ final class Block extends Equatable {
           .merge(blockLabelStyle),
       position: position,
       openingPositions: openingPositions,
+      openingSizes: openingSizes,
     );
   }
 
@@ -83,6 +87,7 @@ final class Block extends Equatable {
         blockColor,
         position,
         openingPositions,
+        openingSizes,
       ];
 }
 

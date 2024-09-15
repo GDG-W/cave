@@ -65,7 +65,7 @@ class MapBlockPainter extends CustomPainter {
   const MapBlockPainter({required this.block});
 
   static const double _fenceStrokeWidth = 1.5;
-  static final double _openingRadius = 32.h;
+  static final double _openingRadius = 32.w;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -260,7 +260,11 @@ class MapBlockPainter extends CustomPainter {
         path.moveTo(0, 0);
         for (int i = 0; i < edgeOpenings.length; i++) {
           path.lineTo(0, edgeOpenings[i].dy);
-          path.moveTo(0, edgeOpenings[i].dy + _openingRadius);
+          path.moveTo(
+            0,
+            edgeOpenings[i].dy +
+                (block.openingSizes.elementAtOrNull(i) ?? _openingRadius),
+          );
         }
         path.lineTo(0, size.height);
       } else {
@@ -286,7 +290,7 @@ class MapBlockPainter extends CustomPainter {
           path.moveTo(
               bottomEdgeOpenings[i].dx -
                   horizontalPaddingFactor +
-                  _openingRadius,
+                  (block.openingSizes.elementAtOrNull(i) ?? _openingRadius),
               size.height);
         }
         path.lineTo(size.width, size.height);
@@ -309,7 +313,10 @@ class MapBlockPainter extends CustomPainter {
       if (edgeOpenings.isNotEmpty) {
         path.moveTo(size.width, size.height);
         for (int i = 0; i < edgeOpenings.length; i++) {
-          path.lineTo(size.width, edgeOpenings[i].dy + _openingRadius);
+          path.lineTo(
+              size.width,
+              edgeOpenings[i].dy +
+                  (block.openingSizes.elementAtOrNull(i) ?? _openingRadius));
           path.moveTo(size.width, edgeOpenings[i].dy);
         }
         path.lineTo(size.width, 0);
@@ -331,7 +338,9 @@ class MapBlockPainter extends CustomPainter {
         path.moveTo(size.width, 0);
         for (int i = 0; i < topEdgeOpenings.length; i++) {
           path.lineTo(
-              topEdgeOpenings[i].dx - horizontalPaddingFactor + _openingRadius,
+              topEdgeOpenings[i].dx -
+                  horizontalPaddingFactor +
+                  (block.openingSizes.elementAtOrNull(i) ?? _openingRadius),
               0);
           path.moveTo(topEdgeOpenings[i].dx - horizontalPaddingFactor, 0);
         }

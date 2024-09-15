@@ -180,6 +180,7 @@ class _SliverAgendaHeaderState extends State<SliverAgendaHeader> {
   Widget build(BuildContext context) {
     return SliverResizingHeader(
       minExtentPrototype: Material(
+        color: DevfestTheme.of(context).backgroundColor,
         child: AgendaHeader(
           title: widget.title,
           subtitle: switch (hideHeaders) {

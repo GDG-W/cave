@@ -34,12 +34,13 @@ class OnboardingLoginScreen extends StatelessWidget {
                           hint: 'e.g senatorofthebu@gmail.com',
                           onChanged: (value) {},
                         ),
-                        Constants.verticalGutter.verticalSpace,
+                        Constants.largeVerticalGutter.verticalSpace,
                         DevfestTextFormField(
                           title: 'Ticket ID',
                           hint: 'e.g 413-012-ABC',
                           onChanged: (value) {},
                         ),
+                        Constants.largeVerticalGutter.verticalSpace,
                         Text.rich(
                           TextSpan(
                             text: 'Looking for your ticket ID? ',
