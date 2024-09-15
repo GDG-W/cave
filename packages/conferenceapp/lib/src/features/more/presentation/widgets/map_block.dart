@@ -1,98 +1,17 @@
 import 'dart:math';
 
 import 'package:cave/cave.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-enum HideFenceBorder {
-  none,
-  top,
-  right,
-  bottom,
-  left,
-  all;
-}
-
-final class Block extends Equatable {
-  final double width;
-  final double height;
-  final HideFenceBorder hideFenceBorder;
-  final String? entranceLabel;
-  final TextStyle? entranceLabelStyle;
-  final String blockLabel;
-  final TextStyle? blockLabelStyle;
-  final Color? blockColor;
-  final Offset? position;
-  final List<Offset> openingPositions;
-
-  const Block({
-    this.width = 100,
-    this.height = 100,
-    this.hideFenceBorder = HideFenceBorder.none,
-    this.entranceLabel,
-    this.entranceLabelStyle,
-    required this.blockLabel,
-    this.blockLabelStyle,
-    this.blockColor,
-    this.position,
-    this.openingPositions = const [],
-  });
-
-  factory Block.fromContext(
-    BuildContext context, {
-    double width = 100,
-    double height = 100,
-    HideFenceBorder hideFenceBorder = HideFenceBorder.none,
-    String? entranceLabel,
-    TextStyle? entranceLabelStyle,
-    required String blockLabel,
-    TextStyle? blockLabelStyle,
-    Color? blockColor,
-    Offset? position,
-    List<Offset> openingPositions = const [],
-  }) {
-    return Block(
-      entranceLabel: entranceLabel,
-      blockLabel: blockLabel,
-      blockColor: blockColor,
-      height: height,
-      width: width,
-      hideFenceBorder: hideFenceBorder,
-      entranceLabelStyle: DevfestTheme.of(context)
-          .textTheme
-          ?.bodyBody4Regular
-          ?.medium
-          .merge(entranceLabelStyle),
-      blockLabelStyle: DevfestTheme.of(context)
-          .textTheme
-          ?.bodyBody2Regular
-          ?.semi
-          .merge(blockLabelStyle),
-      position: position,
-      openingPositions: openingPositions,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        width,
-        height,
-        hideFenceBorder,
-        entranceLabel,
-        entranceLabelStyle,
-        blockLabel,
-        blockLabelStyle,
-        blockColor,
-        position,
-        openingPositions,
-      ];
-}
+import '../map_utils.dart';
 
 class MapLayoutDelegate extends MultiChildLayoutDelegate {
   final List<Block> blocks;
+  final ValueChanged<List<BlockLayoutArea>>? onBlocksLayout;
 
   MapLayoutDelegate({
     this.blocks = const [],
+    this.onBlocksLayout,
   });
 
   double _sumBlocHeightsToIndex(int index) {
@@ -105,6 +24,7 @@ class MapLayoutDelegate extends MultiChildLayoutDelegate {
 
   @override
   void performLayout(Size size) {
+    final blockLayouts = <BlockLayoutArea>[];
     for (int i = 0; i < blocks.length; i++) {
       final block = blocks[i];
       final childId = i;
@@ -118,8 +38,19 @@ class MapLayoutDelegate extends MultiChildLayoutDelegate {
             (block.position?.dy ?? _sumBlocHeightsToIndex(i)),
       );
 
+      blockLayouts.add(
+        (
+          room: RoomType.values[i],
+          start: childOffset,
+          end: Offset(childOffset.dx + currentSize.width,
+              childOffset.dy + currentSize.height)
+        ),
+      );
+
       positionChild(childId, childOffset);
     }
+
+    onBlocksLayout?.call(blockLayouts);
   }
 
   @override
