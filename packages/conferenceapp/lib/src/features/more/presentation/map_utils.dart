@@ -2,7 +2,6 @@ import 'package:cave/cave.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-
 enum HideFenceBorder {
   none,
   top,
