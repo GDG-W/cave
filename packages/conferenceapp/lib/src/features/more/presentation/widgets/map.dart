@@ -163,8 +163,9 @@ class _LandmarkMapState extends State<LandmarkMap>
 
     controller = AnimationController(
       vsync: this,
-      upperBound: double.infinity,
-      lowerBound: double.infinity,
+      duration: const Duration(seconds: 3),
+      // upperBound: double.infinity,
+      // lowerBound: double.infinity,
     );
     speedProgressAnim = ConstantTween<double>(0).animate(controller);
 
@@ -197,10 +198,11 @@ class _LandmarkMapState extends State<LandmarkMap>
     roomsLayouts.forEach(_fillPositionOnGrid);
   }
 
-  void _runAnimation(int speed) {
+  void _runAnimation(int distance) {
     speedProgressAnim = controller.drive(Tween<double>(begin: 0, end: 1));
 
-    final simulation = FrictionSimulation(0.5, 0, 0.3);
+    final simulation = FrictionSimulation.through(0, distance.toDouble(),
+        switch (distance) { <= 50 => 0.5, <= 100 => 0.4, _ => 0.3 }, 0);
     controller.animateWith(simulation);
   }
 
