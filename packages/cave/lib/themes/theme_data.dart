@@ -26,7 +26,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
 
   DevFestThemeData.light()
       : this(
-          textTheme: DevfestTextTheme.light(),
+          textTheme: const DevfestTextTheme.light(),
           backgroundColor: DevfestColors.primariesYellow100,
           buttonTheme: const DevfestButtonTheme.light(),
           outlinedButtonTheme: const DevfestOutlinedButtonTheme.light(),
@@ -36,7 +36,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
 
   DevFestThemeData.dark()
       : this(
-          textTheme: DevfestTextTheme.dark(),
+          textTheme: const DevfestTextTheme.dark(),
           backgroundColor: DevfestColors.backgroundDark,
           textFieldTheme: DevfestTextFieldTheme.dark(),
           buttonTheme: const DevfestButtonTheme.dark(),
@@ -50,12 +50,14 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
     DevfestButtonTheme? buttonTheme,
     DevfestOutlinedButtonTheme? outlinedButtonTheme,
     DevfestBottomNavTheme? bottomNavTheme,
+    DevfestTextFieldTheme? textFieldTheme,
   }) {
     return DevFestThemeData(
       textTheme: textTheme ?? this.textTheme,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       outlinedButtonTheme: outlinedButtonTheme ?? this.outlinedButtonTheme,
       bottomNavTheme: bottomNavTheme ?? this.bottomNavTheme,
+      textFieldTheme: textFieldTheme ?? this.textFieldTheme,
     );
   }
 
@@ -69,6 +71,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
       outlinedButtonTheme:
           outlinedButtonTheme?.lerp(other.outlinedButtonTheme, t),
       bottomNavTheme: bottomNavTheme?.lerp(other.bottomNavTheme, t),
+      textFieldTheme: textFieldTheme?.lerp(other.textFieldTheme, t),
     );
   }
 }

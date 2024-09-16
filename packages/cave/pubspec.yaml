@@ -12,6 +12,7 @@ dependencies:
   ficonsax: ^0.0.3
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.0
   flutter_screenutil: ^5.9.3
 
 dev_dependencies:

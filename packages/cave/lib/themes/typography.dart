@@ -79,285 +79,285 @@ class DevfestTextTheme extends ThemeExtension<DevfestTextTheme> {
     this.buttonSmallBold,
   });
 
-  DevfestTextTheme.light()
+  const DevfestTextTheme.light()
       : this(
-          headerH1: TextStyle(
-              fontSize: 80.sp,
+          headerH1: const TextStyle(
+              fontSize: 80,
               fontWeight: FontWeight.w700,
               height: 1.15,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH2: TextStyle(
-              fontSize: 62.sp,
+          headerH2: const TextStyle(
+              fontSize: 62,
               fontWeight: FontWeight.w700,
               height: 1.23,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH3: TextStyle(
-              fontSize: 56.sp,
+          headerH3: const TextStyle(
+              fontSize: 56,
               fontWeight: FontWeight.w700,
               height: 1.25,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH4: TextStyle(
-              fontSize: 40.sp,
+          headerH4: const TextStyle(
+              fontSize: 40,
               fontWeight: FontWeight.w700,
               height: 1.2,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH5: TextStyle(
-              fontSize: 32.sp,
+          headerH5: const TextStyle(
+              fontSize: 32,
               fontWeight: FontWeight.w700,
               height: 1.25,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH6: TextStyle(
-              fontSize: 28.sp,
+          headerH6: const TextStyle(
+              fontSize: 28,
               fontWeight: FontWeight.w400,
               height: 1.29,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle1Regular: TextStyle(
-              fontSize: 24.sp,
+          titleTitle1Regular: const TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle1Medium: TextStyle(
-              fontSize: 24.sp,
+          titleTitle1Medium: const TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.w500,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle1Semibold: TextStyle(
-              fontSize: 24.sp,
+          titleTitle1Semibold: const TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle2Regular: TextStyle(
-              fontSize: 22.sp,
+          titleTitle2Regular: const TextStyle(
+              fontSize: 22,
               fontWeight: FontWeight.w400,
               height: 1.45,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle2Medium: TextStyle(
-              fontSize: 22.sp,
+          titleTitle2Medium: const TextStyle(
+              fontSize: 22,
               fontWeight: FontWeight.w500,
               height: 1.45,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle2Semibold: TextStyle(
-              fontSize: 22.sp,
+          titleTitle2Semibold: const TextStyle(
+              fontSize: 22,
               fontWeight: FontWeight.w400,
               height: 1.45,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody1Regular: TextStyle(
-              fontSize: 18.sp,
+          bodyBody1Regular: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody1Medium: TextStyle(
-              fontSize: 18.sp,
+          bodyBody1Medium: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w500,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody1Semibold: TextStyle(
-              fontSize: 18.sp,
+          bodyBody1Semibold: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody2Regular: TextStyle(
-              fontSize: 16.sp,
+          bodyBody2Regular: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody2Medium: TextStyle(
-              fontSize: 16.sp,
+          bodyBody2Medium: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w500,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody2Semibold: TextStyle(
-              fontSize: 16.sp,
+          bodyBody2Semibold: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody3Regular: TextStyle(
-              fontSize: 14.sp,
+          bodyBody3Regular: const TextStyle(
+              fontSize: 14,
               fontWeight: FontWeight.w400,
               height: 1.43,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody3Medium: TextStyle(
-              fontSize: 14.sp,
+          bodyBody3Medium: const TextStyle(
+              fontSize: 14,
               fontWeight: FontWeight.w500,
               height: 1.43,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody3Semibold: TextStyle(
-              fontSize: 14.sp,
+          bodyBody3Semibold: const TextStyle(
+              fontSize: 14,
               fontWeight: FontWeight.w400,
               height: 1.43,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody4Regular: TextStyle(
-              fontSize: 12.sp,
+          bodyBody4Regular: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody4Medium: TextStyle(
-              fontSize: 12.sp,
+          bodyBody4Medium: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w500,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody4Semibold: TextStyle(
-              fontSize: 12.sp,
+          bodyBody4Semibold: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody5Regular: TextStyle(
-              fontSize: 10.sp,
+          bodyBody5Regular: const TextStyle(
+              fontSize: 10,
               fontWeight: FontWeight.w400,
               height: 1.4,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody5Medium: TextStyle(
-              fontSize: 10.sp,
+          bodyBody5Medium: const TextStyle(
+              fontSize: 10,
               fontWeight: FontWeight.w500,
               height: 1.4,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody5Semibold: TextStyle(
-              fontSize: 10.sp,
+          bodyBody5Semibold: const TextStyle(
+              fontSize: 10,
               fontWeight: FontWeight.w400,
               height: 1.4,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonLargeMedium: TextStyle(
-              fontSize: 18.sp,
+          buttonLargeMedium: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w500,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonLargeSemibold: TextStyle(
-              fontSize: 18.sp,
+          buttonLargeSemibold: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonLargeBold: TextStyle(
-              fontSize: 18.sp,
+          buttonLargeBold: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w700,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonMediumMedium: TextStyle(
-              fontSize: 16.sp,
+          buttonMediumMedium: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w500,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonMediumSemibold: TextStyle(
-              fontSize: 16.sp,
+          buttonMediumSemibold: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonMediumBold: TextStyle(
-              fontSize: 16.sp,
+          buttonMediumBold: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w700,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonSmallMedium: TextStyle(
-              fontSize: 12.sp,
+          buttonSmallMedium: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w500,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonSmallSemibold: TextStyle(
-              fontSize: 12.sp,
+          buttonSmallSemibold: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey10,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonSmallBold: TextStyle(
-              fontSize: 12.sp,
+          buttonSmallBold: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w700,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
@@ -365,285 +365,285 @@ class DevfestTextTheme extends ThemeExtension<DevfestTextTheme> {
               leadingDistribution: TextLeadingDistribution.even),
         );
 
-  DevfestTextTheme.dark()
+  const DevfestTextTheme.dark()
       : this(
-          headerH1: TextStyle(
-              fontSize: 80.sp,
+          headerH1: const TextStyle(
+              fontSize: 80,
               fontWeight: FontWeight.w700,
               height: 1.15,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH2: TextStyle(
-              fontSize: 62.sp,
+          headerH2: const TextStyle(
+              fontSize: 62,
               fontWeight: FontWeight.w700,
               height: 1.23,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH3: TextStyle(
-              fontSize: 56.sp,
+          headerH3: const TextStyle(
+              fontSize: 56,
               fontWeight: FontWeight.w700,
               height: 1.25,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH4: TextStyle(
-              fontSize: 40.sp,
+          headerH4: const TextStyle(
+              fontSize: 40,
               fontWeight: FontWeight.w700,
               height: 1.2,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH5: TextStyle(
-              fontSize: 32.sp,
+          headerH5: const TextStyle(
+              fontSize: 32,
               fontWeight: FontWeight.w700,
               height: 1.25,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          headerH6: TextStyle(
-              fontSize: 28.sp,
+          headerH6: const TextStyle(
+              fontSize: 28,
               fontWeight: FontWeight.w400,
               height: 1.29,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle1Regular: TextStyle(
-              fontSize: 24.sp,
+          titleTitle1Regular: const TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle1Medium: TextStyle(
-              fontSize: 24.sp,
+          titleTitle1Medium: const TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.w500,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle1Semibold: TextStyle(
-              fontSize: 24.sp,
+          titleTitle1Semibold: const TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle2Regular: TextStyle(
-              fontSize: 22.sp,
+          titleTitle2Regular: const TextStyle(
+              fontSize: 22,
               fontWeight: FontWeight.w400,
               height: 1.45,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle2Medium: TextStyle(
-              fontSize: 22.sp,
+          titleTitle2Medium: const TextStyle(
+              fontSize: 22,
               fontWeight: FontWeight.w500,
               height: 1.45,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          titleTitle2Semibold: TextStyle(
-              fontSize: 22.sp,
+          titleTitle2Semibold: const TextStyle(
+              fontSize: 22,
               fontWeight: FontWeight.w400,
               height: 1.45,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody1Regular: TextStyle(
-              fontSize: 18.sp,
+          bodyBody1Regular: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody1Medium: TextStyle(
-              fontSize: 18.sp,
+          bodyBody1Medium: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w500,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody1Semibold: TextStyle(
-              fontSize: 18.sp,
+          bodyBody1Semibold: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody2Regular: TextStyle(
-              fontSize: 16.sp,
+          bodyBody2Regular: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody2Medium: TextStyle(
-              fontSize: 16.sp,
+          bodyBody2Medium: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w500,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody2Semibold: TextStyle(
-              fontSize: 16.sp,
+          bodyBody2Semibold: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody3Regular: TextStyle(
-              fontSize: 14.sp,
+          bodyBody3Regular: const TextStyle(
+              fontSize: 14,
               fontWeight: FontWeight.w400,
               height: 1.43,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody3Medium: TextStyle(
-              fontSize: 14.sp,
+          bodyBody3Medium: const TextStyle(
+              fontSize: 14,
               fontWeight: FontWeight.w500,
               height: 1.43,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody3Semibold: TextStyle(
-              fontSize: 14.sp,
+          bodyBody3Semibold: const TextStyle(
+              fontSize: 14,
               fontWeight: FontWeight.w400,
               height: 1.43,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody4Regular: TextStyle(
-              fontSize: 12.sp,
+          bodyBody4Regular: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody4Medium: TextStyle(
-              fontSize: 12.sp,
+          bodyBody4Medium: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w500,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody4Semibold: TextStyle(
-              fontSize: 12.sp,
+          bodyBody4Semibold: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               height: 1.5,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody5Regular: TextStyle(
-              fontSize: 10.sp,
+          bodyBody5Regular: const TextStyle(
+              fontSize: 10,
               fontWeight: FontWeight.w400,
               height: 1.4,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody5Medium: TextStyle(
-              fontSize: 10.sp,
+          bodyBody5Medium: const TextStyle(
+              fontSize: 10,
               fontWeight: FontWeight.w500,
               height: 1.4,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          bodyBody5Semibold: TextStyle(
-              fontSize: 10.sp,
+          bodyBody5Semibold: const TextStyle(
+              fontSize: 10,
               fontWeight: FontWeight.w400,
               height: 1.4,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonLargeMedium: TextStyle(
-              fontSize: 18.sp,
+          buttonLargeMedium: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w500,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonLargeSemibold: TextStyle(
-              fontSize: 18.sp,
+          buttonLargeSemibold: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonLargeBold: TextStyle(
-              fontSize: 18.sp,
+          buttonLargeBold: const TextStyle(
+              fontSize: 18,
               fontWeight: FontWeight.w700,
               height: 1.33,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonMediumMedium: TextStyle(
-              fontSize: 16.sp,
+          buttonMediumMedium: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w500,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonMediumSemibold: TextStyle(
-              fontSize: 16.sp,
+          buttonMediumSemibold: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonMediumBold: TextStyle(
-              fontSize: 16.sp,
+          buttonMediumBold: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w700,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonSmallMedium: TextStyle(
-              fontSize: 12.sp,
+          buttonSmallMedium: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w500,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonSmallSemibold: TextStyle(
-              fontSize: 12.sp,
+          buttonSmallSemibold: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
               color: DevfestColors.grey100,
               leadingDistribution: TextLeadingDistribution.even),
-          buttonSmallBold: TextStyle(
-              fontSize: 12.sp,
+          buttonSmallBold: const TextStyle(
+              fontSize: 12,
               fontWeight: FontWeight.w700,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
