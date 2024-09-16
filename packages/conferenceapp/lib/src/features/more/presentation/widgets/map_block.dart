@@ -1,132 +1,11 @@
 import 'dart:math';
 
 import 'package:cave/cave.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-enum HideFenceBorder {
-  none,
-  top,
-  right,
-  bottom,
-  left,
-  all;
-}
+import '../map/map_utils.dart';
 
-final class Block extends Equatable {
-  final double width;
-  final double height;
-  final HideFenceBorder hideFenceBorder;
-  final String? entranceLabel;
-  final TextStyle? entranceLabelStyle;
-  final String blockLabel;
-  final TextStyle? blockLabelStyle;
-  final Color? blockColor;
-  final Offset? position;
-  final List<Offset> openingPositions;
-
-  const Block({
-    this.width = 100,
-    this.height = 100,
-    this.hideFenceBorder = HideFenceBorder.none,
-    this.entranceLabel,
-    this.entranceLabelStyle,
-    required this.blockLabel,
-    this.blockLabelStyle,
-    this.blockColor,
-    this.position,
-    this.openingPositions = const [],
-  });
-
-  factory Block.fromContext(
-    BuildContext context, {
-    double width = 100,
-    double height = 100,
-    HideFenceBorder hideFenceBorder = HideFenceBorder.none,
-    String? entranceLabel,
-    TextStyle? entranceLabelStyle,
-    required String blockLabel,
-    TextStyle? blockLabelStyle,
-    Color? blockColor,
-    Offset? position,
-    List<Offset> openingPositions = const [],
-  }) {
-    return Block(
-      entranceLabel: entranceLabel,
-      blockLabel: blockLabel,
-      blockColor: blockColor,
-      height: height,
-      width: width,
-      hideFenceBorder: hideFenceBorder,
-      entranceLabelStyle: DevfestTheme.of(context)
-          .textTheme
-          ?.bodyBody4Regular
-          ?.medium
-          .merge(entranceLabelStyle),
-      blockLabelStyle: DevfestTheme.of(context)
-          .textTheme
-          ?.bodyBody2Regular
-          ?.semi
-          .merge(blockLabelStyle),
-      position: position,
-      openingPositions: openingPositions,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        width,
-        height,
-        hideFenceBorder,
-        entranceLabel,
-        entranceLabelStyle,
-        blockLabel,
-        blockLabelStyle,
-        blockColor,
-        position,
-        openingPositions,
-      ];
-}
-
-class MapLayoutDelegate extends MultiChildLayoutDelegate {
-  final List<Block> blocks;
-
-  MapLayoutDelegate({
-    this.blocks = const [],
-  });
-
-  double _sumBlocHeightsToIndex(int index) {
-    double sum = 0;
-    for (int i = 0; i < index; i++) {
-      sum += blocks[i].height;
-    }
-    return sum;
-  }
-
-  @override
-  void performLayout(Size size) {
-    for (int i = 0; i < blocks.length; i++) {
-      final block = blocks[i];
-      final childId = i;
-      final childSize = Size(block.width, block.height);
-      final currentSize = layoutChild(childId, BoxConstraints.tight(childSize));
-
-      final childOffset = Offset(
-        block.position?.dx ?? 0,
-        size.height -
-            currentSize.height -
-            (block.position?.dy ?? _sumBlocHeightsToIndex(i)),
-      );
-
-      positionChild(childId, childOffset);
-    }
-  }
-
-  @override
-  bool shouldRelayout(MapLayoutDelegate oldDelegate) {
-    return oldDelegate.blocks != blocks;
-  }
-}
+double openingRadius = 32.w;
 
 class MapBlockPainter extends CustomPainter {
   final Block block;
@@ -134,7 +13,6 @@ class MapBlockPainter extends CustomPainter {
   const MapBlockPainter({required this.block});
 
   static const double _fenceStrokeWidth = 1.5;
-  static final double _openingRadius = 32.h;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -329,7 +207,11 @@ class MapBlockPainter extends CustomPainter {
         path.moveTo(0, 0);
         for (int i = 0; i < edgeOpenings.length; i++) {
           path.lineTo(0, edgeOpenings[i].dy);
-          path.moveTo(0, edgeOpenings[i].dy + _openingRadius);
+          path.moveTo(
+            0,
+            edgeOpenings[i].dy +
+                (block.openingSizes.elementAtOrNull(i) ?? openingRadius),
+          );
         }
         path.lineTo(0, size.height);
       } else {
@@ -355,7 +237,7 @@ class MapBlockPainter extends CustomPainter {
           path.moveTo(
               bottomEdgeOpenings[i].dx -
                   horizontalPaddingFactor +
-                  _openingRadius,
+                  (block.openingSizes.elementAtOrNull(i) ?? openingRadius),
               size.height);
         }
         path.lineTo(size.width, size.height);
@@ -378,7 +260,10 @@ class MapBlockPainter extends CustomPainter {
       if (edgeOpenings.isNotEmpty) {
         path.moveTo(size.width, size.height);
         for (int i = 0; i < edgeOpenings.length; i++) {
-          path.lineTo(size.width, edgeOpenings[i].dy + _openingRadius);
+          path.lineTo(
+              size.width,
+              edgeOpenings[i].dy +
+                  (block.openingSizes.elementAtOrNull(i) ?? openingRadius));
           path.moveTo(size.width, edgeOpenings[i].dy);
         }
         path.lineTo(size.width, 0);
@@ -400,7 +285,9 @@ class MapBlockPainter extends CustomPainter {
         path.moveTo(size.width, 0);
         for (int i = 0; i < topEdgeOpenings.length; i++) {
           path.lineTo(
-              topEdgeOpenings[i].dx - horizontalPaddingFactor + _openingRadius,
+              topEdgeOpenings[i].dx -
+                  horizontalPaddingFactor +
+                  (block.openingSizes.elementAtOrNull(i) ?? openingRadius),
               0);
           path.moveTo(topEdgeOpenings[i].dx - horizontalPaddingFactor, 0);
         }
