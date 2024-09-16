@@ -190,3 +190,9 @@ extension BlockLayouts on List<BlockLayoutArea> {
     return buffer.toString();
   }
 }
+
+extension RoomListX on List<RoomType> {
+  String chainString() {
+    return map((room) => room.toString().split('.').last).join(' -> ');
+  }
+}

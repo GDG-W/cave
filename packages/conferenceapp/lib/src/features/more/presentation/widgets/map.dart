@@ -2,10 +2,12 @@ import 'package:cave/cave.dart';
 import 'package:flutter/material.dart' hide Action;
 
 import '../map/map.dart';
+import '../map/path_finder.dart';
 import 'map_block.dart';
 import 'map_layout.dart';
 
 typedef BlockLayoutCallback = void Function(List<BlockLayoutArea> areas);
+typedef GridCallback = void Function(Grid<int> grid);
 
 typedef GridCellRange = ({GridCell start, GridCell end});
 
@@ -15,10 +17,12 @@ class LandmarkMap extends StatefulWidget {
     required this.mapConstraints,
     required this.onBlocksLayout,
     this.getDirections,
+    this.onGridUpdate,
   });
 
   final BoxConstraints mapConstraints;
   final BlockLayoutCallback onBlocksLayout;
+  final GridCallback? onGridUpdate;
   final GridCellRange? getDirections;
 
   @override
@@ -30,6 +34,7 @@ class _LandmarkMapState extends State<LandmarkMap>
   late final AnimationController controller;
   late double largeRoomHeight = widget.mapConstraints.maxWidth * 0.206;
   late double mediumRoomHeight = widget.mapConstraints.maxHeight * 0.09;
+  late List<BlockLayoutArea> roomsLayouts;
 
   late List<Block> mapSchematics = [
     Block.fromContext(
@@ -138,7 +143,7 @@ class _LandmarkMapState extends State<LandmarkMap>
     ),
   ];
 
-  late List<BlockLayoutArea> roomsLayouts;
+  List<Action> actions = [];
 
   int hueValue = 200;
   int movementPathState = 30;
@@ -167,8 +172,8 @@ class _LandmarkMapState extends State<LandmarkMap>
   @override
   void didUpdateWidget(covariant LandmarkMap oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.getDirections != widget.getDirections &&
-        widget.getDirections != null) {
+
+    if (widget.getDirections != null) {
       _navigateToDestination();
     }
   }
@@ -179,43 +184,51 @@ class _LandmarkMapState extends State<LandmarkMap>
     super.dispose();
   }
 
+  void _resetGrid() {
+    setState(() {
+      grid = Grid.make(grid.rows, grid.columns, 0);
+    });
+    roomsLayouts.forEach(_fillPositionOnGrid);
+  }
+
   void _navigateToDestination() async {
     if (widget.getDirections == null) return;
-    GridCell start = widget.getDirections!.start;
-    GridCell goal = widget.getDirections!.end;
 
-    grid.resetCells(grid.filledCells((state) => state == movementPathState));
+    _resetGrid();
     controller.reset();
-
-    final robot = MapRobot(grid);
-    robot.getAction(start, goal);
 
     Grid<int> newGrid = Grid.make(widget.mapConstraints.maxHeight ~/ cellSize,
         widget.mapConstraints.maxWidth ~/ cellSize, 0);
 
     newGrid = newGrid.copyWith(grid: grid.grid.toList());
 
-    for (final action in robot.foundActions.reversed) {
+    final navigationActions = await getActions(
+      grid: newGrid,
+      moveRange: widget.getDirections!,
+    );
+    if (!mounted) return;
+
+    GridCell start = widget.getDirections!.start;
+    for (final action in navigationActions) {
       switch (action) {
         case Action.moveUp:
-          newGrid.grid[start.row][start.column] = movementPathState;
           start = start.above;
+          newGrid.grid[start.row][start.column] = movementPathState;
           break;
         case Action.moveRight:
-          newGrid.grid[start.row][start.column] = movementPathState;
           start = start.right;
+          newGrid.grid[start.row][start.column] = movementPathState;
           break;
         case Action.moveLeft:
-          newGrid.grid[start.row][start.column] = movementPathState;
           start = start.left;
+          newGrid.grid[start.row][start.column] = movementPathState;
           break;
         case Action.moveDown:
-          newGrid.grid[start.row][start.column] = movementPathState;
           start = start.below;
+          newGrid.grid[start.row][start.column] = movementPathState;
           break;
         case Action.doNothing:
           newGrid.grid[start.row][start.column] = movementPathState;
-          start = start;
           break;
       }
     }
@@ -224,6 +237,7 @@ class _LandmarkMapState extends State<LandmarkMap>
     setState(() {
       if (!mounted) return;
       grid = newGrid;
+      actions = navigationActions;
     });
 
     controller.forward();
@@ -239,10 +253,8 @@ class _LandmarkMapState extends State<LandmarkMap>
             grid: grid,
             cellSize: cellSize,
             progress: controller.value,
-            reverse: widget.getDirections != null
-                ? (widget.getDirections!.start.row >
-                    widget.getDirections!.end.row)
-                : false,
+            cellTrackRange: widget.getDirections,
+            actions: actions,
           ),
           child: child,
         );
@@ -343,6 +355,7 @@ class _LandmarkMapState extends State<LandmarkMap>
     setState(() {
       grid = newGrid;
     });
+    widget.onGridUpdate?.call(grid);
 
     hueValue += 20;
     if (hueValue > 360) {

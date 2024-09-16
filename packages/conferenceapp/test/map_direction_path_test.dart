@@ -7,11 +7,7 @@ void main() {
 
     setUpAll(() {
       grid = Grid.make(78, 74, 0);
-      grid.fillCells(
-          _filledCells
-              .map((cell) => GridCell((row: cell.row, column: cell.column)))
-              .toList(),
-          100);
+      grid.fillCells(_filledCells.map((cell) => GridCell(row: cell.row, column: cell.column)).toList(), 100);
     });
 
     test('filled cells count test', () {
@@ -23,22 +19,18 @@ void main() {
       // const extent = matrix ~/ 2;
       final robot = MapRobot(grid);
 
-      GridCell exhibitionCell =
-          GridCell((row: 62 + ((78 - 62) ~/ 2), column: grid.columns - 1));
-      GridCell room1Cell =
-          GridCell((row: 47 + ((62 - 47) ~/ 2), column: grid.columns - 1));
+      GridCell exhibitionCell = GridCell(row: 62 + ((78 - 62) ~/ 2), column: grid.columns - 1);
+      GridCell room1Cell = GridCell(row: 47 + ((62 - 47) ~/ 2), column: grid.columns - 1);
 
       // state > 0 - cell is available for movement
       // find closest cell that allows movement
       while (grid.filter(exhibitionCell, (state) => state <= 0)) {
-        exhibitionCell = GridCell(
-            (row: exhibitionCell.row + 1, column: exhibitionCell.column - 1));
+        exhibitionCell = GridCell(row: exhibitionCell.row + 1, column: exhibitionCell.column - 1);
       }
 
       // find closes cell that allows movement in room 1
       while (grid.filter(room1Cell, (state) => state <= 0)) {
-        room1Cell =
-            GridCell((row: room1Cell.row + 1, column: room1Cell.column - 1));
+        room1Cell = GridCell(row: room1Cell.row + 1, column: room1Cell.column - 1);
       }
 
       final action = robot.getAction(exhibitionCell, room1Cell);

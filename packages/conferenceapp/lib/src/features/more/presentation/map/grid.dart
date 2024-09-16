@@ -1,18 +1,32 @@
+import 'dart:core';
+
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
-extension type const GridCell(({int row, int column}) cell) {
-  int get row => cell.row;
+import '../widgets/map.dart';
+import 'map.dart';
 
-  int get column => cell.column;
+class GridCell extends Equatable implements Comparable<GridCell> {
+  final int row;
+  final int column;
 
-  GridCell get left => GridCell((row: cell.row, column: cell.column - 1));
+  const GridCell({required this.row, required this.column});
 
-  GridCell get right => GridCell((row: cell.row, column: cell.column + 1));
+  GridCell get left => GridCell(row: row, column: column - 1);
 
-  GridCell get above => GridCell((row: cell.row - 1, column: cell.column));
+  GridCell get right => GridCell(row: row, column: column + 1);
 
-  GridCell get below => GridCell((row: cell.row + 1, column: cell.column));
+  GridCell get above => GridCell(row: row - 1, column: column);
+
+  GridCell get below => GridCell(row: row + 1, column: column);
+
+  @override
+  int compareTo(GridCell other) {
+    return row.compareTo(other.row) + column.compareTo(other.column);
+  }
+
+  @override
+  List<Object?> get props => [row, column];
 }
 
 class GridPainter extends CustomPainter {
@@ -20,164 +34,143 @@ class GridPainter extends CustomPainter {
     required this.grid,
     required this.cellSize,
     required this.progress,
-    this.reverse = false,
+    this.cellTrackRange,
+    this.actions = const [],
   });
 
   final Grid<int> grid;
   final double cellSize;
   final double progress;
-  final bool reverse;
+  final GridCellRange? cellTrackRange;
+  final List<Action> actions;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // final path = Path()
-    //   ..moveTo(0, 0)
-    //   ..lineTo(0, size.height)
-    //   ..lineTo(size.width, size.height)
-    //   ..lineTo(size.width, 0)
-    //   ..close();
+    final path = _paintRobotPath(canvas, size, grid);
 
-    final path = _paintGrid(canvas, size, grid);
-    const hue = HSLColor.fromAHSL(1, 30, 1, 0.5);
+    // _paintProgressPath(path, canvas, HSLColor.fromAHSL(1, 30, 1, 0.5));
+    _paintWalker(path, canvas);
+  }
 
+  Path _paintRobotPath(Canvas canvas, Size size, Grid<int> grid) {
+    Path progressPath = Path();
+
+    if (cellTrackRange != null) {
+      final firstYOrigin =
+          (size.height / grid.rows * cellTrackRange!.start.row).floorToDouble();
+      final firstXOrigin =
+          (size.width / grid.columns * cellTrackRange!.start.column)
+              .floorToDouble();
+      for (int i = 0; i < actions.length; i++) {
+        final action = actions[i];
+
+        if (i == 0 && action == Action.doNothing) {
+          progressPath.moveTo(
+              firstXOrigin + cellSize / 2, firstYOrigin + cellSize / 2);
+          continue;
+        }
+
+        switch (action) {
+          case Action.moveRight:
+            progressPath.relativeLineTo(cellSize, 0);
+          case Action.moveLeft:
+            progressPath.relativeLineTo(-cellSize, 0);
+          case Action.moveUp:
+            progressPath.relativeLineTo(0, -cellSize);
+          case Action.moveDown:
+            progressPath.relativeLineTo(0, cellSize);
+          case Action.doNothing:
+        }
+      }
+    }
+
+    return progressPath;
+  }
+
+  // for debugging purposes
+  // ignore: unused_element
+  void _paintProgressPath(Path path, Canvas canvas, HSLColor hue) {
     canvas.drawPath(
       path,
       Paint()
         ..color = hue.toColor()
-        ..style = PaintingStyle.fill,
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round
+        ..strokeWidth = cellSize,
     );
-    // final pathMetrics = path.computeMetrics();
-
-    // for (final pathMetric in pathMetrics) {
-    //   final extractPath =
-    //   pathMetric.extractPath(0, pathMetric.length * progress);
-    //   canvas.drawPath(
-    //     extractPath,
-    //     Paint()
-    //       ..color = hue.toColor()
-    //       ..style = PaintingStyle.stroke
-    //       ..strokeCap = StrokeCap.round
-    //       ..strokeJoin = StrokeJoin.round
-    //       ..strokeWidth = cellSize,
-    //   );
-    // }
   }
 
-  Path _paintGrid(Canvas canvas, Size size, Grid<int> grid) {
-    final progressPath = Path();
+  void _paintWalker(Path path, Canvas canvas) {
+    final pathMetrics = path.computeMetrics();
 
-    final movementCells = reverse
-        ? grid.filledCells((state) => state == 30).reversed.toList().asMap()
-        : grid.filledCells((state) => state == 30).asMap();
+    for (final pathMetric in pathMetrics) {
+      try {
+        final extractPath =
+            pathMetric.extractPath(0, pathMetric.length * progress);
 
-    for (final cellEntry in movementCells.entries) {
-      final cell = cellEntry.value;
-      final yOrigin = (size.height / grid.rows * cell.row).ceilToDouble();
-      final xOrigin = (size.width / grid.columns * cell.column).ceilToDouble();
-      final center = cellSize / 2;
+        final metric = extractPath.computeMetrics().first;
+        final tangent = metric.getTangentForOffset(metric.length)!;
+        final offset = tangent.position;
 
-      progressPath
-        ..moveTo(xOrigin, yOrigin)
-        ..addRect(
-          Rect.fromCenter(
-            center: Offset(xOrigin + center, yOrigin + center),
-            width: cellSize,
-            height: cellSize,
-          ),
-        );
-      // if (cellEntry.key == 0) {
-      //   progressPath.moveTo(xOrigin, yOrigin);
-      //   continue;
-      // }
-
-      // progressPath.lineTo(xOrigin + center, yOrigin + center);
-      // progressPath.addRect(
-      //   Rect.fromCenter(
-      //     center: Offset(xOrigin + center, yOrigin + center),
-      //     width: cellSize,
-      //     height: cellSize,
-      //   ),
-      // );
-      // progressPath.lineTo(xOrigin, yOrigin);
+        canvas.drawOval(
+            Rect.fromCircle(center: offset, radius: cellSize * 1.5),
+            Paint()
+              ..style = PaintingStyle.fill
+              ..color = Colors.orange);
+      } catch (_) {}
     }
+  }
 
-    // for (int i = 0; i <= grid.rows - 1; i++) {
-    //   for (int j = 0; j <= grid.columns - 1; j++) {
-    //     final state = grid.grid[i][j];
-    //
-    //     final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
-    //     final xOrigin = 0 + (size.width ~/ grid.columns * j).toDouble();
-    //     final center = cellSize / 2;
-    //     Path path = Path()
-    //       ..moveTo(xOrigin, yOrigin)
-    //       ..addRect(
-    //         Rect.fromCenter(
-    //           center: Offset(xOrigin + center, yOrigin + center),
-    //           width: cellSize,
-    //           height: cellSize,
-    //         ),
-    //       );
-    //     canvas.drawPath(
-    //       path,
-    //       Paint()
-    //         ..color = Colors.black
-    //         ..style = PaintingStyle.stroke
-    //         ..strokeWidth = 0.5,
-    //     );
-    //
-    //     if (state > 0) {
-    //       final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
-    //       final xOrigin = 0 + (size.width ~/ grid.columns * j).toDouble();
-    //       final center = cellSize / 2;
-    //       Path path = Path()
-    //         ..moveTo(xOrigin, yOrigin)
-    //         ..addRect(
-    //           Rect.fromCenter(
-    //             center: Offset(xOrigin + center, yOrigin + center),
-    //             width: cellSize,
-    //             height: cellSize,
-    //           ),
-    //         );
-    //
-    //       final hue = HSLColor.fromAHSL(1, state.toDouble(), 1, 0.5);
-    //       canvas.drawPath(
-    //         path,
-    //         Paint()
-    //           ..color = hue.toColor()
-    //           ..style = PaintingStyle.fill,
-    //       );
-    //
-    //       if (state == 30) {
-    //         final hue = HSLColor.fromAHSL(1, state.toDouble(), 1, 0.5);
-    //         progressPath.addPath(path, Offset.zero);
-    //         // canvas.drawPath(
-    //         //   path,
-    //         //   Paint()
-    //         //     ..color = hue.toColor()
-    //         //     ..style = PaintingStyle.stroke
-    //         //     ..strokeCap = StrokeCap.round
-    //         //     ..strokeJoin = StrokeJoin.round
-    //         //     ..strokeWidth = cellSize,
-    //         // );
-    //         // final pathMetrics = path.computeMetrics();
-    //         //
-    //         // for (final pathMetric in pathMetrics) {
-    //         //   final extractPath =
-    //         //       pathMetric.extractPath(0, pathMetric.length * progress);
-    //         //   canvas.drawPath(
-    //         //     extractPath,
-    //         //     Paint()
-    //         //       ..color = hue.toColor()
-    //         //       ..style = PaintingStyle.fill
-    //         //       ..strokeWidth = 0.5,
-    //         //   );
-    //         // }
-    //       }
-    //     }
-    //   }
-    // }
+  void paintGrid(Canvas canvas, Size size) {
+    for (int i = 0; i <= grid.rows - 1; i++) {
+      for (int j = 0; j <= grid.columns - 1; j++) {
+        final state = grid.grid[i][j];
 
-    return progressPath;
+        final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
+        final xOrigin = 0 + (size.width ~/ grid.columns * j).toDouble();
+        final center = cellSize / 2;
+        Path path = Path()
+          ..moveTo(xOrigin, yOrigin)
+          ..addRect(
+            Rect.fromCenter(
+              center: Offset(xOrigin + center, yOrigin + center),
+              width: cellSize,
+              height: cellSize,
+            ),
+          );
+        canvas.drawPath(
+          path,
+          Paint()
+            ..color = Colors.black
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 0.5,
+        );
+
+        if (state > 0) {
+          final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
+          final xOrigin = 0 + (size.width ~/ grid.columns * j).toDouble();
+          final center = cellSize / 2;
+          Path path = Path()
+            ..moveTo(xOrigin, yOrigin)
+            ..addRect(
+              Rect.fromCenter(
+                center: Offset(xOrigin + center, yOrigin + center),
+                width: cellSize,
+                height: cellSize,
+              ),
+            );
+
+          final hue = HSLColor.fromAHSL(1, state.toDouble(), 1, 0.5);
+          canvas.drawPath(
+            path,
+            Paint()
+              ..color = hue.toColor()
+              ..style = PaintingStyle.fill,
+          );
+        }
+      }
+    }
   }
 
   @override
@@ -188,11 +181,13 @@ class GridPainter extends CustomPainter {
     if (oldDelegate.grid != grid) return true;
     if (oldDelegate.cellSize != cellSize) return true;
     if (oldDelegate.progress != progress) return true;
+    if (oldDelegate.cellTrackRange != cellTrackRange) return true;
+    if (oldDelegate.actions != actions) return true;
     return false;
   }
 }
 
-final class Grid<T> extends Equatable {
+class Grid<T extends Object> extends Equatable {
   final List<List<T>> grid;
 
   final T initialValue;
@@ -231,7 +226,7 @@ final class Grid<T> extends Equatable {
       for (int j = 0; j <= columns - 1; j++) {
         final state = grid[i][j];
 
-        if (filter(state)) cells.add(GridCell((row: i, column: j)));
+        if (filter(state)) cells.add(GridCell(row: i, column: j));
       }
     }
     return cells;
@@ -265,29 +260,37 @@ final class Grid<T> extends Equatable {
       for (int j = 0; j <= columns - 1; j++) {
         final state = grid[i][j];
 
-        if (filter(state)) return GridCell((row: i, column: j));
+        if (filter(state)) return GridCell(row: i, column: j);
       }
     }
     return null;
   }
 
-  Map<String, GridCell> getNeighbourPositions(GridCell cell) {
-    final neighbours = <String, GridCell>{};
+  Map<String, GridCell?> getNeighbourPositions(GridCell cell) {
+    final neighbours = <String, GridCell?>{};
 
     if (validPosition(cell.above)) {
       neighbours['above'] = cell.above;
+    } else {
+      neighbours['above'] = null;
     }
 
     if (validPosition(cell.below)) {
       neighbours['below'] = cell.below;
+    } else {
+      neighbours['below'] = null;
     }
 
     if (validPosition(cell.left)) {
       neighbours['left'] = cell.left;
+    } else {
+      neighbours['left'] = null;
     }
 
     if (validPosition(cell.right)) {
       neighbours['right'] = cell.right;
+    } else {
+      neighbours['right'] = null;
     }
 
     return neighbours;
