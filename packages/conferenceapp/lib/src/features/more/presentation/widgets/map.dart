@@ -86,8 +86,11 @@ class _LandmarkMapState extends State<LandmarkMap>
       height: widget.mapConstraints.maxHeight * 0.293,
       hideFenceBorder: HideFenceBorder.all,
       blockLabel: 'HALLWAY',
-      blockLabelStyle:
-          DevfestTheme.of(context).textTheme?.bodyBody4Regular?.medium,
+      blockLabelStyle: DevfestTheme.of(context)
+          .textTheme
+          ?.bodyBody4Regular
+          ?.medium
+          .applyColor(DevfestColors.grey10),
       blockColor: const Color(0xffd9d0c3),
       position: Offset(280.w, largeRoomHeight * 3),
     ),
@@ -109,8 +112,11 @@ class _LandmarkMapState extends State<LandmarkMap>
       height: mediumRoomHeight,
       hideFenceBorder: HideFenceBorder.all,
       blockLabel: 'STAIRWAY',
-      blockLabelStyle:
-          DevfestTheme.of(context).textTheme?.bodyBody4Regular?.medium,
+      blockLabelStyle: DevfestTheme.of(context)
+          .textTheme
+          ?.bodyBody4Regular
+          ?.medium
+          .applyColor(DevfestColors.grey10),
       blockColor: const Color(0xffd9d9d9),
       position: Offset(
         22.w,

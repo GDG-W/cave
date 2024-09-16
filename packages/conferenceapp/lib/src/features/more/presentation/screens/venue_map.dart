@@ -175,24 +175,34 @@ class _VenueMapScreenState extends State<VenueMapScreen> {
                   ),
                 ),
                 Material(
-                  color: DevfestTheme.of(context).backgroundColor,
                   elevation: 5,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(16)),
-                    side: BorderSide(
-                        color: DevfestColors.grey80.possibleDarkVariant),
+                        BorderRadius.vertical(top: Radius.circular(16)),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                            vertical: Constants.verticalGutter,
-                            horizontal: Constants.horizontalMargin)
-                        .r
-                        .add(EdgeInsets.only(
-                            bottom: MediaQuery.viewPaddingOf(context).bottom)),
-                    child: DevfestFilledButton(
-                      title: const Text('Get Directions'),
-                      onPressed: _getDirections,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: DevfestTheme.of(context).backgroundColor,
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(16)),
+                      border: Border(
+                        top: BorderSide(
+                          color: DevfestColors.grey80.possibleDarkVariant,
+                        ),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                              vertical: Constants.verticalGutter,
+                              horizontal: Constants.horizontalMargin)
+                          .r
+                          .add(EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.viewPaddingOf(context).bottom)),
+                      child: DevfestFilledButton(
+                        title: const Text('Get Directions'),
+                        onPressed: _getDirections,
+                      ),
                     ),
                   ),
                 ),

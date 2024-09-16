@@ -64,11 +64,13 @@ final class Block extends Equatable {
           .textTheme
           ?.bodyBody4Regular
           ?.medium
+          .applyColor(DevfestColors.grey10)
           .merge(entranceLabelStyle),
       blockLabelStyle: DevfestTheme.of(context)
           .textTheme
           ?.bodyBody2Regular
           ?.semi
+          .applyColor(DevfestColors.grey10)
           .merge(blockLabelStyle),
       position: position,
       openingPositions: openingPositions,

@@ -203,10 +203,10 @@ class _SignatureCanvasPalette extends StatelessWidget {
   final void Function(Color color)? onColorChanged;
   final Color? selectedColor;
 
-  static const paletteColors = [
+  static final paletteColors = [
     DevfestColors.primariesBlue50,
     DevfestColors.primariesGreen50,
-    DevfestColors.grey10,
+    DevfestColors.grey10.possibleDarkVariant,
     DevfestColors.primariesYellow50,
     DevfestColors.primariesRed50,
   ];
