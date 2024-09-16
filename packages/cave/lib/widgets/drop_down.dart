@@ -65,16 +65,16 @@ class _DevfestDropDownState<T> extends State<DevfestDropDown<T>> {
                   alignment: AlignmentDirectional.topStart,
                   child: Animate(
                     effects: const [
-                      FadeEffect(duration: Duration(milliseconds: 100)),
+                      FadeEffect(duration: Duration(milliseconds: 150)),
                       ScaleEffect(
                         begin: Offset(.95, .95),
                         end: Offset(1, 1),
-                        duration: Duration(milliseconds: 100),
+                        duration: Duration(milliseconds: 150),
                       ),
                       MoveEffect(
                         begin: Offset(0, 2),
                         end: Offset.zero,
-                        duration: Duration(milliseconds: 100),
+                        duration: Duration(milliseconds: 150),
                       ),
                     ],
                     child: Container(
