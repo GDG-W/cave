@@ -35,14 +35,17 @@ class MapLayoutDelegate extends MultiChildLayoutDelegate {
 
       final childOffset = Offset(
         block.position?.dx ?? 0,
-        size.height - currentSize.height - (block.position?.dy ?? _sumBlocHeightsToIndex(i)),
+        size.height -
+            currentSize.height -
+            (block.position?.dy ?? _sumBlocHeightsToIndex(i)),
       );
 
       blockLayouts.add(
         (
           room: RoomType.values[i],
           start: childOffset,
-          end: Offset(childOffset.dx + currentSize.width, childOffset.dy + currentSize.height),
+          end: Offset(childOffset.dx + currentSize.width,
+              childOffset.dy + currentSize.height),
           hideFenceBorder: block.hideFenceBorder,
           openings: block.openingPositions
               .asMap()
@@ -50,27 +53,33 @@ class MapLayoutDelegate extends MultiChildLayoutDelegate {
                 final startX = childOffset.dx + openingPosition.dx;
                 final startY = childOffset.dy + openingPosition.dy;
 
-                final openingSize = block.openingSizes.elementAtOrNull(index) ?? openingRadius;
+                final openingSize =
+                    block.openingSizes.elementAtOrNull(index) ?? openingRadius;
                 late Offset start;
                 late Offset end;
 
-                final blockStartFromEnd = (block.entranceLabel?.isNotEmpty ?? false) ? 25.0 : 0.0;
+                final blockStartFromEnd =
+                    (block.entranceLabel?.isNotEmpty ?? false) ? 25.0 : 0.0;
                 // if is at left edge
                 if (openingPosition.dx == 0) {
                   start = Offset(startX, startY);
                   end = Offset(startX, startY + openingSize);
                 } // if is at right edge
-                else if (openingPosition.dx - blockStartFromEnd == block.width) {
+                else if (openingPosition.dx - blockStartFromEnd ==
+                    block.width) {
                   start = Offset(startX, startY);
                   end = Offset(startX, startY + openingSize);
                 } // if is at top edge
                 else if (openingPosition.dy == 0) {
                   start = Offset(startX - blockStartFromEnd, startY);
-                  end = Offset(startX + openingSize - blockStartFromEnd, startY);
+                  end =
+                      Offset(startX + openingSize - blockStartFromEnd, startY);
                 } // if is at bottom edge
                 else {
-                  start = Offset(startX - blockStartFromEnd, startY - cellSize.w);
-                  end = Offset(startX + openingSize - blockStartFromEnd, startY - cellSize.w);
+                  start =
+                      Offset(startX - blockStartFromEnd, startY - cellSize.w);
+                  end = Offset(startX + openingSize - blockStartFromEnd,
+                      startY - cellSize.w);
                 }
 
                 return MapEntry(index, (start: start, end: end));

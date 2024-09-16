@@ -195,4 +195,3 @@ class _VenueMapScreenState extends State<VenueMapScreen> {
     );
   }
 }
-
