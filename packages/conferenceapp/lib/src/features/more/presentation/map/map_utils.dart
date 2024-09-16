@@ -122,6 +122,18 @@ enum RoomType {
         RoomType.room3 => [RoomType.stairs],
         RoomType.room4 => [RoomType.stairs],
       };
+
+  @override
+  String toString() => switch (this) {
+        RoomType.exhibitionRoom => 'Exhibition Room',
+        RoomType.room1 => 'Room 1',
+        RoomType.room2 => 'Room 2',
+        RoomType.hallway => 'Hallway',
+        RoomType.toilet => 'Toilet',
+        RoomType.stairs => 'Stairs',
+        RoomType.room3 => 'Room 3',
+        RoomType.room4 => 'Room 4',
+      };
 }
 
 // DFS algorithm to get the directions from one room to another

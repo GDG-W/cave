@@ -1,5 +1,6 @@
 import 'package:cave/cave.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:flutter/physics.dart';
 
 import '../map/map.dart';
 import '../map/path_finder.dart';
@@ -35,6 +36,7 @@ class _LandmarkMapState extends State<LandmarkMap>
   late double largeRoomHeight = widget.mapConstraints.maxWidth * 0.206;
   late double mediumRoomHeight = widget.mapConstraints.maxHeight * 0.09;
   late List<BlockLayoutArea> roomsLayouts;
+  late Animation<double> speedProgressAnim;
 
   late List<Block> mapSchematics = [
     Block.fromContext(
@@ -159,8 +161,12 @@ class _LandmarkMapState extends State<LandmarkMap>
   void initState() {
     super.initState();
 
-    controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 5));
+    controller = AnimationController(
+      vsync: this,
+      upperBound: double.infinity,
+      lowerBound: double.infinity,
+    );
+    speedProgressAnim = ConstantTween<double>(0).animate(controller);
 
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
       if (widget.getDirections != null) {
@@ -189,6 +195,13 @@ class _LandmarkMapState extends State<LandmarkMap>
       grid = Grid.make(grid.rows, grid.columns, 0);
     });
     roomsLayouts.forEach(_fillPositionOnGrid);
+  }
+
+  void _runAnimation(int speed) {
+    speedProgressAnim = controller.drive(Tween<double>(begin: 0, end: 1));
+
+    final simulation = FrictionSimulation(0.5, 0, 0.3);
+    controller.animateWith(simulation);
   }
 
   void _navigateToDestination() async {
@@ -240,7 +253,7 @@ class _LandmarkMapState extends State<LandmarkMap>
       actions = navigationActions;
     });
 
-    controller.forward();
+    _runAnimation(navigationActions.length);
   }
 
   @override
@@ -252,7 +265,7 @@ class _LandmarkMapState extends State<LandmarkMap>
           foregroundPainter: GridPainter(
             grid: grid,
             cellSize: cellSize,
-            progress: controller.value,
+            progress: speedProgressAnim.value,
             cellTrackRange: widget.getDirections,
             actions: actions,
           ),

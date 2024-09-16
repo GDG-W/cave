@@ -24,7 +24,6 @@ class DevfestTextFormField extends StatelessWidget {
     this.autovalidateMode,
     this.prefixIcon,
     this.onTap,
-    this.prefixIcon,
     this.prefixIconColor,
     this.suffixIconColor,
     this.suffixIcon,
@@ -45,7 +44,6 @@ class DevfestTextFormField extends StatelessWidget {
   final AutovalidateMode? autovalidateMode;
   final Widget? prefixIcon;
   final GestureTapCallback? onTap;
-  final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Color? prefixIconColor;
   final Color? suffixIconColor;
@@ -118,7 +116,6 @@ class DevfestTextFormField extends StatelessWidget {
             focusedBorder: textFieldTheme.focusedBorder,
             errorBorder: textFieldTheme.errorBorder,
             focusedErrorBorder: textFieldTheme.errorBorder,
-            prefixIcon: prefixIcon,
           ),
         ),
       ],
