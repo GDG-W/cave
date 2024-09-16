@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'colors.dart';
 import 'package:flutter/material.dart';
 
@@ -23,10 +25,10 @@ class DevfestBottomNavTheme extends ThemeExtension<DevfestBottomNavTheme> {
     required this.backgroundColor,
   });
 
-  const DevfestBottomNavTheme.light()
+  DevfestBottomNavTheme.light()
       : this._(
-          labelStyle: const TextStyle(
-            fontSize: 14,
+          labelStyle: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w500,
             height: 1.27,
             fontFamily: 'Google Sans',
@@ -40,10 +42,10 @@ class DevfestBottomNavTheme extends ThemeExtension<DevfestBottomNavTheme> {
           backgroundColor: DevfestColors.primariesYellow100,
         );
 
-  const DevfestBottomNavTheme.dark()
+  DevfestBottomNavTheme.dark()
       : this._(
-          labelStyle: const TextStyle(
-            fontSize: 14,
+          labelStyle: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w500,
             fontFamily: 'Google Sans',
             height: 1.27,

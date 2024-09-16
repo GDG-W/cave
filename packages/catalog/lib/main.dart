@@ -45,8 +45,6 @@ class WidgetbookApp extends StatelessWidget {
                 useMaterial3: true,
                 textTheme: const TextTheme(bodyMedium: TextStyle()),
                 extensions: <ThemeExtension<dynamic>>[
-                  /// Use the below format for raw theme data
-                  /// DevFestTheme(textTheme: DevfestTextTheme()),
                   DevFestThemeData.light(),
                 ],
               ),
@@ -62,8 +60,6 @@ class WidgetbookApp extends StatelessWidget {
                 useMaterial3: true,
                 textTheme: const TextTheme(bodyMedium: TextStyle()),
                 extensions: <ThemeExtension<dynamic>>[
-                  /// Use the below format for raw theme data
-                  /// DevFestTheme(textTheme: DevfestTextTheme()),
                   DevFestThemeData.dark(),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:control_style/control_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'colors.dart';
 import 'effects.dart';
@@ -60,18 +61,18 @@ class DevfestTextFieldTheme extends ThemeExtension<DevfestTextFieldTheme> {
                   BorderSide(color: DevfestColors.primariesRed80, width: 2),
             ),
           ),
-          hintStyle: const TextStyle(
-            fontSize: 16,
+          hintStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: DevfestColors.grey60,
           ),
-          style: const TextStyle(
-            fontSize: 16,
+          style: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: DevfestColors.grey10,
           ),
-          errorStyle: const TextStyle(
-            fontSize: 16,
+          errorStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: DevfestColors.error60,
           ),
@@ -114,18 +115,18 @@ class DevfestTextFieldTheme extends ThemeExtension<DevfestTextFieldTheme> {
                   BorderSide(color: DevfestColors.primariesRed80, width: 2),
             ),
           ),
-          hintStyle: const TextStyle(
-            fontSize: 16,
+          hintStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: DevfestColors.grey60,
           ),
-          style: const TextStyle(
-            fontSize: 16,
+          style: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: DevfestColors.grey70,
           ),
-          errorStyle: const TextStyle(
-            fontSize: 16,
+          errorStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: DevfestColors.error60,
           ),

@@ -52,8 +52,8 @@ class DevfestFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DevfestButtonTheme buttonTheme = DevfestTheme.of(context).buttonTheme ??
-        const DevfestButtonTheme.light();
+    DevfestButtonTheme buttonTheme =
+        DevfestTheme.of(context).buttonTheme ?? DevfestButtonTheme.light();
 
     buttonTheme = buttonTheme.copyWith(
       textStyle: switch (_height) {
@@ -152,7 +152,7 @@ class DevfestOutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final outlinedButtonTheme = DevfestTheme.of(context).outlinedButtonTheme ??
-        const DevfestOutlinedButtonTheme.light();
+        DevfestOutlinedButtonTheme.light();
     return Material(
       type: MaterialType.transparency,
       child: InkWell(

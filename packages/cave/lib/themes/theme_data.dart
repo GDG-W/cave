@@ -15,7 +15,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
   final DevfestTextFieldTheme? textFieldTheme;
   final Color? backgroundColor;
 
-  const DevFestThemeData({
+  DevFestThemeData({
     this.textTheme,
     this.backgroundColor,
     this.bottomNavTheme,
@@ -26,22 +26,22 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
 
   DevFestThemeData.light()
       : this(
-          textTheme: const DevfestTextTheme.light(),
+          textTheme: DevfestTextTheme.light(),
           backgroundColor: DevfestColors.primariesYellow100,
-          buttonTheme: const DevfestButtonTheme.light(),
-          outlinedButtonTheme: const DevfestOutlinedButtonTheme.light(),
-          bottomNavTheme: const DevfestBottomNavTheme.light(),
+          buttonTheme: DevfestButtonTheme.light(),
+          outlinedButtonTheme: DevfestOutlinedButtonTheme.light(),
+          bottomNavTheme: DevfestBottomNavTheme.light(),
           textFieldTheme: DevfestTextFieldTheme.light(),
         );
 
   DevFestThemeData.dark()
       : this(
-          textTheme: const DevfestTextTheme.dark(),
+          textTheme: DevfestTextTheme.dark(),
           backgroundColor: DevfestColors.backgroundDark,
           textFieldTheme: DevfestTextFieldTheme.dark(),
-          buttonTheme: const DevfestButtonTheme.dark(),
-          outlinedButtonTheme: const DevfestOutlinedButtonTheme.dark(),
-          bottomNavTheme: const DevfestBottomNavTheme.dark(),
+          buttonTheme: DevfestButtonTheme.dark(),
+          outlinedButtonTheme: DevfestOutlinedButtonTheme.dark(),
+          bottomNavTheme: DevfestBottomNavTheme.dark(),
         );
 
   @override

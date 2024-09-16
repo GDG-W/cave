@@ -1,5 +1,6 @@
 import 'package:cave/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @immutable
 class DevfestButtonTheme extends ThemeExtension<DevfestButtonTheme> {
@@ -15,26 +16,26 @@ class DevfestButtonTheme extends ThemeExtension<DevfestButtonTheme> {
     required this.iconColor,
   });
 
-  const DevfestButtonTheme.light()
+  DevfestButtonTheme.light()
       : this._(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(48))),
           backgroundColor: DevfestColors.grey10,
-          textStyle: const TextStyle(
-            fontSize: 16,
+          textStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w600,
             color: DevfestColors.grey100,
           ),
           iconColor: DevfestColors.grey100,
         );
 
-  const DevfestButtonTheme.dark()
+  DevfestButtonTheme.dark()
       : this._(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(48))),
           backgroundColor: DevfestColors.primariesYellow100,
-          textStyle: const TextStyle(
-            fontSize: 16,
+          textStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w600,
             color: DevfestColors.grey10,
           ),
@@ -85,30 +86,30 @@ class DevfestOutlinedButtonTheme
     required this.iconColor,
   });
 
-  const DevfestOutlinedButtonTheme.light()
+  DevfestOutlinedButtonTheme.light()
       : this._(
           shape: const RoundedRectangleBorder(
             side: BorderSide(color: DevfestColors.grey10),
             borderRadius: BorderRadius.all(Radius.circular(80)),
           ),
           outlineColor: DevfestColors.grey10,
-          textStyle: const TextStyle(
-            fontSize: 16,
+          textStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w600,
             color: DevfestColors.grey10,
           ),
           iconColor: DevfestColors.grey10,
         );
 
-  const DevfestOutlinedButtonTheme.dark()
+  DevfestOutlinedButtonTheme.dark()
       : this._(
           shape: const RoundedRectangleBorder(
             side: BorderSide(color: DevfestColors.grey100),
             borderRadius: BorderRadius.all(Radius.circular(80)),
           ),
           outlineColor: DevfestColors.grey100,
-          textStyle: const TextStyle(
-            fontSize: 16,
+          textStyle: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w700,
             color: DevfestColors.grey100,
           ),
