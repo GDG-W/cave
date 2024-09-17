@@ -15,7 +15,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
   final DevfestTextFieldTheme? textFieldTheme;
   final Color? backgroundColor;
 
-  const DevFestThemeData({
+  DevFestThemeData({
     this.textTheme,
     this.backgroundColor,
     this.bottomNavTheme,
@@ -28,9 +28,9 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
       : this(
           textTheme: DevfestTextTheme.light(),
           backgroundColor: DevfestColors.primariesYellow100,
-          buttonTheme: const DevfestButtonTheme.light(),
-          outlinedButtonTheme: const DevfestOutlinedButtonTheme.light(),
-          bottomNavTheme: const DevfestBottomNavTheme.light(),
+          buttonTheme: DevfestButtonTheme.light(),
+          outlinedButtonTheme: DevfestOutlinedButtonTheme.light(),
+          bottomNavTheme: DevfestBottomNavTheme.light(),
           textFieldTheme: DevfestTextFieldTheme.light(),
         );
 
@@ -39,9 +39,9 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
           textTheme: DevfestTextTheme.dark(),
           backgroundColor: DevfestColors.backgroundDark,
           textFieldTheme: DevfestTextFieldTheme.dark(),
-          buttonTheme: const DevfestButtonTheme.dark(),
-          outlinedButtonTheme: const DevfestOutlinedButtonTheme.dark(),
-          bottomNavTheme: const DevfestBottomNavTheme.dark(),
+          buttonTheme: DevfestButtonTheme.dark(),
+          outlinedButtonTheme: DevfestOutlinedButtonTheme.dark(),
+          bottomNavTheme: DevfestBottomNavTheme.dark(),
         );
 
   @override
@@ -50,12 +50,14 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
     DevfestButtonTheme? buttonTheme,
     DevfestOutlinedButtonTheme? outlinedButtonTheme,
     DevfestBottomNavTheme? bottomNavTheme,
+    DevfestTextFieldTheme? textFieldTheme,
   }) {
     return DevFestThemeData(
       textTheme: textTheme ?? this.textTheme,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       outlinedButtonTheme: outlinedButtonTheme ?? this.outlinedButtonTheme,
       bottomNavTheme: bottomNavTheme ?? this.bottomNavTheme,
+      textFieldTheme: textFieldTheme ?? this.textFieldTheme,
     );
   }
 
@@ -69,6 +71,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
       outlinedButtonTheme:
           outlinedButtonTheme?.lerp(other.outlinedButtonTheme, t),
       bottomNavTheme: bottomNavTheme?.lerp(other.bottomNavTheme, t),
+      textFieldTheme: textFieldTheme?.lerp(other.textFieldTheme, t),
     );
   }
 }

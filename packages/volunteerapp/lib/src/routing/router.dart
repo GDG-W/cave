@@ -1,4 +1,3 @@
-
 import 'package:volunteerapp/src/features/home/presentation/screens/home_screen.dart';
 import 'package:volunteerapp/src/features/onboarding/presentation/screens/onboarding_home.dart';
 import 'package:volunteerapp/src/features/onboarding/presentation/screens/onboarding_login.dart';
@@ -36,14 +35,12 @@ class Devfest2024Router {
                 name: Devfest2024Routes.onboardingLogin.name,
                 builder: (context, state) => const OnboardingLoginScreen(),
               ),
-              
             ],
           ),
           GoRoute(
             path: '/',
             name: Devfest2024Routes.home.name,
             builder: (context, state) => const HomeScreen(),
-            
           ),
         ]);
   }

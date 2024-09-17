@@ -1,4 +1,3 @@
-
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,6 @@ class OnboardingLoginScreen extends StatelessWidget {
                           hint: 'Enter Password',
                           onChanged: (value) {},
                         ),
-                        
                       ],
                     ),
                   ),
@@ -52,7 +50,6 @@ class OnboardingLoginScreen extends StatelessWidget {
                   context.goNamed(Devfest2024Routes.home.name);
                 },
               ),
-            
             ],
           ),
         ),

@@ -651,250 +651,250 @@ class DevfestTextTheme extends ThemeExtension<DevfestTextTheme> {
               leadingDistribution: TextLeadingDistribution.even),
         );
 
-  const DevfestTextTheme.responsive()
+  DevfestTextTheme.responsive()
       : this(
-          headerH1: const TextStyle(
-            fontSize: 80,
+          headerH1: TextStyle(
+            fontSize: 80.sp,
             fontWeight: FontWeight.w700,
             height: 1.15,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH2: const TextStyle(
-            fontSize: 62,
+          headerH2: TextStyle(
+            fontSize: 62.sp,
             fontWeight: FontWeight.w700,
             height: 1.23,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH3: const TextStyle(
-            fontSize: 56,
+          headerH3: TextStyle(
+            fontSize: 56.sp,
             fontWeight: FontWeight.w700,
             height: 1.25,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH4: const TextStyle(
-            fontSize: 40,
+          headerH4: TextStyle(
+            fontSize: 40.sp,
             fontWeight: FontWeight.w700,
             height: 1.2,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH5: const TextStyle(
-            fontSize: 32,
+          headerH5: TextStyle(
+            fontSize: 32.sp,
             fontWeight: FontWeight.w700,
             height: 1.25,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          headerH6: const TextStyle(
-            fontSize: 28,
+          headerH6: TextStyle(
+            fontSize: 28.sp,
             fontWeight: FontWeight.w400,
             height: 1.29,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle1Regular: const TextStyle(
-            fontSize: 24,
+          titleTitle1Regular: TextStyle(
+            fontSize: 24.sp,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle1Medium: const TextStyle(
-            fontSize: 24,
+          titleTitle1Medium: TextStyle(
+            fontSize: 24.sp,
             fontWeight: FontWeight.w500,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle1Semibold: const TextStyle(
-            fontSize: 24,
+          titleTitle1Semibold: TextStyle(
+            fontSize: 24.sp,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle2Regular: const TextStyle(
-            fontSize: 22,
+          titleTitle2Regular: TextStyle(
+            fontSize: 22.sp,
             fontWeight: FontWeight.w400,
             height: 1.45,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle2Medium: const TextStyle(
-            fontSize: 22,
+          titleTitle2Medium: TextStyle(
+            fontSize: 22.sp,
             fontWeight: FontWeight.w500,
             height: 1.45,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          titleTitle2Semibold: const TextStyle(
-            fontSize: 22,
+          titleTitle2Semibold: TextStyle(
+            fontSize: 22.sp,
             fontWeight: FontWeight.w400,
             height: 1.45,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody1Regular: const TextStyle(
-            fontSize: 18,
+          bodyBody1Regular: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody1Medium: const TextStyle(
-            fontSize: 18,
+          bodyBody1Medium: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.w500,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody1Semibold: const TextStyle(
-            fontSize: 18,
+          bodyBody1Semibold: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody2Regular: const TextStyle(
-            fontSize: 16,
+          bodyBody2Regular: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody2Medium: const TextStyle(
-            fontSize: 16,
+          bodyBody2Medium: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody2Semibold: const TextStyle(
-            fontSize: 16,
+          bodyBody2Semibold: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody3Regular: const TextStyle(
-            fontSize: 14,
+          bodyBody3Regular: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w400,
             height: 1.43,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody3Medium: const TextStyle(
-            fontSize: 14,
+          bodyBody3Medium: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w500,
             height: 1.43,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody3Semibold: const TextStyle(
-            fontSize: 14,
+          bodyBody3Semibold: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w400,
             height: 1.43,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody4Regular: const TextStyle(
-            fontSize: 12,
+          bodyBody4Regular: TextStyle(
+            fontSize: 12.sp,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody4Medium: const TextStyle(
-            fontSize: 12,
+          bodyBody4Medium: TextStyle(
+            fontSize: 12.sp,
             fontWeight: FontWeight.w500,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody4Semibold: const TextStyle(
-            fontSize: 12,
+          bodyBody4Semibold: TextStyle(
+            fontSize: 12.sp,
             fontWeight: FontWeight.w400,
             height: 1.5,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody5Regular: const TextStyle(
-            fontSize: 10,
+          bodyBody5Regular: TextStyle(
+            fontSize: 10.sp,
             fontWeight: FontWeight.w400,
             height: 1.4,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody5Medium: const TextStyle(
-            fontSize: 10,
+          bodyBody5Medium: TextStyle(
+            fontSize: 10.sp,
             fontWeight: FontWeight.w500,
             height: 1.4,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          bodyBody5Semibold: const TextStyle(
-            fontSize: 10,
+          bodyBody5Semibold: TextStyle(
+            fontSize: 10.sp,
             fontWeight: FontWeight.w400,
             height: 1.4,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonLargeMedium: const TextStyle(
-            fontSize: 18,
+          buttonLargeMedium: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.w500,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonLargeSemibold: const TextStyle(
-            fontSize: 18,
+          buttonLargeSemibold: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.w400,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonLargeBold: const TextStyle(
-            fontSize: 18,
+          buttonLargeBold: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             height: 1.33,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonMediumMedium: const TextStyle(
-            fontSize: 16,
+          buttonMediumMedium: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonMediumSemibold: const TextStyle(
-            fontSize: 16,
+          buttonMediumSemibold: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w400,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonMediumBold: const TextStyle(
-            fontSize: 16,
+          buttonMediumBold: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.w700,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonSmallMedium: const TextStyle(
-            fontSize: 12,
+          buttonSmallMedium: TextStyle(
+            fontSize: 12.sp,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonSmallSemibold: const TextStyle(
-            fontSize: 12,
+          buttonSmallSemibold: TextStyle(
+            fontSize: 12.sp,
             fontWeight: FontWeight.w400,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,
           ),
-          buttonSmallBold: const TextStyle(
-            fontSize: 12,
+          buttonSmallBold: TextStyle(
+            fontSize: 12.sp,
             fontWeight: FontWeight.w700,
             fontStyle: FontStyle.normal,
             decoration: TextDecoration.none,

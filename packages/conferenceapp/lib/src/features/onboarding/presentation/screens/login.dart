@@ -34,11 +34,13 @@ class OnboardingLoginScreen extends StatelessWidget {
                           hint: 'e.g senatorofthebu@gmail.com',
                           onChanged: (value) {},
                         ),
+                        Constants.largeVerticalGutter.verticalSpace,
                         DevfestTextFormField(
                           title: 'Ticket ID',
                           hint: 'e.g 413-012-ABC',
                           onChanged: (value) {},
                         ),
+                        Constants.largeVerticalGutter.verticalSpace,
                         Text.rich(
                           TextSpan(
                             text: 'Looking for your ticket ID? ',
@@ -69,7 +71,7 @@ class OnboardingLoginScreen extends StatelessWidget {
               DevfestFilledButton(
                 title: const Text('Next'),
                 onPressed: () {
-                  context.goNamed(Devfest2024Routes.dashboard.name);
+                  context.goNamed(Devfest2024Routes.onboardingSignature.name);
                 },
               ),
               DevfestFilledButton(
@@ -77,7 +79,9 @@ class OnboardingLoginScreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 titleStyle:
                     TextStyle(color: DevfestColors.grey10.possibleDarkVariant),
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed(Devfest2024Routes.dashboard.name);
+                },
               ),
             ],
           ),
