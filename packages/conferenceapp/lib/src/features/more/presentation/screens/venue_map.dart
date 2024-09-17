@@ -3,18 +3,31 @@ import 'package:cave/constants.dart';
 import 'package:devfest24/src/features/more/presentation/map/map.dart';
 import 'package:devfest24/src/features/more/presentation/widgets/map.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/shared.dart';
 import '../widgets/map_layout.dart';
 
-class VenueMapScreen extends StatefulWidget {
+final showGridStateProvider = StateProvider.autoDispose<bool>((ref) {
+  return false;
+});
+
+final showPathStateProvider = StateProvider.autoDispose<bool>((ref) {
+  return false;
+});
+
+final showBlocksProvider = StateProvider.autoDispose<bool>((ref) {
+  return false;
+});
+
+class VenueMapScreen extends ConsumerStatefulWidget {
   const VenueMapScreen({super.key});
 
   @override
-  State<VenueMapScreen> createState() => _VenueMapScreenState();
+  ConsumerState<VenueMapScreen> createState() => _VenueMapScreenState();
 }
 
-class _VenueMapScreenState extends State<VenueMapScreen> {
+class _VenueMapScreenState extends ConsumerState<VenueMapScreen> {
   late List<BlockLayoutArea> roomsLayouts;
   GridCellRange? navigationBlock;
   ({RoomType? from, RoomType? to}) instructions = (from: null, to: null);
@@ -38,16 +51,22 @@ class _VenueMapScreenState extends State<VenueMapScreen> {
   void _getDirections() {
     if (instructions.to == null || instructions.from == null) return;
 
-    final newNavigationBlock = (
-      start: getFirstAvailableCellFromBottomInRoom(instructions.from!),
-      end: getCenterAvailableCellInRoom(instructions.to!),
-    );
-    roomByRoomInstructions =
-        getOverviewDirections(instructions.from!, instructions.to!);
-
-    debugPrint('walk path: ${roomByRoomInstructions.chainString()}');
     setState(() {
-      navigationBlock = newNavigationBlock;
+      navigationBlock = null;
+    });
+
+    Future.delayed(const Duration(milliseconds: 50), () {
+      final newNavigationBlock = (
+        start: getFirstAvailableCellFromBottomInRoom(instructions.from!),
+        end: getCenterAvailableCellInRoom(instructions.to!),
+      );
+      roomByRoomInstructions =
+          getOverviewDirections(instructions.from!, instructions.to!);
+
+      debugPrint('walk path: ${roomByRoomInstructions.chainString()}');
+      setState(() {
+        navigationBlock = newNavigationBlock;
+      });
     });
   }
 
@@ -98,6 +117,108 @@ class _VenueMapScreenState extends State<VenueMapScreen> {
       appBar: AppBar(
         leading: const GoBackButton(),
         leadingWidth: 120.w,
+        actions: [
+          MenuBar(
+            style: MenuStyle(
+              alignment: Alignment.center,
+              backgroundColor: WidgetStateProperty.all(Colors.transparent),
+              shadowColor: WidgetStateProperty.all(Colors.transparent),
+            ),
+            children: [
+              SubmenuButton(
+                menuStyle: MenuStyle(
+                  elevation: WidgetStateProperty.all(5),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  backgroundColor: WidgetStateProperty.all(
+                      DevfestTheme.of(context).backgroundColor),
+                ),
+                menuChildren: [
+                  MenuItemButton(
+                    onPressed: null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Show Grid',
+                          style: DevfestTheme.of(context)
+                              .textTheme
+                              ?.bodyBody2Regular
+                              ?.medium,
+                        ),
+                        Constants.horizontalGutter.horizontalSpace,
+                        DevfestSwitch(
+                          value: ref.watch(showGridStateProvider),
+                          onChanged: (value) {
+                            ref
+                                .read(showGridStateProvider.notifier)
+                                .update((_) => value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  MenuItemButton(
+                    onPressed: null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Show Path',
+                          style: DevfestTheme.of(context)
+                              .textTheme
+                              ?.bodyBody2Regular
+                              ?.medium,
+                        ),
+                        Constants.horizontalGutter.horizontalSpace,
+                        DevfestSwitch(
+                          value: ref.watch(showPathStateProvider),
+                          onChanged: (value) {
+                            ref
+                                .read(showPathStateProvider.notifier)
+                                .update((_) => value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  MenuItemButton(
+                    onPressed: null,
+                    child: Row(
+                      // mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Show Blocks',
+                          style: DevfestTheme.of(context)
+                              .textTheme
+                              ?.bodyBody2Regular
+                              ?.medium,
+                        ),
+                        Constants.horizontalGutter.horizontalSpace,
+                        DevfestSwitch(
+                          value: ref.watch(showBlocksProvider),
+                          onChanged: (value) {
+                            ref
+                                .read(showBlocksProvider.notifier)
+                                .update((_) => value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                child: const Icon(
+                  Icons.lightbulb,
+                  semanticLabel: 'Stats for nerds',
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -211,6 +332,39 @@ class _VenueMapScreenState extends State<VenueMapScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class DevfestSwitch extends StatelessWidget {
+  const DevfestSwitch({
+    super.key,
+    required this.value,
+    this.onChanged,
+  });
+
+  final bool value;
+  final ValueChanged<bool>? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Switch(
+      value: value,
+      thumbColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return DevfestTheme.of(context).bottomNavTheme?.backgroundColor;
+        }
+
+        return DevfestTheme.of(context).bottomNavTheme?.selectedColor;
+      }),
+      trackColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return DevfestTheme.of(context).bottomNavTheme?.selectedColor;
+        }
+
+        return DevfestTheme.of(context).bottomNavTheme?.backgroundColor;
+      }),
+      onChanged: onChanged,
     );
   }
 }

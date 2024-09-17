@@ -1,6 +1,8 @@
 import 'package:cave/cave.dart';
+import 'package:devfest24/src/features/more/presentation/screens/venue_map.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/physics.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../map/map.dart';
 import '../map/path_finder.dart';
@@ -12,7 +14,7 @@ typedef GridCallback = void Function(Grid<int> grid);
 
 typedef GridCellRange = ({GridCell start, GridCell end});
 
-class LandmarkMap extends StatefulWidget {
+class LandmarkMap extends ConsumerStatefulWidget {
   const LandmarkMap({
     super.key,
     required this.mapConstraints,
@@ -27,10 +29,10 @@ class LandmarkMap extends StatefulWidget {
   final GridCellRange? getDirections;
 
   @override
-  State<LandmarkMap> createState() => _LandmarkMapState();
+  ConsumerState<LandmarkMap> createState() => _LandmarkMapState();
 }
 
-class _LandmarkMapState extends State<LandmarkMap>
+class _LandmarkMapState extends ConsumerState<LandmarkMap>
     with SingleTickerProviderStateMixin {
   late final AnimationController controller;
   late double largeRoomHeight = widget.mapConstraints.maxWidth * 0.206;
@@ -163,17 +165,28 @@ class _LandmarkMapState extends State<LandmarkMap>
     0,
   );
 
+  late Grid<int> baseGrid = Grid.make(
+    widget.mapConstraints.maxHeight ~/ cellSize,
+    widget.mapConstraints.maxWidth ~/ cellSize,
+    0,
+  );
+
+  void _animationListener() {
+    // stop animation controller when simulation is done
+    // at controller value greater than 1, friction simulation is done
+    if (controller.value > 1) {
+      controller.stop();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
 
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-      // upperBound: double.infinity,
-      // lowerBound: double.infinity,
-    );
+    controller = AnimationController.unbounded(vsync: this);
     speedProgressAnim = ConstantTween<double>(0).animate(controller);
+
+    controller.addListener(_animationListener);
 
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
       if (widget.getDirections != null) {
@@ -186,7 +199,8 @@ class _LandmarkMapState extends State<LandmarkMap>
   void didUpdateWidget(covariant LandmarkMap oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.getDirections != null) {
+    if (widget.getDirections != null &&
+        widget.getDirections != oldWidget.getDirections) {
       _navigateToDestination();
     }
   }
@@ -276,8 +290,18 @@ class _LandmarkMapState extends State<LandmarkMap>
             progress: speedProgressAnim.value,
             cellTrackRange: widget.getDirections,
             actions: actions,
+            showGrid: ref.watch(showGridStateProvider),
+            showPath: ref.watch(showPathStateProvider),
           ),
-          child: child,
+          child: CustomPaint(
+            foregroundPainter: GridPainter(
+              grid: baseGrid,
+              cellSize: cellSize,
+              progress: 0,
+              showBlocks: ref.watch(showBlocksProvider),
+            ),
+            child: child,
+          ),
         );
       },
       child: CustomMultiChildLayout(
@@ -375,6 +399,7 @@ class _LandmarkMapState extends State<LandmarkMap>
 
     setState(() {
       grid = newGrid;
+      baseGrid = newGrid;
     });
     widget.onGridUpdate?.call(grid);
 
