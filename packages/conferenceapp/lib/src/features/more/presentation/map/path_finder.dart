@@ -38,7 +38,7 @@ void _acquireActions(
     euclideanRobot = MapRobot(grid);
 
     manhattanRobot.getAction(start, goal, HeuristicFunction.manhattan);
-    euclideanRobot.getAction(start, goal, HeuristicFunction.manhattan);
+    euclideanRobot.getAction(start, goal, HeuristicFunction.euclidean);
 
     if (manhattanRobot.foundActions.isNotEmpty ||
         euclideanRobot.foundActions.isNotEmpty) {
@@ -47,8 +47,8 @@ void _acquireActions(
 
       if (manhattanActions.isNotEmpty && euclideanActions.isNotEmpty) {
         final superiorActions =
-            min(manhattanActions.length, euclideanActions.length) ==
-                    manhattanActions.length
+            min(manhattanRobot.actionCost, euclideanRobot.actionCost) ==
+                    manhattanRobot.actionCost
                 ? manhattanActions
                 : euclideanActions;
 

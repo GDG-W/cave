@@ -20,6 +20,7 @@ final class MapRobot {
 
   final Map<_Node, _Node?> _cameFrom = {};
   Map<String, Action?> actionMap = {};
+  int actionCost = 0;
 
   MapRobot(Grid<int> grid) {
     _grid = grid;
@@ -135,11 +136,13 @@ final class MapRobot {
   void _reconstructPath(_Node target) {
     if (actionMap[target.tileName] != null) {
       _foundActions.add(actionMap[target.tileName]!);
+      actionCost += target.priority;
     }
     // backtrack to the start position
     while (_cameFrom[target] != null) {
       target = _cameFrom[target]!;
       _foundActions.add(actionMap[target.tileName]!);
+      actionCost += target.priority;
     }
 
     if (_foundActions.isNotEmpty) {
