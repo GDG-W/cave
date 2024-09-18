@@ -55,7 +55,10 @@ class _ViewState extends State<_View> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const TabBarView(children: _tabs),
+      body: const TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        children: _tabs,
+      ),
       bottomNavigationBar: DevfestBottomNav(
         index: DefaultTabController.of(context).index,
         onTap: _onPageChanged,

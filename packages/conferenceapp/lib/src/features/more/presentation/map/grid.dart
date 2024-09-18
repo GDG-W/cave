@@ -36,6 +36,9 @@ class GridPainter extends CustomPainter {
     required this.progress,
     this.cellTrackRange,
     this.actions = const [],
+    this.showGrid = false,
+    this.showPath = false,
+    this.showBlocks = false,
   });
 
   final Grid<int> grid;
@@ -43,12 +46,19 @@ class GridPainter extends CustomPainter {
   final double progress;
   final GridCellRange? cellTrackRange;
   final List<Action> actions;
+  final bool showGrid;
+  final bool showPath;
+  final bool showBlocks;
 
   @override
   void paint(Canvas canvas, Size size) {
     final path = _paintRobotPath(canvas, size, grid);
 
-    // _paintProgressPath(path, canvas, HSLColor.fromAHSL(1, 30, 1, 0.5));
+    if (showGrid) _paintGrid(canvas, size);
+    if (showBlocks) _paintBlocks(canvas, size);
+    if (showPath) {
+      _paintProgressPath(path, canvas, const HSLColor.fromAHSL(1, 30, 1, 0.5));
+    }
     _paintWalker(path, canvas);
   }
 
@@ -122,11 +132,9 @@ class GridPainter extends CustomPainter {
     }
   }
 
-  void paintGrid(Canvas canvas, Size size) {
-    for (int i = 0; i <= grid.rows - 1; i++) {
-      for (int j = 0; j <= grid.columns - 1; j++) {
-        final state = grid.grid[i][j];
-
+  void _paintGrid(Canvas canvas, Size size) {
+    for (int i = 0; i < grid.rows; i++) {
+      for (int j = 0; j < grid.columns; j++) {
         final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
         final xOrigin = 0 + (size.width ~/ grid.columns * j).toDouble();
         final center = cellSize / 2;
@@ -146,6 +154,14 @@ class GridPainter extends CustomPainter {
             ..style = PaintingStyle.stroke
             ..strokeWidth = 0.5,
         );
+      }
+    }
+  }
+
+  void _paintBlocks(Canvas canvas, Size size) {
+    for (int i = 0; i < grid.rows; i++) {
+      for (int j = 0; j < grid.columns; j++) {
+        final state = grid.grid[i][j];
 
         if (state > 0) {
           final yOrigin = 0 + (size.height ~/ grid.rows * i).toDouble();
@@ -161,7 +177,8 @@ class GridPainter extends CustomPainter {
               ),
             );
 
-          final hue = HSLColor.fromAHSL(1, state.toDouble(), 1, 0.5);
+          HSLColor hue = HSLColor.fromAHSL(1, state.toDouble(), 1, 0.5);
+
           canvas.drawPath(
             path,
             Paint()
@@ -177,12 +194,14 @@ class GridPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     if (oldDelegate is! GridPainter) return false;
 
-    // ensure unnecessary paint calls doesn't trigger repaints
     if (oldDelegate.grid != grid) return true;
     if (oldDelegate.cellSize != cellSize) return true;
     if (oldDelegate.progress != progress) return true;
     if (oldDelegate.cellTrackRange != cellTrackRange) return true;
     if (oldDelegate.actions != actions) return true;
+    if (oldDelegate.showGrid != showGrid) return true;
+    if (oldDelegate.showPath != showPath) return true;
+    if (oldDelegate.showBlocks != showBlocks) return true;
     return false;
   }
 }
