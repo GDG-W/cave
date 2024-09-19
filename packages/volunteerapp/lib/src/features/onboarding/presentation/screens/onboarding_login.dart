@@ -1,5 +1,6 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:volunteerapp/src/routing/routing.dart';
@@ -14,8 +15,8 @@ class OnboardingLoginScreen extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
+          padding: EdgeInsets.fromLTRB(Constants.horizontalMargin.w, 0.0,
+              Constants.horizontalMargin.w, 78.h),
           child: Column(
             children: [
               Expanded(
@@ -32,11 +33,24 @@ class OnboardingLoginScreen extends StatelessWidget {
                         DevfestTextFormField(
                           title: 'Email Address',
                           hint: 'e.g senatorofthebu@gmail.com',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'This field cannot be empty';
+                            }
+                            if (EmailValidator.validate(value)) {
+                              return 'Enter a valid email address';
+                            }
+                          },
                           onChanged: (value) {},
                         ),
                         DevfestTextFormField(
                           title: 'Password',
                           hint: 'Enter Password',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'This field cannot be empty';
+                            }
+                          },
                           onChanged: (value) {},
                         ),
                       ],
