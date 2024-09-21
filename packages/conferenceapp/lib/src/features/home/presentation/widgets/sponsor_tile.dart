@@ -2,7 +2,6 @@ import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:devfest24/src/shared/shared.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ConferenceSponsorTile extends StatelessWidget {
   const ConferenceSponsorTile({super.key, this.linkOnTap});

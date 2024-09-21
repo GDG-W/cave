@@ -1,3 +1,4 @@
+import 'package:ficonsax/ficonsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -210,6 +211,37 @@ class DevfestOutlinedButton extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class GoBackButton extends StatelessWidget {
+  const GoBackButton({super.key, this.label, this.onTap, this.textColor});
+
+  final VoidCallback? onTap;
+  final String? label;
+  final Color? textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final buttonTheme = DevfestTheme.of(context).buttonTheme;
+    final theme = DevfestTheme.of(context);
+    return DevfestTheme(
+      data: theme.copyWith(
+        buttonTheme: buttonTheme?.copyWith(
+          backgroundColor: theme.backgroundColor,
+          textStyle: buttonTheme.textStyle.copyWith(
+            color: textColor ?? theme.onBackgroundColor,
+          ),
+          iconColor: textColor ?? theme.onBackgroundColor,
+        ),
+      ),
+      child: DevfestFilledButton(
+        onPressed: onTap,
+        backgroundColor: Colors.transparent,
+        prefixIcon: const Icon(IconsaxOutline.arrow_left),
+        title: Text(label ?? 'Go Back'),
       ),
     );
   }

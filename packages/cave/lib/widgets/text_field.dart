@@ -27,6 +27,9 @@ class DevfestTextFormField extends StatelessWidget {
     this.prefixIconColor,
     this.suffixIconColor,
     this.suffixIcon,
+    this.contentPadding,
+    this.hintStyle,
+    this.errorStyle,
   })  : keyboardType = keyboardType ?? TextInputType.text,
         readOnly = readOnly ?? false,
         iconColor = iconColor ?? DevfestColors.grey10;
@@ -47,6 +50,9 @@ class DevfestTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? prefixIconColor;
   final Color? suffixIconColor;
+  final EdgeInsetsGeometry? contentPadding;
+  final TextStyle? hintStyle;
+  final TextStyle? errorStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -91,31 +97,36 @@ class DevfestTextFormField extends StatelessWidget {
           ),
           Constants.smallVerticalGutter.verticalSpace,
         ],
-        TextFormField(
-          controller: controller,
-          keyboardType: keyboardType,
-          onTap: onTap,
-          readOnly: readOnly,
-          enabled: enabled,
-          onChanged: onChanged,
-          validator: validator,
-          textInputAction: textInputAction,
-          autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
-          keyboardAppearance: Brightness.dark,
-          style: textFieldTheme.style,
-          decoration: InputDecoration(
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            hintText: hint,
-            hintStyle: textFieldTheme.hintStyle,
-            errorStyle: textFieldTheme.errorStyle,
-            errorMaxLines: 2,
-            contentPadding: const EdgeInsets.all(16),
-            border: textFieldTheme.border,
-            enabledBorder: textFieldTheme.enabledBorder,
-            focusedBorder: textFieldTheme.focusedBorder,
-            errorBorder: textFieldTheme.errorBorder,
-            focusedErrorBorder: textFieldTheme.errorBorder,
+        Semantics(
+          label: hint,
+          child: ExcludeSemantics(
+            child: TextFormField(
+              controller: controller,
+              keyboardType: keyboardType,
+              onTap: onTap,
+              readOnly: readOnly,
+              enabled: enabled,
+              onChanged: onChanged,
+              validator: validator,
+              textInputAction: textInputAction,
+              autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
+              keyboardAppearance: Brightness.dark,
+              style: textFieldTheme.style,
+              decoration: InputDecoration(
+                prefixIcon: prefixIcon,
+                suffixIcon: suffixIcon,
+                hintText: hint,
+                hintStyle: hintStyle ?? textFieldTheme.hintStyle,
+                errorStyle: errorStyle ?? textFieldTheme.errorStyle,
+                errorMaxLines: 2,
+                contentPadding: contentPadding ?? const EdgeInsets.all(16),
+                border: textFieldTheme.border,
+                enabledBorder: textFieldTheme.enabledBorder,
+                focusedBorder: textFieldTheme.focusedBorder,
+                errorBorder: textFieldTheme.errorBorder,
+                focusedErrorBorder: textFieldTheme.errorBorder,
+              ),
+            ),
           ),
         ),
       ],

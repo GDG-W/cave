@@ -11,7 +11,17 @@ class OnboardingLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        title: SvgPicture.asset(
+          'images/logo.svg',
+          package: 'cave',
+          width: 16,
+          height: 29,
+          semanticsLabel: 'Acme Logo',
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding:
@@ -28,12 +38,15 @@ class OnboardingLoginScreen extends StatelessWidget {
                           title: Text('Login 🤙🏾'),
                           subtitle: Text('Enter your details to continue!'),
                         ),
-                        Constants.largeVerticalGutter.verticalSpace,
+                        (Constants.largeVerticalGutter +
+                                Constants.verticalGutter)
+                            .verticalSpace,
                         DevfestTextFormField(
                           title: 'Email Address',
                           hint: 'e.g senatorofthebu@gmail.com',
                           onChanged: (value) {},
                         ),
+                        Constants.verticalGutter.verticalSpace,
                         DevfestTextFormField(
                           title: 'Password',
                           hint: 'Enter Password',

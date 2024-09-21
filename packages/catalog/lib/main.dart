@@ -44,9 +44,6 @@ class WidgetbookApp extends StatelessWidget {
                 ),
                 useMaterial3: true,
                 textTheme: const TextTheme(bodyMedium: TextStyle()),
-                extensions: <ThemeExtension<dynamic>>[
-                  DevFestThemeData.light(),
-                ],
               ),
             ),
             WidgetbookTheme(
@@ -59,9 +56,6 @@ class WidgetbookApp extends StatelessWidget {
                 ),
                 useMaterial3: true,
                 textTheme: const TextTheme(bodyMedium: TextStyle()),
-                extensions: <ThemeExtension<dynamic>>[
-                  DevFestThemeData.dark(),
-                ],
               ),
             ),
           ],
@@ -72,15 +66,14 @@ class WidgetbookApp extends StatelessWidget {
               minTextAdapt: true,
               useInheritedMediaQuery: true,
               builder: (context, child) {
+                theme = theme.copyWith(
+                  extensions: [
+                    isDark ? DevFestThemeData.dark() : DevFestThemeData.light()
+                  ],
+                );
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
-                  theme: theme.copyWith(
-                    extensions: [
-                      isDark
-                          ? DevFestThemeData.dark()
-                          : DevFestThemeData.light()
-                    ],
-                  ),
+                  theme: theme,
                   home: Material(child: child),
                 );
               },
