@@ -121,7 +121,7 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
                     DevfestColors.grey100,
             width: 0.8),
       ),
-      child: SizedBox(width: widget.width/ 2, height: widget.height/2 ),
+      child: SizedBox(width: widget.width / 2, height: widget.height / 2),
     );
   }
 }
