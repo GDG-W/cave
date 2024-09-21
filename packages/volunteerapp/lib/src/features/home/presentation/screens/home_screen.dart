@@ -3,6 +3,7 @@ import 'package:cave/cave.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../routing/routing.dart';
+import '../widgets/analytics_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -108,13 +109,25 @@ class _HomeScreenState extends State<HomeScreen> {
               25.verticalSpace,
               ConstrainedBox(
                 constraints: BoxConstraints(maxHeight: 138.h),
-                child: SingleChildScrollView(
+                child: const SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      OverviewCard(textTheme: textTheme),
-                      OverviewCard(textTheme: textTheme),
-                      OverviewCard(textTheme: textTheme),
+                      AnalyticsCard(
+                        title: "Total Tickets",
+                        amount: 5000,
+                        analysis: "7% up this week",
+                      ),
+                      AnalyticsCard(
+                        title: "Total Check-ins",
+                        amount: 5000,
+                        analysis: "7% up this week",
+                      ),
+                      AnalyticsCard(
+                        title: "Total unchecked",
+                        amount: 5000,
+                        analysis: "7% up this week",
+                      ),
                     ],
                   ),
                 ),
@@ -294,118 +307,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class OverviewCard extends StatelessWidget {
-  const OverviewCard({
-    super.key,
-    required this.textTheme,
-  });
-
-  final DevfestTextTheme? textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 170.w,
-      margin: EdgeInsets.only(right: 8.w),
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          width: 0.5,
-          color: const Color(0xFFCCCCCC),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CircleAvatar(
-            radius: 15,
-            backgroundColor: DevfestColors.primariesYellow90,
-            child: Icon(
-              IconsaxOutline.ticket_2,
-              size: 16,
-            ),
-          ),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Total Tickets',
-                style: textTheme?.bodyBody4Regular
-                    ?.copyWith(color: const Color(0Xff828A8C)),
-              ),
-              Text(
-                '5,000',
-                style: textTheme?.titleTitle2Medium
-                    ?.copyWith(color: const Color(0xFF2A2E2F)),
-              ),
-              Row(
-                children: [
-                  const Icon(
-                    IconsaxOutline.arrow_up_3,
-                    size: 8,
-                    color: Color(0XFF34A853),
-                  ),
-                  Text(
-                    '7% up this week',
-                    style: textTheme?.bodyBody5Medium
-                        ?.copyWith(color: const Color(0XFF34A853)),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class PageIndicatorWidget extends StatelessWidget {
-  const PageIndicatorWidget({
-    super.key,
-    required this.count,
-    required this.value,
-    this.size = 8,
-    this.spacing = 16,
-  });
-
-  final int count;
-  final int value;
-  final double size;
-  final double spacing;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        for (int i = 0; i < count; i++)
-          AnimatedContainer(
-            height: 3,
-            width: size,
-            margin: EdgeInsets.fromLTRB(
-              0,
-              spacing,
-              i == count - 1 ? 0 : spacing,
-              spacing,
-            ),
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(4),
-              color: i == value
-                  ? DevfestColors.backgroundDark
-                  : const Color(0xFFCCCCCC),
-            ),
-            duration: const Duration(milliseconds: 900),
-          )
-      ],
     );
   }
 }
