@@ -1,6 +1,5 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:volunteerapp/src/routing/routing.dart';
@@ -13,14 +12,14 @@ class OnboardingLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        title: SvgPicture.asset(
-          'images/logo.svg',
-          package: 'cave',
-          width: 16,
-          height: 29,
-          semanticsLabel: 'Acme Logo',
+        leadingWidth: 100.w,
+        leading: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
+              child: GdgLogo.normal(),
+            ),
+          ],
         ),
       ),
       body: SafeArea(
@@ -52,17 +51,19 @@ class OnboardingLoginScreen extends StatelessWidget {
                             if (EmailValidator.validate(value)) {
                               return 'Enter a valid email address';
                             }
+                            return null;
                           },
                           onChanged: (value) {},
                         ),
                         Constants.verticalGutter.verticalSpace,
                         DevfestTextFormField(
                           title: 'Password',
-                          hint: 'Enter Password',
+                          hint: 'Enter password',
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'This field cannot be empty';
                             }
+                            return null;
                           },
                           onChanged: (value) {},
                         ),

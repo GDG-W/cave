@@ -1,7 +1,6 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:volunteerapp/src/routing/routing.dart';
 import 'package:volunteerapp/src/shared/shared.dart';
@@ -13,13 +12,14 @@ class OnboardingHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        title: SvgPicture.asset(
-          'images/logo.svg',
-          package: 'cave',
-          width: 16,
-          height: 29,
-          semanticsLabel: 'GDG Logo',
+        leadingWidth: 100.w,
+        leading: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
+              child: GdgLogo.normal(),
+            ),
+          ],
         ),
       ),
       body: SafeArea(

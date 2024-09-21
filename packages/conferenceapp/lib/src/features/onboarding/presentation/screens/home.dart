@@ -22,9 +22,8 @@ class OnboardingHomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
-        child: Column(
+      body: SafeArea(
+        child: Stack(
           children: [
             Padding(
               padding: EdgeInsets.symmetric(

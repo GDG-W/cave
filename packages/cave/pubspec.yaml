@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   control_style: ^0.1.0
+  email_validator: ^3.0.0
   ficonsax: ^0.0.3
   flutter:
     sdk: flutter

@@ -1,12 +1,10 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:cave/cave.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../routing/routing.dart';
-import '../widgets/analytics_card.dart';
+import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,14 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ?.copyWith(fontWeight: FontWeight.w600, color: const Color(0xFF1E1E1E));
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        title: SvgPicture.asset(
-          'images/logo.svg',
-          package: 'cave',
-          width: 16,
-          height: 29,
-          semanticsLabel: 'GDG Logo',
+        leadingWidth: 100.w,
+        leading: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
+              child: GdgLogo.normal(),
+            ),
+          ],
         ),
         actions: [
           Padding(
@@ -85,27 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: DevfestColors.grey10,
                       ),
                     ),
-                    OutlinedButton.icon(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: DevfestColors.primariesYellow90,
-                        side: BorderSide.none,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 4),
-                      ),
-                      label: Text(
-                        'Day 1',
-                        style: textTheme?.bodyBody3Semibold?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: DevfestColors.grey10,
-                        ),
-                      ),
-                      icon: const Icon(
-                        IconsaxOutline.arrow_down_1,
-                        color: DevfestColors.grey10,
-                      ),
-                      iconAlignment: IconAlignment.end,
-                    )
+                    const DayMenuBar(),
                   ],
                 ),
               ),
