@@ -18,7 +18,6 @@ class OnboardingHomeScreen extends StatelessWidget {
               child: SvgPicture.asset(
                 'assets/icons/Logo.svg',
                 semanticsLabel: 'Devfest Logo',
-                
               ))),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),

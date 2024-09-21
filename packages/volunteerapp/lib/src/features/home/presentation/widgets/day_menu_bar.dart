@@ -7,10 +7,7 @@ import 'package:volunteerapp/src/shared/extensions.dart';
 class DayMenuBar extends StatefulWidget {
   const DayMenuBar({
     super.key,
-    
   });
-
-
 
   @override
   State<DayMenuBar> createState() => _DayMenuBarState();
@@ -22,11 +19,10 @@ class _DayMenuBarState extends State<DayMenuBar> {
   Widget build(BuildContext context) {
     return MenuBar(
         style: MenuStyle(
-            padding: WidgetStateProperty.all(
-                EdgeInsets.zero),
+            padding: WidgetStateProperty.all(EdgeInsets.zero),
             alignment: Alignment.center,
-            backgroundColor: WidgetStateProperty.all(
-                DevfestColors.primariesYellow90),
+            backgroundColor:
+                WidgetStateProperty.all(DevfestColors.primariesYellow90),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(56),
@@ -57,8 +53,7 @@ class _DayMenuBarState extends State<DayMenuBar> {
                         .textTheme
                         ?.bodyBody3Medium
                         ?.medium
-                        .applyColor(DevfestColors
-                            .grey10.possibleDarkVariant),
+                        .applyColor(DevfestColors.grey10.possibleDarkVariant),
                   ),
                 ),
                 MenuItemButton(
@@ -73,8 +68,7 @@ class _DayMenuBarState extends State<DayMenuBar> {
                         .textTheme
                         ?.bodyBody3Medium
                         ?.medium
-                        .applyColor(DevfestColors
-                            .grey10.possibleDarkVariant),
+                        .applyColor(DevfestColors.grey10.possibleDarkVariant),
                   ),
                 )
               ],

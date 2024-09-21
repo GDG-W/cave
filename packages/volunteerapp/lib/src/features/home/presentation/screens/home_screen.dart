@@ -66,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 25.h),
             SingleChildScrollView(
-              
               scrollDirection: Axis.horizontal,
               controller: _controller,
               child: Row(
