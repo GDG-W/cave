@@ -4,7 +4,7 @@ enum Devfest2024Routes {
   home(''),
   profile('profile'),
   scanQrCode('qr-code'),
-  search('map');
+  search('search');
 
   const Devfest2024Routes(this.path);
 

@@ -1,7 +1,6 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:volunteerapp/src/routing/routing.dart';
 import 'package:volunteerapp/src/shared/shared.dart';
@@ -13,20 +12,25 @@ class OnboardingHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: Padding(
-              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
-              child: SvgPicture.asset(
-                'assets/icons/Logo.svg',
-                semanticsLabel: 'Devfest Logo',
-              ))),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
-        child: Column(
+        leadingWidth: 100.w,
+        leading: Row(
           children: [
-            Expanded(
-              child: ListView(
+            Padding(
+              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
+              child: GdgLogo.normal(),
+            ),
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Constants.horizontalMargin.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Constants.largeVerticalGutter.verticalSpace,
                   const HeaderText(
                     title: Text('Get attendees checked in faster than before'),
                     subtitle: Text(
@@ -39,14 +43,21 @@ class OnboardingHomeScreen extends StatelessWidget {
                       context.goNamed(Devfest2024Routes.onboardingLogin.name);
                     },
                     title: const Text('Login'),
-                  )
+                  ),
                 ],
               ),
             ),
-            Image.asset(
-              'assets/images/onboarding_img1.png',
-              semanticLabel: 'Onboarding Image',
-            )
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: SvgPicture.asset(
+                'images/volunteer_onboarding.svg',
+                package: 'cave',
+                semanticsLabel: 'Onboarding Image',
+                fit: BoxFit.contain,
+              ),
+            ),
           ],
         ),
       ),
