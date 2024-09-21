@@ -11,6 +11,15 @@ class ScheduleHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 100.w,
+        leading: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
+              child: GdgLogo.normal(),
+            ),
+          ],
+        ),
         actions: [
           const CheckInButton(isLoggedIn: true),
           Constants.horizontalMargin.horizontalSpace,
