@@ -16,13 +16,6 @@ class GdgLogo extends StatefulWidget {
 }
 
 class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
-  List<Color> pillColors = [
-    DevfestColors.primariesRed50,
-    DevfestColors.primariesGreen50,
-    DevfestColors.primariesBlue50,
-    DevfestColors.primariesYellow50
-  ];
-
   late AnimationController _controller;
   late Animation<double> _angleAnim;
   late Animation<double> _fadeAnim;
@@ -76,7 +69,7 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
                   top: 1,
                   child: Transform.rotate(
                     angle: -_angleAnim.value,
-                    child: _logoPill(DevfestColors.primariesRed50),
+                    child: _logoPill(const Color(0xffea4335)),
                   ),
                 ),
                 Positioned(
@@ -84,7 +77,7 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
                   left: 0,
                   child: Transform.rotate(
                     angle: _angleAnim.value,
-                    child: _logoPill(DevfestColors.primariesBlue50),
+                    child: _logoPill(const Color(0xff4285f4)),
                   ),
                 ),
                 Positioned(
@@ -92,7 +85,7 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
                   top: 1,
                   child: Transform.rotate(
                     angle: _angleAnim.value,
-                    child: _logoPill(DevfestColors.primariesGreen50),
+                    child: _logoPill(const Color(0xff34a853)),
                   ),
                 ),
                 Positioned(
@@ -100,7 +93,7 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
                   bottom: 1,
                   child: Transform.rotate(
                     angle: -_angleAnim.value,
-                    child: _logoPill(DevfestColors.primariesYellow50),
+                    child: _logoPill(const Color(0xfff9ab00)),
                   ),
                 ),
               ],
