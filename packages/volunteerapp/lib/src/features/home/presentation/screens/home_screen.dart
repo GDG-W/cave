@@ -218,25 +218,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             DataCell(
                               Center(
                                 child: Checkbox(
-                                    semanticLabel: 'Checkin user',
-                                    value: attendee['checkedIn'],
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        attendee['checkedIn'] = value ?? false;
-                                      });
-                                    },
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    side: const BorderSide(
-                                      color: DevfestColors.backgroundDark,
-                                      width: 1.5,
-                                    ),
-                                    checkColor: DevfestColors.backgroundLight,
-                                    activeColor: const Color(0xFF141B34),
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.padded,
-                                    visualDensity: VisualDensity.standard),
+                                  semanticLabel: 'Checkin user',
+                                  value: attendee['checkedIn'],
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      attendee['checkedIn'] = value ?? false;
+                                    });
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  side: const BorderSide(
+                                    color: DevfestColors.backgroundDark,
+                                    width: 1.5,
+                                  ),
+                                  checkColor: DevfestColors.backgroundLight,
+                                  activeColor: const Color(0xFF141B34),
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.padded,
+                                  visualDensity: VisualDensity.standard,
+                                ),
                               ),
                             ),
                             DataCell(

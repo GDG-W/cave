@@ -11,24 +11,52 @@ class OnboardingHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
-        child: Column(
+      appBar: AppBar(
+        centerTitle: false,
+        title: SvgPicture.asset(
+          'images/logo.svg',
+          package: 'cave',
+          width: 16,
+          height: 29,
+          semanticsLabel: 'GDG Logo',
+        ),
+      ),
+      body: SafeArea(
+        child: Stack(
           children: [
-            const HeaderText(
-              title: Text('DevFest Lagos like you have never seen it before'),
-              subtitle: Text(
-                'We said we will see you again next year, here we are, we have missed you and prepared amazing things for you 🥺',
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Constants.horizontalMargin.w),
+              child: Column(
+                children: [
+                  const HeaderText(
+                    title: Text(
+                        'DevFest Lagos like you have never seen it before'),
+                    subtitle: Text(
+                      'We said we will see you again next year, here we are, we have missed you and prepared amazing things for you 🥺',
+                    ),
+                  ),
+                  SizedBox(height: (Constants.largeVerticalGutter * 3).h),
+                  DevfestFilledButton(
+                    onPressed: () {
+                      context.goNamed(Devfest2024Routes.onboardingLogin.name);
+                    },
+                    title: const Text('Let\'s Get This Bread Quickly'),
+                  )
+                ],
               ),
             ),
-            SizedBox(height: (Constants.largeVerticalGutter * 3).h),
-            DevfestFilledButton(
-              onPressed: () {
-                context.goNamed(Devfest2024Routes.onboardingLogin.name);
-              },
-              title: const Text('Let\'s Get This Bread Quickly'),
-            )
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: SvgPicture.asset(
+                'images/conference_onboarding.svg',
+                package: 'cave',
+                semanticsLabel: 'Onboarding Image',
+                fit: BoxFit.contain,
+              ),
+            ),
           ],
         ),
       ),
