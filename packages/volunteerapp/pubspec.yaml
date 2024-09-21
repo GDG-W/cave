@@ -23,14 +23,10 @@ environment:
 
 dependencies:
   accessibility_tools: ^2.2.2
-  carousel_slider: ^5.0.0
   cave:
     path: ../cave
-  cupertino_icons: ^1.0.6
-  dots_indicator: ^3.0.0
 
   equatable: ^2.0.5
-
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.5.1
