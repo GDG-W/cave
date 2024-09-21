@@ -12,17 +12,19 @@ class OnboardingHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        title: SvgPicture.asset(
-          'images/logo.svg',
-          package: 'cave',
-          width: 16,
-          height: 29,
-          semanticsLabel: 'GDG Logo',
+        leadingWidth: 100.w,
+        leading: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
+              child: GdgLogo.normal(),
+            ),
+          ],
         ),
       ),
-      body: SafeArea(
-        child: Stack(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
+        child: Column(
           children: [
             Padding(
               padding: EdgeInsets.symmetric(

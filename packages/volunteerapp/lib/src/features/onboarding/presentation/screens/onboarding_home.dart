@@ -1,6 +1,7 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:volunteerapp/src/routing/routing.dart';
 import 'package:volunteerapp/src/shared/shared.dart';
