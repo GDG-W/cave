@@ -57,9 +57,6 @@ jobs:
   android-build:
     if: inputs.android-build == 'true'
     runs-on: ubuntu-latest
-    secrets:
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
