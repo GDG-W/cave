@@ -1,0 +1,45 @@
+name: Catalog Web CI
+
+on:
+  push:
+    paths:
+      - 'packages/catalog/**'
+
+jobs:
+  check-formatting:
+    uses: ./.github/workflows/shared-workflow.yaml
+    with:
+      package-name: catalog
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            packages/catalog/.dart_tool
+          key: ${{ runner.os }}-pub-${{ hashFiles('packages/catalog/pubspec.yaml') }}
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: packages/catalog
+
+      - name: Build Web
+        run: flutter build web
+        working-directory: packages/catalog
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/catalog/build/web

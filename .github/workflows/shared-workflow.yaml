@@ -1,0 +1,114 @@
+name: Shared Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      package-name:
+        description: 'The name of the package to build (e.g. conferenceapp)'
+        required: true
+      android-build:
+        description: 'Whether to build Android APK'
+        required: false
+        default: false
+        type: boolean
+      ios-build:
+        description: 'Whether to build iOS IPA'
+        required: false
+        default: false
+        type: boolean
+      changelog:
+        description: 'Changelog for the release'
+        required: false
+        type: string
+    secrets:
+      FIREBASE_TOKEN:
+        required: true
+      FIREBASE_APP_ID:
+        required: true
+
+jobs:
+  check-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            packages/${{ inputs['package-name'] }}/.dart_tool
+          key: ${{ runner.os }}-pub-${{ hashFiles('packages/${{ inputs["package-name"] }}/pubspec.yaml') }}
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: packages/${{ inputs['package-name'] }}
+
+      - name: Check formatting
+        run: dart format --set-exit-if-changed .
+        working-directory: packages/${{ inputs['package-name'] }}
+
+      - name: Run Linter
+        run: flutter analyze
+        working-directory: packages/${{ inputs['package-name'] }}
+
+  android-build:
+    if: inputs.android-build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: packages/${{ inputs['package-name'] }}
+
+      - name: Build Android
+        run: flutter build apk --release
+        working-directory: packages/${{ inputs['package-name'] }}
+
+      - name: Deploy Android to Firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          groups: testers
+          file: packages/${{ inputs['package-name'] }}/build/app/outputs/flutter-apk/app-release.apk
+          releaseNotes: ${{ inputs.changelog }}
+
+  ios-build:
+    if: inputs.ios-build == 'true'
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: packages/${{ inputs['package-name'] }}
+
+      - name: Build iOS
+        run: flutter build ios --release
+        working-directory: packages/${{ inputs['package-name'] }}
+
+      - name: Deploy iOS to TestFlight
+        uses: actions/upload-artifact@v3
+        with:
+          path: packages/${{ inputs['package-name'] }}/build/ios/ipa/*.ipa
+          releaseNotes: ${{ inputs.changelog }}
