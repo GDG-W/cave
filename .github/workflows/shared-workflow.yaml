@@ -6,6 +6,7 @@ on:
       package-name:
         description: 'The name of the package to build (e.g. conferenceapp)'
         required: true
+        type: string
       android-build:
         description: 'Whether to build Android APK'
         required: false
