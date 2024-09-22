@@ -21,11 +21,6 @@ on:
         description: 'Changelog for the release'
         required: false
         type: string
-    secrets:
-      FIREBASE_TOKEN:
-        required: true
-      FIREBASE_APP_ID:
-        required: true
 
 jobs:
   check-formatting:
@@ -62,6 +57,9 @@ jobs:
   android-build:
     if: inputs.android-build == 'true'
     runs-on: ubuntu-latest
+    secrets:
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
