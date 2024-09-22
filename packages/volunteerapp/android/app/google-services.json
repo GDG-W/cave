@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "704850365731",
+    "project_id": "devfest24-810f5",
+    "storage_bucket": "devfest24-810f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704850365731:android:e0c6a0d363859091639096",
+        "android_client_info": {
+          "package_name": "com.devfestlagos.conferenceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr4B0zjDqTjrx8Gz0F4qUbl87ndx73ubw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704850365731:android:f105611896323aba639096",
+        "android_client_info": {
+          "package_name": "com.devfestlagos.volunteerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr4B0zjDqTjrx8Gz0F4qUbl87ndx73ubw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
