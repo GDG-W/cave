@@ -26,9 +26,6 @@ jobs:
       package-name: volunteerapp
       android-build: true
       changelog: ${{ github.event.inputs.changelog }}
-    secrets:
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
 
   ios-build:
     if: github.event_name == 'workflow_dispatch'
@@ -37,6 +34,3 @@ jobs:
       package-name: volunteerapp
       ios-build: true
       changelog: ${{ github.event.inputs.changelog }}
-    secrets:
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
