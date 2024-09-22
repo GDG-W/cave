@@ -15,13 +15,13 @@ on:
 jobs:
   check-formatting:
     if: github.event_name == 'pull_request'
-    uses: ./.github/workflows/shared-build.yml
+    uses: ./.github/workflows/shared-workflow.yaml
     with:
       package-name: volunteerapp
 
   android-build:
     if: github.event_name == 'workflow_dispatch'
-    uses: ./.github/workflows/shared-build.yml
+    uses: ./.github/workflows/shared-workflow.yaml
     with:
       package-name: volunteerapp
       android-build: true
@@ -32,7 +32,7 @@ jobs:
 
   ios-build:
     if: github.event_name == 'workflow_dispatch'
-    uses: ./.github/workflows/shared-build.yml
+    uses: ./.github/workflows/shared-workflow.yaml
     with:
       package-name: volunteerapp
       ios-build: true
