@@ -1,6 +1,5 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:volunteerapp/src/routing/routing.dart';
@@ -12,7 +11,17 @@ class OnboardingLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leadingWidth: 100.w,
+        leading: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: Constants.horizontalMargin.w),
+              child: GdgLogo.normal(),
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.fromLTRB(Constants.horizontalMargin.w, 0.0,
@@ -29,7 +38,9 @@ class OnboardingLoginScreen extends StatelessWidget {
                           title: Text('Login 🤙🏾'),
                           subtitle: Text('Enter your details to continue!'),
                         ),
-                        Constants.largeVerticalGutter.verticalSpace,
+                        (Constants.largeVerticalGutter +
+                                Constants.verticalGutter)
+                            .verticalSpace,
                         DevfestTextFormField(
                           title: 'Email Address',
                           hint: 'e.g senatorofthebu@gmail.com',
@@ -40,16 +51,19 @@ class OnboardingLoginScreen extends StatelessWidget {
                             if (EmailValidator.validate(value)) {
                               return 'Enter a valid email address';
                             }
+                            return null;
                           },
                           onChanged: (value) {},
                         ),
+                        Constants.verticalGutter.verticalSpace,
                         DevfestTextFormField(
                           title: 'Password',
-                          hint: 'Enter Password',
+                          hint: 'Enter password',
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'This field cannot be empty';
                             }
+                            return null;
                           },
                           onChanged: (value) {},
                         ),

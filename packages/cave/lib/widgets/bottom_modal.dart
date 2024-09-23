@@ -26,8 +26,9 @@ Future<void> showDevfestBottomModal(
   void Function()? onSecondBtnPressed,
 }) async {
   await showModalBottomSheet(
-    constraints: BoxConstraints.tight(Size(MediaQuery.of(context).size.width,
-        MediaQuery.of(context).size.height * 0.45)),
+    isScrollControlled: true,
+    // constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width,
+    //     MediaQuery.of(context).size.height * 0.45)),
     backgroundColor: DevfestColors.warning100,
     showDragHandle: true,
     context: context,
@@ -118,10 +119,7 @@ class _DevfestBottomModalState extends State<DevfestBottomModal> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               if (widget.emoji != null) ...[
-                Expanded(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
+                
                       Center(
                         child: Container(
                           decoration: BoxDecoration(
@@ -165,9 +163,9 @@ class _DevfestBottomModalState extends State<DevfestBottomModal> {
                       ] else ...[
                         SizedBox.shrink()
                       ],
-                    ],
-                  ),
-                ),
+                 
+
+
                 if (widget.hasTwoButtons ?? false) ...[
                   if (widget.outlineButtonIsPlacedFirst ?? false) ...[
                     DevfestOutlinedButton(

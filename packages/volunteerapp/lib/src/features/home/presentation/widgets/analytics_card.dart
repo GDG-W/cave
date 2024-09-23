@@ -1,67 +1,75 @@
 import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:volunteerapp/src/features/home/presentation/screens/home_screen.dart';
-import 'package:volunteerapp/src/shared/shared.dart';
 
 class AnalyticsCard extends StatelessWidget {
-  const AnalyticsCard(
-      {super.key,
-      required this.amount,
-      required this.analysis,
-      required this.title});
+  const AnalyticsCard({
+    super.key,
+    required this.title,
+    required this.amount,
+    required this.analysis,
+  });
+
   final String title;
   final num amount;
   final String analysis;
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = DevfestTheme.of(context).textTheme;
     return Container(
-        width: 170.w,
-        padding: EdgeInsets.fromLTRB(16.0.w, 16.0.h, 0.0, 16.0),
-        decoration: BoxDecoration(
-          borderRadius: ContainerProperties.defaultBorderRadius,
-          border: Border.all(color: Color(0xFFCCCCCC)),
+      width: 170.w,
+      margin: EdgeInsets.only(right: 8.w),
+      padding: EdgeInsets.all(16.r),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          width: 0.5,
+          color: const Color(0xFFCCCCCC),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipOval(
-              child: Container(
-                  padding: EdgeInsets.all(7),
-                  color: DevfestColors.primariesYellow90,
-                  child: SvgPicture.asset('assets/icons/ticket.svg')),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CircleAvatar(
+            radius: 15,
+            backgroundColor: DevfestColors.primariesYellow90,
+            child: Icon(
+              IconsaxOutline.ticket_2,
+              size: 16,
             ),
-            SizedBox(height: 12.h),
-            Text(
-              title,
-              style: DevfestTheme.of(context)
-                  .textTheme
-                  ?.bodyBody4Regular
-                  ?.medium
-                  .applyColor(Color(0xFF828A8C)),
-            ),
-            Text(
-              '${amount.formattedWithDecimalPattern}',
-              style: DevfestTheme.of(context)
-                  .textTheme
-                  ?.titleTitle2Medium
-                  ?.medium
-                  .applyColor(Color(0xFF2A2E2F)),
-            ),
-            Wrap(
-              children: [
-                SvgPicture.asset('assets/icons/arrowUp.svg'),
-                SizedBox(width: 4.w),
-                Text(analysis,
-                    style: DevfestTheme.of(context)
-                        .textTheme
-                        ?.bodyBody5Medium
-                        ?.medium
-                        .applyColor(Color(0xFF34A853)))
-              ],
-            )
-          ],
-        ));
+          ),
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: textTheme?.bodyBody4Regular
+                    ?.copyWith(color: const Color(0Xff828A8C)),
+              ),
+              Text(
+                amount.toInt().toString(),
+                style: textTheme?.titleTitle2Medium
+                    ?.copyWith(color: const Color(0xFF2A2E2F)),
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    IconsaxOutline.arrow_up_3,
+                    size: 8,
+                    color: Color(0XFF34A853),
+                  ),
+                  Text(
+                    analysis,
+                    style: textTheme?.bodyBody5Medium
+                        ?.copyWith(color: const Color(0XFF34A853)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

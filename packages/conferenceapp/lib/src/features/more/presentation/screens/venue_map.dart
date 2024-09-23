@@ -4,6 +4,7 @@ import 'package:devfest24/src/features/more/presentation/map/map.dart';
 import 'package:devfest24/src/features/more/presentation/widgets/map.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../shared/shared.dart';
 import '../widgets/map_layout.dart';
@@ -115,7 +116,9 @@ class _VenueMapScreenState extends ConsumerState<VenueMapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const GoBackButton(),
+        leading: GoBackButton(
+          onTap: context.pop,
+        ),
         leadingWidth: 120.w,
         actions: [
           MenuBar(

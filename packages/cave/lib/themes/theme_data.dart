@@ -14,6 +14,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
   final DevfestBottomNavTheme? bottomNavTheme;
   final DevfestTextFieldTheme? textFieldTheme;
   final Color? backgroundColor;
+  final Color? onBackgroundColor;
 
   DevFestThemeData({
     this.textTheme,
@@ -22,6 +23,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
     this.buttonTheme,
     this.outlinedButtonTheme,
     this.textFieldTheme,
+    this.onBackgroundColor,
   });
 
   DevFestThemeData.light()
@@ -32,6 +34,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
           outlinedButtonTheme: DevfestOutlinedButtonTheme.light(),
           bottomNavTheme: DevfestBottomNavTheme.light(),
           textFieldTheme: DevfestTextFieldTheme.light(),
+          onBackgroundColor: DevfestColors.grey10,
         );
 
   DevFestThemeData.dark()
@@ -42,6 +45,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
           buttonTheme: DevfestButtonTheme.dark(),
           outlinedButtonTheme: DevfestOutlinedButtonTheme.dark(),
           bottomNavTheme: DevfestBottomNavTheme.dark(),
+          onBackgroundColor: DevfestColors.backgroundLight,
         );
 
   @override
@@ -51,6 +55,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
     DevfestOutlinedButtonTheme? outlinedButtonTheme,
     DevfestBottomNavTheme? bottomNavTheme,
     DevfestTextFieldTheme? textFieldTheme,
+    Color? onBackgroundColor,
   }) {
     return DevFestThemeData(
       textTheme: textTheme ?? this.textTheme,
@@ -58,6 +63,7 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
       outlinedButtonTheme: outlinedButtonTheme ?? this.outlinedButtonTheme,
       bottomNavTheme: bottomNavTheme ?? this.bottomNavTheme,
       textFieldTheme: textFieldTheme ?? this.textFieldTheme,
+      onBackgroundColor: onBackgroundColor ?? this.onBackgroundColor,
     );
   }
 
@@ -67,6 +73,8 @@ class DevFestThemeData extends ThemeExtension<DevFestThemeData> {
     return DevFestThemeData(
       textTheme: textTheme?.lerp(other.textTheme, t),
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      onBackgroundColor:
+          Color.lerp(onBackgroundColor, other.onBackgroundColor, t),
       buttonTheme: buttonTheme?.lerp(other.buttonTheme, t),
       outlinedButtonTheme:
           outlinedButtonTheme?.lerp(other.outlinedButtonTheme, t),

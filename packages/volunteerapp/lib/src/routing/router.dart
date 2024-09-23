@@ -1,6 +1,7 @@
 import 'package:volunteerapp/src/features/home/presentation/screens/home_screen.dart';
 import 'package:volunteerapp/src/features/onboarding/presentation/screens/onboarding_home.dart';
 import 'package:volunteerapp/src/features/onboarding/presentation/screens/onboarding_login.dart';
+import 'package:volunteerapp/src/features/search/presentation/screens/search_screen.dart';
 
 import 'routes.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,13 @@ class Devfest2024Router {
             path: '/',
             name: Devfest2024Routes.home.name,
             builder: (context, state) => const HomeScreen(),
+            routes: [
+              GoRoute(
+                path: Devfest2024Routes.search.path,
+                name: Devfest2024Routes.search.name,
+                builder: (context, state) => const SearchScreen(),
+              ),
+            ],
           ),
         ]);
   }

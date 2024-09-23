@@ -1,6 +1,7 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:devfest24/src/shared/shared.dart';
+import 'package:go_router/go_router.dart';
 import '../widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,10 @@ class ProfileScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: const GoBackButton(color: DevfestColors.grey100),
+        leading: GoBackButton(
+          onTap: context.pop,
+          textColor: DevfestColors.grey100,
+        ),
         leadingWidth: 120.w,
       ),
       body: Column(

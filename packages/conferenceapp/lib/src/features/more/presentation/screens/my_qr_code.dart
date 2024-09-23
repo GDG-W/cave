@@ -2,6 +2,7 @@ import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:devfest24/src/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MyQrCodeScreen extends StatelessWidget {
   const MyQrCodeScreen({super.key});
@@ -10,7 +11,9 @@ class MyQrCodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const GoBackButton(),
+        leading: GoBackButton(
+          onTap: context.pop,
+        ),
         leadingWidth: 120.w,
       ),
       body: Padding(

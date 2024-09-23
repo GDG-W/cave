@@ -72,6 +72,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  confetti:
+    dependency: transitive
+    description:
+      name: confetti
+      sha256: "979aafde2428c53947892c95eb244466c109c129b7eee9011f0a66caaca52267"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   control_style:
     dependency: transitive
     description:
@@ -80,14 +88,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
-  cupertino_icons:
-    dependency: "direct main"
+  email_validator:
+    dependency: transitive
     description:
-      name: cupertino_icons
-      sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
+      name: email_validator
+      sha256: b19aa5d92fdd76fbc65112060c94d45ba855105a28bb6e462de7ff03b12fa1fb
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.8"
+    version: "3.0.0"
   equatable:
     dependency: "direct main"
     description:
@@ -120,6 +128,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.3"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      sha256: c7de9354eb2cd8bfe8059e1112174c9a58beda7051807207306bc48283277cfb
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.5.0"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      sha256: e30da58198a6d4b49d5bce4e852f985c32cb10db329ebef9473db2b9f09ce810
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.0"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      sha256: f967a7138f5d2ffb1ce15950e2a382924239eaa521150a8f144af34e68b3b3e5
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.18.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -153,10 +185,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_screenutil
-      sha256: "8239210dd68bee6b0577aa4a090890342d04a136ce1c81f98ee513fc0ce891de"
+      sha256: b372c35a772a1dc84142a3b9c5ee89a390834bd258e5e6a450d9b975b985d1c9
       url: "https://pub.dev"
     source: hosted
-    version: "5.9.3"
+    version: "5.9.1"
   flutter_shaders:
     dependency: transitive
     description:
@@ -166,7 +198,7 @@ packages:
     source: hosted
     version: "0.1.2"
   flutter_svg:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_svg
       sha256: "7b4ca6cf3304575fe9c8ec64813c8d02ee41d2afe60bcfe0678bcb5375d596a2"
