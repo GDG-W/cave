@@ -17,6 +17,20 @@ class WidgetbookApp extends StatelessWidget {
     return Widgetbook.material(
       directories: directories,
       addons: [
+        BuilderAddon(
+          name: 'ScreenUtil',
+          builder: (context, child) {
+            return ScreenUtilInit(
+              designSize: const Size(430, 956),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              // This is needed to use the workbench [MediaQuery]
+              useInheritedMediaQuery: true,
+              builder: (context, child) => child!,
+              child: child,
+            );
+          },
+        ),
         DeviceFrameAddon(
           devices: [
             DeviceInfo.genericPhone(

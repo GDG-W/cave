@@ -11,6 +11,12 @@ on:
       changelog:
         description: 'Changelog for this release'
         required: true
+      build-version:
+        description: 'Version number for the release'
+        required: true
+      build-number:
+        description: 'Build number for the release'
+        required: true
 
 jobs:
   check-formatting:
@@ -26,14 +32,16 @@ jobs:
       package-name: conferenceapp
       android-build: true
       changelog: ${{ github.event.inputs.changelog }}
+      build-number: ${{ github.event.inputs.build-number }}
+      build-version: ${{ github.event.inputs.build-version }}
     secrets:
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      CREDENTIAL_FILE_CONTENT: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
 
-  ios-build:
-    if: github.event_name == 'workflow_dispatch'
-    uses: ./.github/workflows/shared-workflow.yaml
-    with:
-      package-name: conferenceapp
-      ios-build: true
-      changelog: ${{ github.event.inputs.changelog }}
+  # ios-build:
+  #   if: github.event_name == 'workflow_dispatch'
+  #   uses: ./.github/workflows/shared-workflow.yaml
+  #   with:
+  #     package-name: conferenceapp
+  #     ios-build: true
+  #     changelog: ${{ github.event.inputs.changelog }}
