@@ -8,7 +8,7 @@ on:
 
 jobs:
   check-formatting:
-  if: github.event_name == 'push'
+    if: github.event_name == 'push'
     uses: ./.github/workflows/shared-workflow.yaml
     with:
       package-name: catalog
