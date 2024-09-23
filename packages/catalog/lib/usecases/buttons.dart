@@ -89,3 +89,22 @@ Widget devfestOutlinedButton(BuildContext context) {
     ),
   );
 }
+
+@widgetbook.UseCase(name: 'Go back Button', type: GoBackButton)
+Widget devfestGoBackButton(BuildContext context) {
+  return Material(
+    color: DevfestTheme.of(context).backgroundColor,
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          GoBackButton(
+            onTap: () {},
+          ),
+        ],
+      ),
+    ),
+  );
+}

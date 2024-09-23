@@ -13,6 +13,8 @@ jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,6 +23,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.3'
+          cache: true
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -40,11 +43,11 @@ jobs:
         run: melos generate
 
       - name: Build Web
-        run: flutter build web
+        run: flutter build web --wasm
         working-directory: packages/catalog
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./packages/catalog/build/web
