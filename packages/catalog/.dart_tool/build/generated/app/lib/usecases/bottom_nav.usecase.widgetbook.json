@@ -1,0 +1,11 @@
+[{
+  "name": "devfestBottomNav",
+  "designLink": null,
+  "useCaseName": "DevFest Bottom Nav",
+  "importStatement": "package:app/usecases/bottom_nav.dart",
+  "useCaseDefinitionPath": "/catalog/lib/usecases/bottom_nav.dart",
+  "componentName": "DevfestBottomNav",
+  "componentImportStatement": "package:cave/widgets/bottom_nav.dart",
+  "componentDefinitionPath": "/cave/lib/widgets/bottom_nav.dart",
+  "navPath": "widgets"
+}]

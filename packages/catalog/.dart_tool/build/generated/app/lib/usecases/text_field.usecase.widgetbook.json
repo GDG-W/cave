@@ -1,0 +1,11 @@
+[{
+  "name": "devfestTextField",
+  "designLink": null,
+  "useCaseName": "DevFest FormField",
+  "importStatement": "package:app/usecases/text_field.dart",
+  "useCaseDefinitionPath": "/catalog/lib/usecases/text_field.dart",
+  "componentName": "DevfestTextFormField",
+  "componentImportStatement": "package:cave/widgets/text_field.dart",
+  "componentDefinitionPath": "/cave/lib/widgets/text_field.dart",
+  "navPath": "widgets"
+}]

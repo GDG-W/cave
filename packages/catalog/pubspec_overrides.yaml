@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: cave
+dependency_overrides:
+  cave:
+    path: ../cave

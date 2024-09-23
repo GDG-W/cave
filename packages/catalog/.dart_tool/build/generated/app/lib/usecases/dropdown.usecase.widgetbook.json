@@ -1,0 +1,11 @@
+[{
+  "name": "devfestDropdown",
+  "designLink": "https://www.figma.com/design/CMEZj7OPDW09hOuTg1tAgF/DevFest-Lagos-'24---Mobile-App.?node-id=5457-8141&node-type=FRAME&t=13HTMdJAt4XcDqvU-0",
+  "useCaseName": "DevFest Dropdown",
+  "importStatement": "package:app/usecases/dropdown.dart",
+  "useCaseDefinitionPath": "/catalog/lib/usecases/dropdown.dart",
+  "componentName": "DevfestDropDown",
+  "componentImportStatement": "package:cave/widgets/drop_down.dart",
+  "componentDefinitionPath": "/cave/lib/widgets/drop_down.dart",
+  "navPath": "widgets"
+}]

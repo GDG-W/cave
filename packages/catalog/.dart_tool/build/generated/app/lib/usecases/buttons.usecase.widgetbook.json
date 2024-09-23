@@ -1,0 +1,22 @@
+[{
+  "name": "devfestFilledButton",
+  "designLink": null,
+  "useCaseName": "Filled Button",
+  "importStatement": "package:app/usecases/buttons.dart",
+  "useCaseDefinitionPath": "/catalog/lib/usecases/buttons.dart",
+  "componentName": "DevfestFilledButton",
+  "componentImportStatement": "package:cave/widgets/buttons.dart",
+  "componentDefinitionPath": "/cave/lib/widgets/buttons.dart",
+  "navPath": "widgets"
+},
+{
+  "name": "devfestOutlinedButton",
+  "designLink": null,
+  "useCaseName": "Outlined Button",
+  "importStatement": "package:app/usecases/buttons.dart",
+  "useCaseDefinitionPath": "/catalog/lib/usecases/buttons.dart",
+  "componentName": "DevfestOutlinedButton",
+  "componentImportStatement": "package:cave/widgets/buttons.dart",
+  "componentDefinitionPath": "/cave/lib/widgets/buttons.dart",
+  "navPath": "widgets"
+}]
