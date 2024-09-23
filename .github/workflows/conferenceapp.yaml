@@ -35,7 +35,7 @@ jobs:
       build-number: ${{ github.event.inputs.build-number }}
       build-version: ${{ github.event.inputs.build-version }}
     secrets:
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      CREDENTIAL_FILE_CONTENT: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
 
   # ios-build:

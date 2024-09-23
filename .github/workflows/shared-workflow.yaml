@@ -68,6 +68,15 @@ jobs:
           key: ${{ runner.os }}-pub-${{ hashFiles('packages/${{ inputs["package-name"] }}/pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pub-
+      
+      - name: Enable melos
+        run: dart pub global activate melos
+
+      - name: Get packages 
+        run: melos bootstrap
+
+      - name: Generate Files  
+        run: melos generate
 
       - name: Install dependencies
         run: flutter pub get
@@ -118,6 +127,15 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.3'
+      
+      - name: Enable melos
+        run: dart pub global activate melos
+
+      - name: Get packages 
+        run: melos bootstrap
+
+      - name: Generate Files  
+        run: melos generate
 
       - name: Install dependencies
         run: flutter pub get
@@ -167,6 +185,15 @@ jobs:
   #       uses: subosito/flutter-action@v2
   #       with:
   #         flutter-version: '3.24.3'
+
+  #     - name: Enable melos
+  #       run: dart pub global activate melos
+
+  #     - name: Get packages 
+  #       run: melos bootstrap
+
+  #     - name: Generate Files  
+  #       run: melos generate
 
   #     - name: Install dependencies
   #       run: flutter pub get
