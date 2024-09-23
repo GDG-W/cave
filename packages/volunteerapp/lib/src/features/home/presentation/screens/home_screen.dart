@@ -70,10 +70,17 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _controller,
               child: Row(
                 children: [
-                  AnalyticsCard(
-                      title: "Total Tickets",
-                      amount: 5000,
-                      analysis: "7% up this week"),
+                  
+                  GestureDetector(
+                    onTap: () {
+                      showDevfestBottomModal(context,emoji: '🥳',title: 'Insignia Uploaded!',subtitle: 'Talk about leaving your mark on the world, we have recorded your sign!', btnText:'Continue To App',showConfetti: true);
+                    //  showDevfestBottomModal(context,emoji: '🥳',title: 'Check In attendee?',showColorfulUserNameCard: true,   btnText:'Cancel', secondBtnText: 'Yes check in');
+                    },
+                    child: AnalyticsCard(
+                        title: "Total Tickets",
+                        amount: 5000,
+                        analysis: "7% up this week"),
+                  ),
                   Constants.horizontalGutter.horizontalSpace,
                   AnalyticsCard(
                       title: "Total Check-ins",

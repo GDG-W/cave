@@ -116,7 +116,6 @@ class _DevfestBottomNavTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final bottomNavItemTheme = DevfestTheme.of(context).bottomNavTheme ??
         DevfestBottomNavTheme.light();
-
     final itemColor = selected
         ? bottomNavItemTheme.selectedColor
         : bottomNavItemTheme.unselectedColor;

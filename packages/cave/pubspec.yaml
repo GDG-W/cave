@@ -8,12 +8,14 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  confetti: ^0.7.0
   control_style: ^0.1.0
   ficonsax: ^0.0.3
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
   flutter_screenutil: ^5.9.3
+  
 
 dev_dependencies:
   flutter_lints: ^4.0.0
