@@ -2,6 +2,7 @@
 
 [![Trigger Conference App Android/iOS Build](https://img.shields.io/badge/Trigger-Conference%20App%20Build-blue.svg)](https://github.com/gdg-w/cave/actions/workflows/conferenceapp.yaml)
 [![Trigger Volunteer App Android/iOS Build](https://img.shields.io/badge/Trigger-Volunteer%20App%20Build-blue.svg)](https://github.com/gdg-w/cave/actions/workflows/volunteerapp.yaml)
+[![Deploy Catalog](https://img.shields.io/badge/Deploy-Catalog-blue.svg)](https://github.com/gdg-w/cave/actions/workflows/catalog.yaml)
 
 ## Description
 This repository contains the source code for the **DevFest24** mobile applications, including:

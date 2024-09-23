@@ -4,9 +4,11 @@ on:
   push:
     paths:
       - 'packages/catalog/**'
+  workflow_dispatch:
 
 jobs:
   check-formatting:
+  if: github.event_name == 'push'
     uses: ./.github/workflows/shared-workflow.yaml
     with:
       package-name: catalog
