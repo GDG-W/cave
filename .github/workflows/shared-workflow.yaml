@@ -78,10 +78,6 @@ jobs:
       - name: Generate Files  
         run: melos generate
 
-      - name: Install dependencies
-        run: flutter pub get
-        working-directory: packages/${{ inputs['package-name'] }}
-
       - name: Check formatting
         run: dart format --set-exit-if-changed .
         working-directory: packages/${{ inputs['package-name'] }}
@@ -136,10 +132,6 @@ jobs:
 
       - name: Generate Files  
         run: melos generate
-
-      - name: Install dependencies
-        run: flutter pub get
-        working-directory: packages/${{ inputs['package-name'] }}
 
       - name: Build Android
         run: flutter build apk --release --build-name=${{ inputs.build-version }} --build-number=${{ inputs.build-number }}

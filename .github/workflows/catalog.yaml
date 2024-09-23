@@ -30,9 +30,14 @@ jobs:
             packages/catalog/.dart_tool
           key: ${{ runner.os }}-pub-${{ hashFiles('packages/catalog/pubspec.yaml') }}
 
-      - name: Install dependencies
-        run: flutter pub get
-        working-directory: packages/catalog
+      - name: Enable melos
+        run: dart pub global activate melos
+
+      - name: Get packages 
+        run: melos bootstrap
+
+      - name: Generate Files  
+        run: melos generate
 
       - name: Build Web
         run: flutter build web
