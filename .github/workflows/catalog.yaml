@@ -43,7 +43,7 @@ jobs:
         run: melos generate
 
       - name: Build Web
-        run: flutter build web --wasm
+        run: flutter build web --release  --wasm --base-href "/cave/"
         working-directory: packages/catalog
 
       - name: Deploy to GitHub Pages
