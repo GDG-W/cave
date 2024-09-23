@@ -1,1 +1,0 @@
- /Users/codefarmer/Desktop/mastersam/devfest24/packages/conferenceapp/.dart_tool/flutter_build/c2c861bf630461aa340fd32fda11b3b9/native_assets.yaml: 
