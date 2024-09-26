@@ -18,7 +18,9 @@ dependencies:
   flutter_screenutil: 5.9.1
   flutter_svg: ^2.0.10+1
   mobile_scanner: ^5.2.3
+
   iconoir_flutter: ^7.9.0
+
 
 dev_dependencies:
   flutter_lints: ^4.0.0
