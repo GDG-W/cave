@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
               25.verticalSpace,
               ConstrainedBox(
                 constraints: BoxConstraints(maxHeight: 138.h),
-                child: SingleChildScrollView(
+                child: const SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [

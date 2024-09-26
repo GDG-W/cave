@@ -1,4 +1,4 @@
-import 'package:cave/cave.dart';
+import 'package:cave/cave.dart'  hide Text;
 import 'package:devfest24/src/features/home/presentation/presentation.dart';
 import 'package:devfest24/src/features/more/presentation/presentation.dart';
 import 'package:devfest24/src/features/reserve/presentation/presentation.dart';
