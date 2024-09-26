@@ -1,12 +1,12 @@
-import 'dart:math';
+
 
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:cave/extensions/extensions.dart';
-import 'package:cave/themes/themes.dart';
+
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 Future<void> showDevfestBottomModal(
   BuildContext context, {
@@ -91,7 +91,7 @@ class _DevfestBottomModalState extends State<DevfestBottomModal> {
   final controller = ConfettiController();
   @override
   void initState() {
-    // TODO: implement initState
+   
     super.initState();
     if (widget.showConfetti != null && widget.showConfetti == true) {
       controller.play();
@@ -100,7 +100,7 @@ class _DevfestBottomModalState extends State<DevfestBottomModal> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    
     super.dispose();
     if (widget.showConfetti != null && widget.showConfetti == true) {
       controller.dispose();
@@ -122,7 +122,7 @@ class _DevfestBottomModalState extends State<DevfestBottomModal> {
                 
                       Center(
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: DevfestColors.warning80),
                           padding: EdgeInsets.all(21.w),
@@ -161,7 +161,7 @@ class _DevfestBottomModalState extends State<DevfestBottomModal> {
                       if (widget.showColorfulUserNameCard == true) ...[
                         ColorfulUserInfoCard(widget: widget)
                       ] else ...[
-                        SizedBox.shrink()
+                        const SizedBox.shrink()
                       ],
                  
 
@@ -218,7 +218,7 @@ class _DevfestBottomModalState extends State<DevfestBottomModal> {
                   ]
                 ],
                 widget.hasTwoButtons == true
-                    ? SizedBox.shrink()
+                    ? const SizedBox.shrink()
                     : DevfestFilledButton(
                         onPressed: widget.onBtnPressed,
                         title: Text(
@@ -262,7 +262,7 @@ class ColorfulUserInfoCard extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.r),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                   colors: [Color(0xFFC471ED), Color(0xFF12C2E9)])),
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 15.w),
           child: Column(
@@ -331,11 +331,11 @@ class TicketOrIdContainer extends StatelessWidget {
           color: DevfestColors.backgroundSoftLight),
       child: Row(
         children: [
-          Icon(
+          const Icon(
             IconsaxOutline.ticket_star,
             color: DevfestColors.grey100,
           ),
-          SizedBox(
+          const SizedBox(
             width: 2,
           ),
           Text('$title: $info',

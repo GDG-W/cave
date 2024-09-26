@@ -223,6 +223,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  iconoir_flutter:
+    dependency: transitive
+    description:
+      name: iconoir_flutter
+      sha256: "4fe4386230a39901c0c1f0166f96aff4580464e799399389b5ae78f309b2b30f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.9.0"
   intl:
     dependency: "direct main"
     description:
