@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>Devfest 24 needs camera access to scan check-in QR codes</string>
+
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Devfest 24 needs photos access to get QR code from photo library</string>
 </dict>
 </plist>

@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
 
+import '../map/grid.dart';
 import '../map/map_utils.dart';
 
 double openingRadius = 32.w;
@@ -44,7 +43,7 @@ class MapBlockPainter extends CustomPainter {
     // render entrance label
     if (entranceLabelExists) {
       canvas.save();
-      canvas.rotate(_getDegInRad(-90));
+      canvas.rotate(getRadFromDeg(-90));
       textPainter.paint(
         canvas,
         Offset(-(size.height + textPainter.width) / 2,
@@ -173,7 +172,7 @@ class MapBlockPainter extends CustomPainter {
     labelPainter.layout();
     // render block label
     if (labelPainter.width > blockWidth) {
-      canvas.rotate(_getDegInRad(-90));
+      canvas.rotate(getRadFromDeg(-90));
       labelPainter.paint(
         canvas,
         Offset(-(size.height + labelPainter.width) / 2,
@@ -188,10 +187,6 @@ class MapBlockPainter extends CustomPainter {
     }
 
     canvas.restore();
-  }
-
-  double _getDegInRad(double angle) {
-    return angle * (pi / 180);
   }
 
   Path _getPathWithOpenings(List<Offset> openings, Size size,
