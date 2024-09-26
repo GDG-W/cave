@@ -179,6 +179,8 @@ class _LandmarkMapState extends ConsumerState<LandmarkMap>
     }
   }
 
+  Offset? walkerPosition;
+
   @override
   void initState() {
     super.initState();
@@ -221,8 +223,9 @@ class _LandmarkMapState extends ConsumerState<LandmarkMap>
   void _runAnimation(int distance) {
     speedProgressAnim = controller.drive(Tween<double>(begin: 0, end: 1));
 
-    final simulation = FrictionSimulation.through(0, distance.toDouble(),
-        switch (distance) { <= 50 => 0.5, <= 100 => 0.4, _ => 0.3 }, 0);
+    final speed = switch (distance) { <= 50 => 0.38, <= 100 => 0.2, _ => 0.05 };
+    final simulation =
+        FrictionSimulation.through(0, distance.toDouble(), speed, 0);
     controller.animateWith(simulation);
   }
 
@@ -280,51 +283,59 @@ class _LandmarkMapState extends ConsumerState<LandmarkMap>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (context, child) {
-        return CustomPaint(
-          foregroundPainter: GridPainter(
-            grid: grid,
-            cellSize: cellSize,
-            progress: speedProgressAnim.value,
-            cellTrackRange: widget.getDirections,
-            actions: actions,
-            showGrid: ref.watch(showGridStateProvider),
-            showPath: ref.watch(showPathStateProvider),
-          ),
-          child: CustomPaint(
-            foregroundPainter: GridPainter(
-              grid: baseGrid,
-              cellSize: cellSize,
-              progress: 0,
-              showBlocks: ref.watch(showBlocksProvider),
-            ),
-            child: child,
-          ),
-        );
-      },
-      child: CustomMultiChildLayout(
-        delegate: MapLayoutDelegate(
-          blocks: mapSchematics,
-          onBlocksLayout: (areas) {
-            widget.onBlocksLayout(areas.toList());
-            roomsLayouts = areas;
-            WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
-              areas.forEach(_fillPositionOnGrid);
-            });
-          },
-        ),
-        children: [
-          for (int i = 0; i < mapSchematics.length; i++)
-            LayoutId(
-              id: i,
-              child: CustomPaint(
-                painter: MapBlockPainter(block: mapSchematics[i]),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Positioned.fill(
+          child: AnimatedBuilder(
+            animation: controller,
+            builder: (context, child) {
+              return CustomPaint(
+                foregroundPainter: GridPainter(
+                  grid: grid,
+                  cellSize: cellSize,
+                  progress: speedProgressAnim.value,
+                  cellTrackRange: widget.getDirections,
+                  actions: actions,
+                  showGrid: ref.watch(showGridStateProvider),
+                  showPath: ref.watch(showPathStateProvider),
+                ),
+                child: CustomPaint(
+                  foregroundPainter: GridPainter(
+                    grid: baseGrid,
+                    cellSize: cellSize,
+                    progress: 0,
+                    showBlocks: ref.watch(showBlocksProvider),
+                  ),
+                  child: child,
+                ),
+              );
+            },
+            child: CustomMultiChildLayout(
+              delegate: MapLayoutDelegate(
+                blocks: mapSchematics,
+                onBlocksLayout: (areas) {
+                  widget.onBlocksLayout(areas.toList());
+                  roomsLayouts = areas;
+                  WidgetsFlutterBinding.ensureInitialized()
+                      .addPostFrameCallback((_) {
+                    areas.forEach(_fillPositionOnGrid);
+                  });
+                },
               ),
+              children: [
+                for (int i = 0; i < mapSchematics.length; i++)
+                  LayoutId(
+                    id: i,
+                    child: CustomPaint(
+                      painter: MapBlockPainter(block: mapSchematics[i]),
+                    ),
+                  ),
+              ],
             ),
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 

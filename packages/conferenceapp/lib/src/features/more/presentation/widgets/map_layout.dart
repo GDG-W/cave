@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../map/map_utils.dart';
 
-double cellSize = 5;
+double cellSize = 8;
 
 class MapLayoutDelegate extends MultiChildLayoutDelegate {
   final List<Block> blocks;
