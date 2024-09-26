@@ -1,5 +1,8 @@
 import 'dart:core';
+import 'dart:math';
+import 'dart:ui';
 
+import 'package:cave/cave.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart' hide Action;
 
@@ -39,6 +42,7 @@ class GridPainter extends CustomPainter {
     this.showGrid = false,
     this.showPath = false,
     this.showBlocks = false,
+    this.onWalkerPosition,
   });
 
   final Grid<int> grid;
@@ -49,6 +53,7 @@ class GridPainter extends CustomPainter {
   final bool showGrid;
   final bool showPath;
   final bool showBlocks;
+  final void Function(Offset walkerPostion, double angle)? onWalkerPosition;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -116,20 +121,168 @@ class GridPainter extends CustomPainter {
 
     for (final pathMetric in pathMetrics) {
       try {
-        final extractPath =
-            pathMetric.extractPath(0, pathMetric.length * progress);
+        final extractPath = pathMetric.extractPath(
+            0, pathMetric.length * progress,
+            startWithMoveTo: false);
 
-        final metric = extractPath.computeMetrics().first;
-        final tangent = metric.getTangentForOffset(metric.length)!;
+        final tangent = _computeTangentForPath(extractPath);
         final offset = tangent.position;
 
-        canvas.drawOval(
-            Rect.fromCircle(center: offset, radius: cellSize * 1.5),
-            Paint()
-              ..style = PaintingStyle.fill
-              ..color = Colors.orange);
+        canvas.save();
+        canvas.translate(offset.dx, offset.dy);
+
+        double rotationAngle = tangent.angle.abs() - pi / 2;
+
+        final isOnXAxis = rotationAngle == pi / 2 || rotationAngle == -pi / 2;
+
+        if (isOnXAxis) {
+          rotationAngle = rotationAngle - pi;
+        } else {
+          // if the tangent angle is -90, then the rotation angle should be 180
+          if (_getDegFromRad(tangent.angle) == -90) {
+            rotationAngle = pi;
+          }
+        }
+
+        onWalkerPosition?.call(offset, rotationAngle);
+        canvas.rotate(rotationAngle);
+
+        _walker(canvas, Size(cellSize * 1.5, cellSize * 1.5));
+        if (!isOnXAxis) {
+          canvas.translate(0, cellSize / 2);
+        }
+
+        Matrix4 matrix4 = Matrix4.identity();
+        matrix4.scale(-1.0, 1.0);
+        canvas.transform(matrix4.storage);
+        _walker(canvas, Size(cellSize * 1.5, cellSize * 1.5));
+
+        canvas.restore();
+        // canvas.drawOval(
+        //     Rect.fromCircle(center: offset, radius: cellSize * 1.5),
+        //     Paint()
+        //       ..style = PaintingStyle.fill
+        //       ..color = Colors.orange);
       } catch (_) {}
     }
+  }
+
+  void _walker(Canvas canvas, Size size) {
+    Path path_0 = Path();
+    path_0.moveTo(size.width * 0.3759985, size.height * 0.4896138);
+    path_0.cubicTo(
+        size.width * 0.4655944,
+        size.height * 0.5371670,
+        size.width * 0.5076371,
+        size.height * 0.6434983,
+        size.width * 0.4776357,
+        size.height * 0.7412578);
+    path_0.cubicTo(
+        size.width * 0.4721253,
+        size.height * 0.7588096,
+        size.width * 0.4672271,
+        size.height * 0.7769737,
+        size.width * 0.4633494,
+        size.height * 0.7951377);
+    path_0.cubicTo(
+        size.width * 0.4474303,
+        size.height * 0.8767741,
+        size.width * 0.4688598,
+        size.height * 0.9792276,
+        size.width * 0.5586598,
+        size.height * 0.9973917);
+    path_0.cubicTo(
+        size.width * 0.6039679,
+        size.height * 1.006984,
+        size.width * 0.6490720,
+        size.height * 0.9894322,
+        size.width * 0.6809102,
+        size.height * 0.9561654);
+    path_0.cubicTo(
+        size.width * 0.7758124,
+        size.height * 0.8530995,
+        size.width * 0.7468315,
+        size.height * 0.5426774,
+        size.width * 0.7460151,
+        size.height * 0.4649188);
+    path_0.cubicTo(
+        size.width * 0.7460151,
+        size.height * 0.4308357,
+        size.width * 0.7451988,
+        size.height * 0.3959361,
+        size.width * 0.7317288,
+        size.height * 0.3640980);
+    path_0.cubicTo(
+        size.width * 0.7015233,
+        size.height * 0.2926662,
+        size.width * 0.6166216,
+        size.height * 0.2640935,
+        size.width * 0.5413121,
+        size.height * 0.2442967);
+    path_0.cubicTo(
+        size.width * 0.4176330,
+        size.height * 0.1991926,
+        size.width * 0.3396704,
+        size.height * 0.2561339,
+        size.width * 0.3135467,
+        size.height * 0.2981767);
+    path_0.cubicTo(
+        size.width * 0.2874231,
+        size.height * 0.3402194,
+        size.width * 0.2684427,
+        size.height * 0.4336929,
+        size.width * 0.3759985,
+        size.height * 0.4896138);
+    path_0.close();
+
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = DevfestColors.primariesBlue70.withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
+
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = DevfestColors.primariesBlue70.withOpacity(1.0);
+    canvas.drawOval(
+        Rect.fromCenter(
+            center: Offset(size.width * 0.2894640, size.height * 0.09041222),
+            width: size.width * 0.1285772,
+            height: size.height * 0.1808244),
+        paint1Fill);
+
+    Paint paint2Fill = Paint()..style = PaintingStyle.fill;
+    paint2Fill.color = DevfestColors.primariesBlue70.withOpacity(1.0);
+    canvas.drawOval(
+        Rect.fromCenter(
+            center: Offset(size.width * 0.4380421, size.height * 0.1055149),
+            width: size.width * 0.07632996,
+            height: size.height * 0.1077599),
+        paint2Fill);
+
+    Paint paint3Fill = Paint()..style = PaintingStyle.fill;
+    paint3Fill.color = DevfestColors.primariesBlue70.withOpacity(1.0);
+    canvas.drawOval(
+        Rect.fromCenter(
+            center: Offset(size.width * 0.5570271, size.height * 0.1387817),
+            width: size.width * 0.06816633,
+            height: size.height * 0.09510631),
+        paint3Fill);
+
+    Paint paint4Fill = Paint()..style = PaintingStyle.fill;
+    paint4Fill.color = DevfestColors.primariesBlue70.withOpacity(1.0);
+    canvas.drawOval(
+        Rect.fromCenter(
+            center: Offset(size.width * 0.6656034, size.height * 0.1667422),
+            width: size.width * 0.06041088,
+            height: size.height * 0.08408541),
+        paint4Fill);
+
+    Paint paint5Fill = Paint()..style = PaintingStyle.fill;
+    paint5Fill.color = DevfestColors.primariesBlue70.withOpacity(1.0);
+    canvas.drawOval(
+        Rect.fromCenter(
+            center: Offset(size.width * 0.7473805, size.height * 0.2229039),
+            width: size.width * 0.07469723,
+            height: size.height * 0.05387997),
+        paint5Fill);
   }
 
   void _paintGrid(Canvas canvas, Size size) {
@@ -188,6 +341,11 @@ class GridPainter extends CustomPainter {
         }
       }
     }
+  }
+
+  Tangent _computeTangentForPath(Path path) {
+    final metric = path.computeMetrics().first;
+    return metric.getTangentForOffset(metric.length)!;
   }
 
   @override
@@ -344,4 +502,23 @@ class Grid<T extends Object> extends Equatable {
 
   @override
   List<Object?> get props => [grid];
+}
+
+//Copy this CustomPainter code to the Bottom of the File
+class RPSCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {}
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+double _getDegFromRad(double radians) {
+  return radians * (180 / pi);
+}
+
+double getRadFromDeg(double angle) {
+  return angle * (pi / 180);
 }
