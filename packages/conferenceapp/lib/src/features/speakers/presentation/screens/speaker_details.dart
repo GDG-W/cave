@@ -2,7 +2,7 @@ import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:cave/ui_utils/container_properties.dart';
 import 'package:devfest24/src/features/speakers/presentation/widgets/speaker_social_media.dart';
-import 'package:devfest24/src/shared/speaker_talk_info_pill.dart';
+import 'package:devfest24/src/shared/widgets/speaker_talk_info_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconoir_flutter/iconoir_flutter.dart'
