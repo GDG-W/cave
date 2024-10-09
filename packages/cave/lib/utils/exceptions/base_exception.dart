@@ -2,7 +2,6 @@ import 'package:cave/cave.dart';
 import 'client_exception.dart';
 import 'empty_exception.dart';
 
-
 base class Devfest2024Exception implements Exception {
   const Devfest2024Exception();
 

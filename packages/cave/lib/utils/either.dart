@@ -18,15 +18,15 @@ abstract class Either<L, R> {
 
   /// Get [Left] value, may throw an exception when the value is [Right]
   L get left => this.fold<L>(
-          (value) => value,
-          (right) => throw Exception(
+      (value) => value,
+      (right) => throw Exception(
           'Illegal use. You should check isLeft before calling'));
 
   /// Get [Right] value, may throw an exception when the value is [Left]
   R get right => this.fold<R>(
-          (left) => throw Exception(
+      (left) => throw Exception(
           'Illegal use. You should check isRight before calling'),
-          (value) => value);
+      (value) => value);
 
   /// Transform values of [Left] and [Right]
   Either<TL, TR> either<TL, TR>(
@@ -95,14 +95,14 @@ abstract class Either<L, R> {
 
   /// If the condition is satify then return [rightValue] in [Right] else [leftValue] in [Left]
   static Either<L, R> condLazy<L, R>(
-      bool test, Lazy<L> leftValue, Lazy<R> rightValue) =>
+          bool test, Lazy<L> leftValue, Lazy<R> rightValue) =>
       test ? Right(rightValue()) : Left(leftValue());
 
   @override
   bool operator ==(Object other) {
     return this.fold(
-          (left) => other is Left && left == other.value,
-          (right) => other is Right && right == other.value,
+      (left) => other is Left && left == other.value,
+      (right) => other is Right && right == other.value,
     );
   }
 
