@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'package:cave/cave.dart';
+import 'package:devfest24/src/routing/routing.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
-import '../exceptions/exceptions.dart';
+import 'package:go_router/go_router.dart';
 
 part 'ui_state_model_mutex.dart';
 
@@ -38,6 +39,12 @@ abstract base class Devfest2024UiState extends Equatable {
 
   @override
   bool? get stringify => true;
+
+  List<Object?> get otherProps;
+
+  @override
+  @visibleForTesting
+  List<Object?> get props => [error, uiState, ...otherProps];
 }
 
 Future<void> launch<E extends Devfest2024UiState>(
@@ -64,14 +71,19 @@ extension ViewModelX<T extends Devfest2024UiState> on T {
     if (uiState != UiState.error) return;
     assert(error is! EmptyException, 'Please pass appropriate exception');
 
-    // final context = Devfest2024Router.rootNavigatorKey.currentContext!;
-    //
-    // final snackbar = SnackBar(
-    //   content: Text(error.toString()),
-    //   backgroundColor: Theme.of(context).colorScheme.error,
-    //   behavior: SnackBarBehavior.floating,
-    // );
-    // ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    final context = Devfest2024Router.rootNavigatorKey.currentContext!;
+
+    final snackbar = SnackBar(
+      content: Text(error.toString()),
+      backgroundColor: Theme.of(context).colorScheme.error,
+      behavior: SnackBarBehavior.floating,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+
+    if (error is UnauthorizedUserException) {
+      context.go(Devfest2024Routes.onboardingHome.name);
+    }
   }
 }
 

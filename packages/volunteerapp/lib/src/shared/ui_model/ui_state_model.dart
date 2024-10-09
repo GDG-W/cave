@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'package:cave/cave.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../exceptions/exceptions.dart';
+import '../../routing/router.dart';
 
 part 'ui_state_model_mutex.dart';
 
@@ -64,14 +65,14 @@ extension ViewModelX<T extends Devfest2024UiState> on T {
     if (uiState != UiState.error) return;
     assert(error is! EmptyException, 'Please pass appropriate exception');
 
-    // final context = Devfest2024Router.rootNavigatorKey.currentContext!;
-    //
-    // final snackbar = SnackBar(
-    //   content: Text(error.toString()),
-    //   backgroundColor: Theme.of(context).colorScheme.error,
-    //   behavior: SnackBarBehavior.floating,
-    // );
-    // ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    final context = Devfest2024Router.rootNavigatorKey.currentContext!;
+
+    final snackbar = SnackBar(
+      content: Text(error.toString()),
+      backgroundColor: Theme.of(context).colorScheme.error,
+      behavior: SnackBarBehavior.floating,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 }
 
