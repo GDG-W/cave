@@ -45,7 +45,7 @@ class ScheduleDetailsScreen extends StatelessWidget {
                     border: Border.all(
                         color: DevfestColors.primariesBlue60, width: 2),
                   ),
-                  child:  const FlutterLogo(size: 32),
+                  child: const FlutterLogo(size: 32),
                 ),
                 Constants.horizontalGutter.horizontalSpace,
                 Text(
