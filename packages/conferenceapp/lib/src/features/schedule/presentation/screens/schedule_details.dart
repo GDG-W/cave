@@ -45,13 +45,7 @@ class ScheduleDetailsScreen extends StatelessWidget {
                     border: Border.all(
                         color: DevfestColors.primariesBlue60, width: 2),
                   ),
-                  child: Image.asset(
-                    'assets/images/mastersam.png',
-                    semanticLabel: 'Speakers photograph',
-                    height: 32.h,
-                    width: 32.w,
-                    fit: BoxFit.cover,
-                  ),
+                  child:  const FlutterLogo(size: 32),
                 ),
                 Constants.horizontalGutter.horizontalSpace,
                 Text(
