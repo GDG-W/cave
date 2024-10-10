@@ -1,3 +1,4 @@
+import 'package:cave/cave.dart';
 import 'package:devfest24/src/features/dashboard/presentation/screens/dashboard.dart';
 import 'package:devfest24/src/features/more/presentation/presentation.dart';
 import 'package:devfest24/src/features/onboarding/presentation/presentation.dart';
@@ -25,7 +26,7 @@ class Devfest2024Router {
   GoRouter _getRouter(WidgetRef ref) {
     return GoRouter(
         navigatorKey: rootNavigatorKey,
-        initialLocation: '/onboarding',
+        initialLocation: '/',
         routes: [
           GoRoute(
             path: '/${Devfest2024Routes.onboardingHome.path}',
@@ -48,6 +49,15 @@ class Devfest2024Router {
             path: '/',
             name: Devfest2024Routes.dashboard.name,
             builder: (context, state) => const DashboardScreen(),
+            redirect: (context, state) async {
+              final token =
+                  await ConferenceAppStorageService.instance.userToken;
+              if (token.isEmpty) {
+                return '/${Devfest2024Routes.onboardingHome.path}';
+              }
+
+              return null;
+            },
             routes: [
               GoRoute(
                 path: Devfest2024Routes.speakerDetails.path,

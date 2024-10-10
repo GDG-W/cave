@@ -30,6 +30,7 @@ class DevfestTextFormField extends StatelessWidget {
     this.contentPadding,
     this.hintStyle,
     this.errorStyle,
+    this.onEditingComplete,
   })  : keyboardType = keyboardType ?? TextInputType.text,
         readOnly = readOnly ?? false,
         iconColor = iconColor ?? DevfestColors.grey10;
@@ -53,6 +54,7 @@ class DevfestTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final TextStyle? hintStyle;
   final TextStyle? errorStyle;
+  final VoidCallback? onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +114,7 @@ class DevfestTextFormField extends StatelessWidget {
               autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
               keyboardAppearance: Brightness.dark,
               style: textFieldTheme.style,
+              onEditingComplete: onEditingComplete,
               decoration: InputDecoration(
                 prefixIcon: prefixIcon,
                 suffixIcon: suffixIcon,

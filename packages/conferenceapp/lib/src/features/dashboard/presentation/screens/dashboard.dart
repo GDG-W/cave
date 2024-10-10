@@ -1,10 +1,12 @@
 import 'package:cave/cave.dart';
+import 'package:devfest24/src/features/dashboard/application/application.dart';
 import 'package:devfest24/src/features/home/presentation/presentation.dart';
 import 'package:devfest24/src/features/more/presentation/presentation.dart';
 import 'package:devfest24/src/features/reserve/presentation/presentation.dart';
 import 'package:devfest24/src/features/schedule/presentation/presentation.dart';
 import 'package:devfest24/src/features/speakers/presentation/presentation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/shared.dart';
 
@@ -17,14 +19,14 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
-class _View extends StatefulWidget {
+class _View extends ConsumerStatefulWidget {
   const _View();
 
   @override
-  State<_View> createState() => _ViewState();
+  ConsumerState<_View> createState() => _ViewState();
 }
 
-class _ViewState extends State<_View> {
+class _ViewState extends ConsumerState<_View> {
   late int index;
   static const _tabs = [
     KeepAliveWidget(child: HomeScreen()),
@@ -45,6 +47,20 @@ class _ViewState extends State<_View> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      Future.wait([
+        ref.read(userViewModelNotifier.notifier).fetchUserProfile(),
+        ref.read(sponsorsViewModelNotifier.notifier).fetchSponsors(),
+        ref.read(speakersViewModelNotifier.notifier).fetchSpeakers(),
+        ref.read(agendasViewModelNotifier.notifier).fetchAgenda(),
+      ]);
+    });
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
@@ -54,36 +70,40 @@ class _ViewState extends State<_View> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const TabBarView(
-        physics: NeverScrollableScrollPhysics(),
-        children: _tabs,
-      ),
-      bottomNavigationBar: DevfestBottomNav(
-        index: DefaultTabController.of(context).index,
-        onTap: _onPageChanged,
-        items: const [
-          DevfestBottomNavItem(
-            label: 'Home',
-            icon: Icon(IconsaxOutline.home_2),
-          ),
-          DevfestBottomNavItem(
-            label: 'Schedule',
-            icon: Icon(IconsaxOutline.calendar_1),
-          ),
-          DevfestBottomNavItem(
-            label: 'Speakers',
-            icon: Icon(IconsaxOutline.microphone),
-          ),
-          DevfestBottomNavItem(
-            label: 'Reserve',
-            icon: Icon(IconsaxOutline.ticket),
-          ),
-          DevfestBottomNavItem(
-            label: 'More',
-            icon: Icon(IconsaxOutline.more_square),
-          ),
-        ],
+    return OverlayScreenLoadingIndicator(
+      isLoading:
+          ref.watch(userViewModelNotifier.select((vm) => vm.uiState.isLoading)),
+      child: Scaffold(
+        body: const TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: _tabs,
+        ),
+        bottomNavigationBar: DevfestBottomNav(
+          index: DefaultTabController.of(context).index,
+          onTap: _onPageChanged,
+          items: const [
+            DevfestBottomNavItem(
+              label: 'Home',
+              icon: Icon(IconsaxOutline.home_2),
+            ),
+            DevfestBottomNavItem(
+              label: 'Schedule',
+              icon: Icon(IconsaxOutline.calendar_1),
+            ),
+            DevfestBottomNavItem(
+              label: 'Speakers',
+              icon: Icon(IconsaxOutline.microphone),
+            ),
+            DevfestBottomNavItem(
+              label: 'Reserve',
+              icon: Icon(IconsaxOutline.ticket),
+            ),
+            DevfestBottomNavItem(
+              label: 'More',
+              icon: Icon(IconsaxOutline.more_square),
+            ),
+          ],
+        ),
       ),
     );
   }

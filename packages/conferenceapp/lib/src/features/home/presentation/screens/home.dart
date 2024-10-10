@@ -1,18 +1,20 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
+import 'package:devfest24/src/features/dashboard/application/user/view_model.dart';
 import 'package:devfest24/src/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../widgets/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,121 +35,128 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: Constants.horizontalMargin.w),
-        child: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(
-              child: HeaderText(
-                title: Text('🌤️ Good morning, Aise'),
-                subtitle: Text(
-                    'You start on the street, work till you are eleniyan.'),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await ref.read(userViewModelNotifier.notifier).fetchUserProfile();
+          },
+          child: CustomScrollView(
+            slivers: [
+              const SliverToBoxAdapter(
+                child: HeaderText(
+                  title: Text('🌤️ Good morning, Aise'),
+                  subtitle: Text(
+                      'You start on the street, work till you are eleniyan.'),
+                ),
               ),
-            ),
-            SliverToBoxAdapter(
-              child: Constants.largeVerticalGutter.verticalSpace,
-            ),
-            SliverMainAxisGroup(
-              slivers: [
-                PinnedHeaderSliver(
-                  child: HomeAgendaHeader(
-                    title: const Text('📆 Schedule'),
-                    onEventDayChanged: (day) {},
-                    onFilterSelected: () {},
+              SliverToBoxAdapter(
+                child: Constants.largeVerticalGutter.verticalSpace,
+              ),
+              SliverMainAxisGroup(
+                slivers: [
+                  PinnedHeaderSliver(
+                    child: HomeAgendaHeader(
+                      title: const Text('📆 Schedule'),
+                      onEventDayChanged: (day) {},
+                      onFilterSelected: () {},
+                    ),
                   ),
-                ),
-                SliverList.separated(
-                  itemCount: 2,
-                  itemBuilder: (context, index) => AgendaScheduleTile(
-                    onTap: () {},
-                  ),
-                  separatorBuilder: (context, _) =>
-                      Constants.smallVerticalGutter.verticalSpace,
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: Constants.verticalGutter).h,
-                    child: InkWell(
+                  SliverList.separated(
+                    itemCount: 2,
+                    itemBuilder: (context, index) => AgendaScheduleTile(
                       onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                                vertical: Constants.smallVerticalGutter)
-                            .r,
-                        child: const Center(
-                          child: IconText(
-                            Icons.arrow_forward,
-                            'View All Schedules',
-                            alignment: IconTextAlignment.right,
+                    ),
+                    separatorBuilder: (context, _) =>
+                        Constants.smallVerticalGutter.verticalSpace,
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: Constants.verticalGutter)
+                              .h,
+                      child: InkWell(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                                  vertical: Constants.smallVerticalGutter)
+                              .r,
+                          child: const Center(
+                            child: IconText(
+                              Icons.arrow_forward,
+                              'View All Schedules',
+                              alignment: IconTextAlignment.right,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                    child: Constants.verticalGutter.verticalSpace),
-              ],
-            ),
-            SliverMainAxisGroup(
-              slivers: [
-                PinnedHeaderSliver(
-                  child: HomeAgendaHeader(
-                    title: const Text('🎤 Speakers'),
-                    onEventDayChanged: (day) {},
+                  SliverToBoxAdapter(
+                      child: Constants.verticalGutter.verticalSpace),
+                ],
+              ),
+              SliverMainAxisGroup(
+                slivers: [
+                  PinnedHeaderSliver(
+                    child: HomeAgendaHeader(
+                      title: const Text('🎤 Speakers'),
+                      onEventDayChanged: (day) {},
+                    ),
                   ),
-                ),
-                SliverList.separated(
-                  itemCount: 2,
-                  itemBuilder: (context, index) => AgendaTalkTile(
-                    onTap: () {},
-                  ),
-                  separatorBuilder: (context, _) =>
-                      Constants.smallVerticalGutter.verticalSpace,
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: Constants.verticalGutter).h,
-                    child: InkWell(
+                  SliverList.separated(
+                    itemCount: 2,
+                    itemBuilder: (context, index) => AgendaTalkTile(
                       onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                                vertical: Constants.smallVerticalGutter)
-                            .r,
-                        child: const Center(
-                          child: IconText(
-                            Icons.arrow_forward,
-                            'View All Talks',
-                            alignment: IconTextAlignment.right,
+                    ),
+                    separatorBuilder: (context, _) =>
+                        Constants.smallVerticalGutter.verticalSpace,
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: Constants.verticalGutter)
+                              .h,
+                      child: InkWell(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                                  vertical: Constants.smallVerticalGutter)
+                              .r,
+                          child: const Center(
+                            child: IconText(
+                              Icons.arrow_forward,
+                              'View All Talks',
+                              alignment: IconTextAlignment.right,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                    child: Constants.verticalGutter.verticalSpace),
-              ],
-            ),
-            SliverMainAxisGroup(
-              slivers: [
-                const PinnedHeaderSliver(
-                  child: HomeAgendaHeader(
-                    title: Text('🥺 Sponsors'),
+                  SliverToBoxAdapter(
+                      child: Constants.verticalGutter.verticalSpace),
+                ],
+              ),
+              SliverMainAxisGroup(
+                slivers: [
+                  const PinnedHeaderSliver(
+                    child: HomeAgendaHeader(
+                      title: Text('🥺 Sponsors'),
+                    ),
                   ),
-                ),
-                SliverList.separated(
-                  itemCount: 4,
-                  itemBuilder: (context, index) => ConferenceSponsorTile(
-                    linkOnTap: () {},
+                  SliverList.separated(
+                    itemCount: 4,
+                    itemBuilder: (context, index) => ConferenceSponsorTile(
+                      linkOnTap: () {},
+                    ),
+                    separatorBuilder: (context, _) =>
+                        Constants.smallVerticalGutter.verticalSpace,
                   ),
-                  separatorBuilder: (context, _) =>
-                      Constants.smallVerticalGutter.verticalSpace,
-                ),
-                SliverToBoxAdapter(
-                    child: Constants.verticalGutter.verticalSpace),
-              ],
-            ),
-          ],
+                  SliverToBoxAdapter(
+                      child: Constants.verticalGutter.verticalSpace),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

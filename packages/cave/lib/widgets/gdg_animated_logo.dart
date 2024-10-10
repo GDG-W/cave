@@ -4,12 +4,19 @@ import 'package:cave/cave.dart';
 import 'package:flutter/material.dart';
 
 class GdgLogo extends StatefulWidget {
-  const GdgLogo({super.key, required this.width, required this.height});
+  const GdgLogo({
+    super.key,
+    required this.width,
+    required this.height,
+    this.repeat = false,
+  });
 
   final double width;
   final double height;
+  final bool repeat;
 
-  GdgLogo.normal({Key? key}) : this(width: 44.w, height: 20.w, key: key);
+  GdgLogo.normal({Key? key, bool repeat = false})
+      : this(width: 44.w, height: 20.w, key: key, repeat: repeat);
 
   @override
   State<GdgLogo> createState() => _GdgLogoState();
@@ -39,10 +46,15 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
       CurvedAnimation(
         parent: _controller,
         curve: const Interval(0, 0.4, curve: Curves.easeInOut),
+        reverseCurve: const Interval(0, 0.2, curve: Curves.ease),
       ),
     );
 
-    _controller.forward();
+    if (widget.repeat) {
+      _controller.repeat(reverse: true, period: Duration(milliseconds: 1800));
+    } else {
+      _controller.forward();
+    }
   }
 
   @override
