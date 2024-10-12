@@ -182,7 +182,8 @@ class _SessionInfo extends StatelessWidget {
             Constants.verticalGutter.verticalSpace,
             SpeakerInfo(
               name: session.speakers.first.fullname,
-              shortBio: '${session.speakers.first.title}, ${session.speakers.first.company}',
+              shortBio:
+                  '${session.speakers.first.title}, ${session.speakers.first.company}',
               avatarUrl: session.speakers.first.imageUrl,
             ),
             Constants.verticalGutter.verticalSpace,

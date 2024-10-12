@@ -53,22 +53,22 @@ class ProfileScreen extends ConsumerWidget {
                   ),
               child: Column(
                 children: [
-                   _ProfileInfoTile(
+                  _ProfileInfoTile(
                     title: '📧 Email Address',
-                    info:  user.emailAddress,
+                    info: user.emailAddress,
                   ),
                   Constants.verticalGutter.verticalSpace,
-                   _ProfileInfoTile(
+                  _ProfileInfoTile(
                     title: '🤹‍♀️ Area of Expertise',
                     info: user.role,
                   ),
                   Constants.verticalGutter.verticalSpace,
-                   _ProfileInfoTile(
+                  _ProfileInfoTile(
                     title: '😊 Level of Experience',
                     info: user.levelOfExpertise,
                   ),
                   Constants.verticalGutter.verticalSpace,
-                   _ProfileInfoTile(
+                  _ProfileInfoTile(
                     title: '👕 Shirt Size',
                     info: user.shirtSize,
                   ),
