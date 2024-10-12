@@ -4,13 +4,16 @@ import 'package:devfest24/src/features/more/presentation/widgets/widgets.dart';
 import 'package:devfest24/src/routing/routing.dart';
 import 'package:devfest24/src/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class MoreHomeScreen extends StatelessWidget {
+import '../../../dashboard/application/application.dart';
+
+class MoreHomeScreen extends ConsumerWidget {
   const MoreHomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0),
       body: Column(
@@ -21,7 +24,15 @@ class MoreHomeScreen extends StatelessWidget {
                   horizontal: Constants.horizontalMargin.w),
               child: Column(
                 children: [
-                  const SignedInUserHeaderTile(),
+                  if (ref.watch(userViewModelNotifier
+                      .select((vm) => vm.user.id.isNotEmpty)))
+                    const SignedInUserHeaderTile()
+                  else
+                    SignedOutUserHeaderTile(
+                      signInOnTap: () {
+                        context.goNamed(Devfest2024Routes.onboardingLogin.name);
+                      },
+                    ),
                   MoreSection(
                     title: const Text('GENERAL'),
                     options: [

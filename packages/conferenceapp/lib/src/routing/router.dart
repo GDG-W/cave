@@ -4,7 +4,9 @@ import 'package:devfest24/src/features/more/presentation/presentation.dart';
 import 'package:devfest24/src/features/onboarding/presentation/presentation.dart';
 import 'package:devfest24/src/features/schedule/presentation/presentation.dart';
 import 'package:devfest24/src/features/speakers/presentation/presentation.dart';
+import 'package:devfest24/src/routing/extra_codec.dart';
 
+import '../features/dashboard/model/model.dart';
 import 'routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +29,7 @@ class Devfest2024Router {
     return GoRouter(
         navigatorKey: rootNavigatorKey,
         initialLocation: '/',
+        extraCodec: const ConferenceExtraCodec(),
         routes: [
           GoRoute(
             path: '/${Devfest2024Routes.onboardingHome.path}',
@@ -62,7 +65,9 @@ class Devfest2024Router {
               GoRoute(
                 path: Devfest2024Routes.speakerDetails.path,
                 name: Devfest2024Routes.speakerDetails.name,
-                builder: (context, state) => const SpeakerDetailsScreen(),
+                builder: (context, state) => SpeakerDetailsScreen(
+                  speaker: state.extra as SpeakerDto,
+                ),
               ),
               GoRoute(
                 path: Devfest2024Routes.scheduleDetails.path,

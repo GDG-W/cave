@@ -1,15 +1,19 @@
 import 'package:cave/cave.dart';
 import 'package:cave/constants.dart';
 import 'package:devfest24/src/shared/shared.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../routing/routing.dart';
+import '../../../dashboard/application/application.dart';
 import '../widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final user = ref.watch(userViewModelNotifier).user;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -22,12 +26,20 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SignedInUserHeaderTile(
-            height: 300.h,
-            margin: EdgeInsets.zero,
-            borderRadius: BorderRadius.zero,
-            gap: (Constants.verticalGutter * 2).verticalSpace,
-          ),
+          if (ref.watch(
+              userViewModelNotifier.select((vm) => vm.user.id.isNotEmpty)))
+            SignedInUserHeaderTile(
+              height: 300.h,
+              margin: EdgeInsets.zero,
+              borderRadius: BorderRadius.zero,
+              gap: (Constants.verticalGutter * 2).verticalSpace,
+            )
+          else
+            SignedOutUserHeaderTile(
+              signInOnTap: () {
+                context.goNamed(Devfest2024Routes.onboardingLogin.name);
+              },
+            ),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(
@@ -41,24 +53,24 @@ class ProfileScreen extends StatelessWidget {
                   ),
               child: Column(
                 children: [
-                  const _ProfileInfoTile(
+                   _ProfileInfoTile(
                     title: '📧 Email Address',
-                    info: 'samuelabada2@gmail.com',
+                    info:  user.emailAddress,
                   ),
                   Constants.verticalGutter.verticalSpace,
-                  const _ProfileInfoTile(
+                   _ProfileInfoTile(
                     title: '🤹‍♀️ Area of Expertise',
-                    info: 'Mobile Development',
+                    info: user.role,
                   ),
                   Constants.verticalGutter.verticalSpace,
-                  const _ProfileInfoTile(
+                   _ProfileInfoTile(
                     title: '😊 Level of Experience',
-                    info: 'Senior',
+                    info: user.levelOfExpertise,
                   ),
                   Constants.verticalGutter.verticalSpace,
-                  const _ProfileInfoTile(
-                    title: '😁 Number of Years of Experience',
-                    info: '6+ Years',
+                   _ProfileInfoTile(
+                    title: '👕 Shirt Size',
+                    info: user.shirtSize,
                   ),
                 ],
               ),
