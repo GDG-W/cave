@@ -30,6 +30,14 @@ class Devfest2024Router {
         navigatorKey: rootNavigatorKey,
         initialLocation: '/',
         extraCodec: const ConferenceExtraCodec(),
+        redirect: (context, state) async {
+          final token = await ConferenceAppStorageService.instance.userToken;
+          if (token.isEmpty) {
+            return '/${Devfest2024Routes.onboardingHome.path}';
+          }
+
+          return null;
+        },
         routes: [
           GoRoute(
             path: '/${Devfest2024Routes.onboardingHome.path}',
@@ -52,15 +60,6 @@ class Devfest2024Router {
             path: '/',
             name: Devfest2024Routes.dashboard.name,
             builder: (context, state) => const DashboardScreen(),
-            redirect: (context, state) async {
-              final token =
-                  await ConferenceAppStorageService.instance.userToken;
-              if (token.isEmpty) {
-                return '/${Devfest2024Routes.onboardingHome.path}';
-              }
-
-              return null;
-            },
             routes: [
               GoRoute(
                 path: Devfest2024Routes.speakerDetails.path,
